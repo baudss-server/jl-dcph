@@ -1,0 +1,84 @@
+/* ===== GALLERY SECTION ===== */
+.dcp-gallery-section {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.dcp-gallery-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Bagong styles para sa services list na may icons */
+.dcp-services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  list-style: none; /* Remove bullet points */
+  padding: 0;
+  margin-top: 24px;
+  text-align: left;
+}
+
+.dcp-services-list li {
+  display: flex;
+  align-items: center; /* I-align ang icon at text sa gitna */
+  gap: 12px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  transition: transform 0.3s ease-in-out, background 0.3s ease;
+}
+
+.dcp-services-list li:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+.dcp-services-list li i {
+  font-size: 2rem; /* Laki ng icon */
+  color: #fff;
+  line-height: 1; /* Para sa tamang alignment */
+}
+
+.dcp-services-list li span {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* Style para sa gallery na may images */
+.dcp-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.dcp-gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  
+  /* FIXED HEIGHT PARA SA CONSISTENT NA LAKI */
+  height: 200px; 
+}
+
+.dcp-gallery-item img {
+  width: 100%; /* Sized to fit the container */
+  height: 100%; /* Sized to fit the container */
+  display: block;
+  
+  /* ITO ANG NAG-AAYOS NG LAKI NG LARAWAN */
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.dcp-gallery-item:hover img {
+  transform: scale(1.05);
+}

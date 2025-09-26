@@ -1,0 +1,40 @@
+/* ===== CONTACT ===== */
+.dcp-contacts-section{
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08);
+}
+.dcp-contacts-container{
+  display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;
+}
+
+/* Form (left) */
+.dcp-contact-card{ padding:22px 20px }
+.dcp-form{ display:grid; gap:10px }
+.dcp-form label{ display:grid; gap:6px; color:#ededed }
+.dcp-form input,.dcp-form textarea{
+  background:#121212; border:1px solid rgba(255,255,255,.08); color:#ededed; border-radius:12px; padding:12px 14px; outline:none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.dcp-form input:focus,.dcp-form textarea:focus{
+  border-color:#ffd84d; box-shadow: 0 0 0 3px rgba(255,216,77,.22);
+}
+
+/* Info + map (right) */
+.dcp-map-card{ padding:22px 20px; display:grid; gap:12px; align-content:start }
+.dcp-contact-list{ list-style:none; padding-left:0; margin:0; display:grid; gap:6px }
+.dcp-contact-list li{ color:#b8b8b8; display:flex; gap:10px; align-items:flex-start }
+.dcp-contact-list i{ color:#ffd84d; margin-top:2px }
+.dcp-contact-list a{
+  color: var(--text);
+  text-decoration: none;
+}
+.dcp-contact-list a:hover {
+  text-decoration: underline;
+  color: var(--gold-strong);
+}
+.dcp-map{ aspect-ratio:16/12; width:100%; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.08) }
+.dcp-map iframe{ width:100%; height:100%; border:0 }
+
+@media (max-width: 980px){
+  .dcp-contacts-container{ grid-template-columns:1fr }
+}

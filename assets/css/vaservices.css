@@ -1,0 +1,38 @@
+
+.dcp-benefits-inner ul li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border-left: 4px solid #ffd84d;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex; /* Added to align icon and text */
+  align-items: center; /* Added to align icon and text */
+}
+
+.dcp-benefits-inner ul li i {
+  color: #ffd84d; /* Added to change icon color */
+  margin-right: 10px; /* Added for spacing */
+  font-size: 1.5rem; /* Added to increase icon size for visibility */
+}
+
+.dcp-benefits-inner ul li:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.dcp-benefits-inner ul li strong {
+  color: #fff;
+  font-weight: 600;
+}
+#benefits .section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#benefits .section-title i {
+  margin-right: 10px;
+}

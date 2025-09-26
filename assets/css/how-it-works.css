@@ -1,0 +1,46 @@
+/* ===== HOW IT WORKS ===== */
+.dcp-how-it-works-section {
+  background: transparent;
+}
+.dcp-hiw-inner .section-title {
+  display: block;
+  text-align: center;
+}
+.dcp-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+.dcp-step-card {
+  padding: 18px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45), 0 0 0 rgba(255, 216, 77, 0);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.dcp-step-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 216, 77, 0.45);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45), 0 0 12px rgba(255, 216, 77, 0.15);
+}
+.dcp-step-card h3 {
+  margin: 0 0 6px 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.dcp-step-card h3 i {
+  color: var(--gold-strong);
+  filter: drop-shadow(0 0 4px rgba(255, 216, 77, .25));
+}
+.dcp-step-card p {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+@media (max-width: 768px) {
+  .dcp-steps {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,47 @@
+/* ===== TESTIMONIALS (no manual scroll; auto-loop only) ===== */
+.dcp-testimonials-section{ background:transparent; padding-bottom:0 }
+.dcp-testimonials-inner{ text-align:center }
+
+/* Track */
+.dcp-testimonial-cards{
+  display:flex; gap:16px; margin-top:20px;
+  max-width:1100px; margin-left:auto; margin-right:auto;
+  padding-bottom:20px; position:relative;
+
+  /* HIDE native scrollbar & disallow manual pan */
+  overflow-x:auto;                 /* programmatic scrollLeft pa rin */
+  -ms-overflow-style:none;         /* IE/Edge */
+  scrollbar-width:none;            /* Firefox */
+  overscroll-behavior-x:contain;
+  touch-action:none;               /* disable touch panning */
+  cursor:default;
+}
+.dcp-testimonial-cards::-webkit-scrollbar{ display:none }
+
+/* Optional fade edges (keeps clean look) */
+.dcp-testimonial-cards{
+  -webkit-mask-image:linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image:linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+/* Card */
+.dcp-testimonial-card{
+  width:280px; height:280px; flex-shrink:0; padding:22px;
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.08); border-radius:16px; box-shadow:0 8px 22px rgba(0,0,0,.45);
+  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow:hidden;
+  opacity:1; transition:opacity .3s ease;
+}
+
+.dcp-testimonial-card p{
+  font-style:italic; margin:0 0 10px 0; color:#ededed;
+  overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical;
+}
+.dcp-testimonial-card cite{
+  display:block; text-align:right; color:var(--gold-strong); font-size:90%; text-shadow:0 0 4px rgba(255,216,77,.15)
+}
+
+@media (max-width:992px){
+  .dcp-testimonial-card{ width:250px; height:250px }
+  .dcp-testimonial-cards{ max-width:92vw }
+}

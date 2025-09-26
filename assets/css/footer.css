@@ -1,0 +1,128 @@
+/* ========= FOOTER (shared) ========= */
+:root {
+  --bg: #000;
+  --panel: #0e0e0e;
+  --panel-2: #121212;
+  --text: #ededed;
+  --muted: #b8b8b8;
+  --gold: #f4d55c;
+  --gold-strong: #ffd84d; /* shining gold */
+  --border: rgba(255, 255, 255, 0.08);
+}
+.dcp-footer {
+  background: #0f0f0f;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+  padding: 48px 0 18px;
+}
+.dcp-footer-inner {
+  width: min(1200px, 92vw);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Changed to four equal columns */
+  gap: 28px;
+  align-items: flex-start;
+  text-align: left;
+}
+/* Bagong styling para sa group ng Quick Links at Follow */
+.dcp-col.group-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.dcp-col h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+}
+.dcp-col p {
+  color: #cfcfcf;
+  margin: 0.35rem 0 1rem;
+}
+.dcp-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  place-items: flex-start;
+}
+.dcp-col ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #cfcfcf;
+}
+.dcp-col ul li a {
+  color: #cfcfcf;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+/* small brand logo */
+.dcp-col.brand .logo {
+  margin-bottom: 8px;
+}
+.brand-logo.small {
+  height: 34px;
+  width: auto;
+}
+/* ===== GOLD REMIX ICONS ===== */
+.dcp-footer i,
+.dcp-footer a i {
+  color: var(--gold-strong) !important;
+  filter: drop-shadow(0 0 6px rgba(255, 216, 77, 0.25));
+  font-size: 1.08rem;
+  line-height: 1;
+}
+.dcp-col.links a i,
+.dcp-col.social a i {
+  font-size: 1.12rem;
+}
+/* hover */
+.dcp-col.links a:hover,
+.dcp-col.social a:hover {
+  color: #fff;
+}
+.dcp-col.links a:hover i,
+.dcp-col.social a:hover i {
+  color: #fff !important;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+.dcp-copy {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #a4a4a4;
+}
+/* Responsive styles */
+@media (max-width: 992px) {
+  .dcp-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .dcp-col.group-links {
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    gap: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .dcp-footer-inner {
+    text-align: left;
+  }
+  .dcp-col.group-links {
+    grid-template-columns: 1fr;
+    text-align: left;
+    gap: 20px;
+  }
+  .dcp-col ul {
+    place-items: flex-start;
+  }
+  .dcp-col ul li,
+  .dcp-col ul li a {
+    justify-content: flex-start;
+  }
+}

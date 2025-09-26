@@ -1,0 +1,85 @@
+/* ===== VIDEO SECTION ===== */
+.dcp-videos-section {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.dcp-video-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.dcp-video-slider {
+    position: relative;
+    overflow: hidden;
+    margin-top: 24px;
+}
+
+.dcp-video-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 400%; /* 4 videos */
+}
+
+.video-container {
+    flex-shrink: 0;
+    width: 25%; /* Each video takes up 1/4 of the track */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.dcp-video-item {
+    width: 100%;
+    aspect-ratio: 16/9; /* Maintain 16:9 ratio */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.dcp-slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, .1);
+    color: #ffd84d;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 100;
+    font-size: 24px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.dcp-slider-btn:hover {
+    background: rgba(255, 255, 255, .2);
+}
+
+.dcp-prev-btn {
+    left: 10px;
+}
+
+.dcp-next-btn {
+    right: 10px;
+}
+
+@media (max-width: 768px) {
+    .video-container {
+        width: 100%; /* On smaller screens, show one video at a time */
+    }
+    .dcp-video-track {
+        width: 400%;
+    }
+}
+
+@media (max-width: 576px) {
+    .dcp-slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}

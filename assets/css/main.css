@@ -1,0 +1,205 @@
+:root{
+  --bg:#000;
+  --panel:#0e0e0e;
+  --panel-2:#121212;
+  --text:#ededed;
+  --muted:#b8b8b8;
+  --gold:#f4d55c;
+  --gold-strong:#ffd84d;
+  --border:rgba(255,255,255,.08);
+  --radius:18px;
+  --shadow:0 8px 24px rgba(0,0,0,.45);
+  --va-nav-offset:84px;
+
+  /* modern viewport units for stable vh/vw on mobile */
+  --svw: 100dvw;
+  --svh: 100dvh;
+}
+
+/* ---- GLOBAL VIEWPORT + SCROLL STABILITY ---- */
+html { scrollbar-gutter: stable both-edges; } /* iwas zig-zag kapag 100vw sections */
+
+/* ===== Global reset & overflow guards ===== */
+*{ box-sizing:border-box }
+html, body{ margin:0; padding:0; }
+
+/* cut off side bleed pero hindi hinahawakan ang height/scroll ng page */
+html, body{ overflow-x: clip; }
+@supports not (overflow-x: clip){ html, body{ overflow-x:hidden; } }
+
+img, video, canvas, svg{ max-width:100%; height:auto; display:block }
+
+body{
+  font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:#000; color:var(--text); line-height:1.6;
+}
+
+/* container width is percent-based para di “sumabit” sa right edge */
+.container{ width:min(1200px, 92%); margin-inline:auto }
+
+/* ===== Sections: KEEP 100vw/100vh but stable ===== */
+.page-section{
+  inline-size: var(--svw, 100vw);      /* keep vw semantics */
+  min-block-size: var(--svh, 100vh);   /* keep vh semantics */
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+
+  /* guard laban sa inner elements na may box-shadow/translate */
+  overflow-x: clip;
+}
+
+/* common wrappers — percent para safe sa loob ng 100vw */
+#va-about .about-container,
+#va-intro .pro-provider-container,
+#va-services-list .services-grid,
+#va-contact .contact-form,
+.footer .footer-columns{
+  width:min(1200px, 92%);
+  margin-inline:auto;
+}
+
+.section-title{
+  margin:0 0 40px 0;
+  font-size:clamp(1.8rem, 5vw, 2.5rem);
+  text-align:center;
+}
+
+/* anchor offsets */
+#va-hero, #va-about, #va-intro, #va-services-list, #va-contact { scroll-margin-top:var(--va-nav-offset) }
+
+/* ===== Text gradient ===== */
+.text-gradient{
+  background:linear-gradient(90deg,#fff,var(--gold-strong));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.section-title.text-gradient{ position:relative; display:inline-block; padding-bottom:6px; }
+
+/* ===== Glass look ===== */
+.glass{
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+@media (max-width:768px){
+  .glass{ backdrop-filter:none; -webkit-backdrop-filter:none; }
+}
+
+/* ===== Buttons ===== */
+.dcp-btn,.dcp-btn-primary,.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.7rem 1rem; border-radius:12px; text-decoration:none; font-weight:600; cursor:pointer; user-select:none;
+  transition:box-shadow .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+}
+.dcp-btn,.btn{ border:1px solid var(--gold-strong); color:var(--text); background:transparent }
+.dcp-btn:hover,.btn:hover{ color:#000; background:var(--gold-strong); box-shadow:0 0 16px rgba(255,216,77,.25) }
+.dcp-btn-primary{ background:var(--gold-strong); color:#000; border:1px solid var(--gold-strong) }
+.dcp-btn-primary:hover{ filter:brightness(1.05) }
+
+/* ===== Starfield (unchanged visuals) ===== */
+.stars-wrap,.background-stars{ position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none }
+#stars,#stars2,#stars3{ position:absolute; inset:0; background:transparent }
+#stars{
+  background:
+    radial-gradient(1px 1px at 20% 30%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 80% 40%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 60% 70%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 10% 80%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 50% 10%, #fff 50%, transparent 51%);
+  animation:drift1 50s linear infinite; opacity:.75;
+}
+#stars2{
+  background:
+    radial-gradient(1px 1px at 30% 60%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 70% 20%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 90% 80%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 15% 45%, #fff 50%, transparent 51%);
+  animation:drift2 80s linear infinite; opacity:.5;
+}
+#stars3{
+  background:
+    radial-gradient(1px 1px at 25% 25%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 55% 45%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 75% 85%, #fff 50%, transparent 51%);
+  animation:drift3 120s linear infinite; opacity:.35;
+}
+@keyframes drift1{ to{ transform:translateX(-160px) } }
+@keyframes drift2{ to{ transform:translateX(-320px) } }
+@keyframes drift3{ to{ transform:translateX(-480px) } }
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion:reduce){
+  .page-wipe{ display:none }
+  #stars,#stars2,#stars3{ animation:none }
+}
+
+/* ===== Generic scroll-fx ===== */
+.scroll-fx{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; will-change:opacity,transform }
+.scroll-fx.in{ opacity:1; transform:none }
+.scroll-fx.out{ opacity:0; transform:translateY(16px) }
+
+/* Testimonials: visible by default (compat) */
+body.gsap-ready .dcp-testimonials-section .dcp-testimonial-card{
+  opacity:1; transform:none; transition:opacity .3s ease;
+}
+
+/* ===== Webview-safe lock while menu open ===== */
+body.menu-open{ overflow-y:hidden; } /* Y lang para iwas webview bug */
+
+/* ===== Utility for any edge-bleed elements ===== */
+.no-bleed{ max-width:100%; overflow-x:hidden }
+/* === Embed & media safety (iwas horizontal scroll) === */
+.dcp-map iframe { width:100%; max-width:100%; display:block; border:0; }
+
+/* Safe default for any iframe/video that might overflow */
+iframe, video { max-width:100%; }
+
+/* ---------- Page Wipe (right) ---------- */
+/* (deprecated first variant kept for compatibility) */
+.page-wipe{
+  position: fixed;
+  inset: 0;
+  background: var(--wipe-bg, #0b0f1a);
+  z-index: 9999;
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+/* Modern page wipe (black) — consolidated and contained */
+.page-wipe{
+  position: fixed;
+  inset: 0;
+  background: #000;             /* solid black */
+  z-index: 2147483646;          /* overlay top */
+  transform: translateX(-100%); /* default: nakatago sa kaliwa */
+  will-change: transform;
+  contain: layout paint;        /* NEW: prevent layout side-effects */
+  pointer-events: none;
+}
+
+/* Exit: cover from RIGHT → LEFT (pa-alis = wipe-left) */
+.page-wipe.wipe-cover-left {
+  animation: dcp-wipe-cover-left 520ms cubic-bezier(.22,.61,.36,1) forwards;
+  pointer-events: auto;
+}
+
+/* Entry: reveal to the RIGHT (pa-pasok = wipe-right) */
+.page-wipe.wipe-reveal-right {
+  animation: dcp-wipe-reveal-right 640ms cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+/* Optional: safety class kapag gusto mong agad naka-cover sa load */
+.page-wipe.is-covered { transform: translateX(0); }
+
+@keyframes dcp-wipe-cover-left {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+@keyframes dcp-wipe-reveal-right {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+
+/* ---- universal flex/grid child guards ---- */
+:where(.flex > *, .grid > *, [class*="grid"] > *){ min-width:0; min-height:0; }

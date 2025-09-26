@@ -1,0 +1,82 @@
+/* ===== FAQ ===== */
+.dcp-faq-section {
+  background: transparent;
+}
+.dcp-faq-inner {
+  text-align: center;
+}
+.dcp-faq-list {
+  max-width: 900px;
+  margin: 20px auto 0;
+  display: grid;
+  gap: 12px;
+}
+.dcp-faq-item {
+  padding: 18px 22px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.dcp-faq-item:hover {
+  border-color: rgba(255, 216, 77, 0.45);
+}
+.dcp-faq-item summary {
+  display: block;
+  position: relative;
+  font-size: 1.15rem;
+  font-weight: 600;
+  list-style: none;
+  outline: none;
+  color: #fff;
+}
+.dcp-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.dcp-faq-item summary::after {
+  content: '\ea41'; /* Bagong icon: '+' */
+  font-family: 'remixicon';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold-strong);
+  transition: transform 0.2s ease;
+}
+.dcp-faq-item[open] summary::after {
+  transform: translateY(-50%) rotate(45deg); /* Paikot para maging 'X' */
+}
+.dcp-faq-item[open] summary {
+  color: var(--gold-strong);
+}
+.dcp-faq-item p {
+  /* Animation para sa smooth na pagbukas at pagsara */
+  max-height: 0;
+  padding-top: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--muted);
+}
+.dcp-faq-item[open] p {
+  /* Ang taas kapag bukas, dapat sapat para sa content */
+  max-height: 500px;
+  padding-top: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .dcp-faq-item summary {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .dcp-faq-item summary {
+    font-size: 1rem;
+  }
+  .dcp-faq-item p {
+    font-size: 0.9rem;
+  }
+}
