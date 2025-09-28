@@ -7,7 +7,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <!-- ✅ Match VA page icon set -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../css/main.css" />
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="../css/contact.css" />
     <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="../css/testimonials.css" />
+    <!-- ✅ Same FAQ CSS as VA page -->
     <link rel="stylesheet" href="../css/faq.css" />
     <link rel="stylesheet" href="../css/vaservices.css" />
     <link rel="stylesheet" href="../css/gallery.css" />
@@ -320,74 +322,74 @@
         </div>
       </div>
 
-      <!-- ================= UPDATED FAQ ================= -->
+      <!-- ================= UPDATED FAQ (identical behavior/structure to VA page) ================= -->
       <section id="faq" class="dcp-faq-section page-section">
         <div class="dcp-faq-inner container">
           <h2 class="section-title text-gradient">Frequently Asked Questions</h2>
 
           <div class="dcp-faq-list">
-            <details class="dcp-faq-item glass">
-              <summary class="faq-summary" tabindex="0">
+            <details class="dcp-faq-item">
+              <summary class="faq-summary" tabindex="0" aria-controls="faq-1">
                 <span class="faq-left"><i class="ri-question-line" aria-hidden="true"></i></span>
                 <span class="faq-title">What services do you offer?</span>
                 <span class="faq-right" aria-hidden="true">+</span>
               </summary>
-              <div class="faq-content">
+              <div id="faq-1" class="faq-content">
                 <p>We specialize in Janitorial Services for commercial and office spaces.</p>
               </div>
             </details>
 
-            <details class="dcp-faq-item glass">
-              <summary class="faq-summary" tabindex="0">
+            <details class="dcp-faq-item">
+              <summary class="faq-summary" tabindex="0" aria-controls="faq-2">
                 <span class="faq-left"><i class="ri-shield-check-line" aria-hidden="true"></i></span>
                 <span class="faq-title">How do you ensure quality for janitorial work?</span>
                 <span class="faq-right" aria-hidden="true">+</span>
               </summary>
-              <div class="faq-content">
+              <div id="faq-2" class="faq-content">
                 <p>Our staff undergoes extensive training, and we maintain strict quality standards. We also provide weekly reports and keep clear communication channels for any concerns.</p>
               </div>
             </details>
 
-            <details class="dcp-faq-item glass">
-              <summary class="faq-summary" tabindex="0">
-                <span class="faq-left"><i class="ri-rocket-2-line" aria-hidden="true"></i></span>
+            <details class="dcp-faq-item">
+              <summary class="faq-summary" tabindex="0" aria-controls="faq-3">
+                <span class="faq-left"><i class="ri-rocket-line" aria-hidden="true"></i></span>
                 <span class="faq-title">How can I get started with your services?</span>
                 <span class="faq-right" aria-hidden="true">+</span>
               </summary>
-              <div class="faq-content">
+              <div id="faq-3" class="faq-content">
                 <p>Use the contact form to tell us what you need, and we'll propose a plan that works for you.</p>
               </div>
             </details>
 
-            <details class="dcp-faq-item glass">
-              <summary class="faq-summary" tabindex="0">
+            <details class="dcp-faq-item">
+              <summary class="faq-summary" tabindex="0" aria-controls="faq-4">
                 <span class="faq-left"><i class="ri-money-dollar-circle-line" aria-hidden="true"></i></span>
                 <span class="faq-title">What is your pricing model?</span>
                 <span class="faq-right" aria-hidden="true">+</span>
               </summary>
-              <div class="faq-content">
+              <div id="faq-4" class="faq-content">
                 <p>Our pricing is customized based on your specific needs, the size of the space, the frequency of cleaning, and the services required. Please contact us for a free, no-obligation quote.</p>
               </div>
             </details>
 
-            <details class="dcp-faq-item glass">
-              <summary class="faq-summary" tabindex="0">
+            <details class="dcp-faq-item">
+              <summary class="faq-summary" tabindex="0" aria-controls="faq-5">
                 <span class="faq-left"><i class="ri-leaf-line" aria-hidden="true"></i></span>
                 <span class="faq-title">Are your cleaning products safe for the environment?</span>
                 <span class="faq-right" aria-hidden="true">+</span>
               </summary>
-              <div class="faq-content">
+              <div id="faq-5" class="faq-content">
                 <p>Yes, we are committed to using eco-friendly and non-toxic cleaning products to ensure a safe and healthy environment for your staff and clients, while also being mindful of the planet.</p>
               </div>
             </details>
 
-            <details class="dcp-faq-item glass">
-              <summary class="faq-summary" tabindex="0">
+            <details class="dcp-faq-item">
+              <summary class="faq-summary" tabindex="0" aria-controls="faq-6">
                 <span class="faq-left"><i class="ri-brush-2-line" aria-hidden="true"></i></span>
                 <span class="faq-title">Can you handle special requests or deep cleaning?</span>
                 <span class="faq-right" aria-hidden="true">+</span>
               </summary>
-              <div class="faq-content">
+              <div id="faq-6" class="faq-content">
                 <p>Absolutely. We offer deep cleaning services for carpets, floors, and high-touch areas. We can also accommodate special requests to meet your unique cleaning needs.</p>
               </div>
             </details>
@@ -483,6 +485,7 @@
     <!-- Use janitorial-specific gallery (images at ../images/iStock-*.png) -->
     <script src="../js/janitorial-gallery.js" defer></script>
 
+    <!-- ✅ Same FAQ JS as VA page -->
     <script src="../js/faq.js" defer></script>
     <script src="../js/nav.js" defer></script>
     <script src="../js/wipe-transition.js" type="module" defer></script>

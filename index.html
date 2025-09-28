@@ -10,9 +10,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
-    <!-- Font Awesome (for FAQ icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
+    <!-- ✅ Use the same Remix Icon version as VA page -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <!-- CSS bundles -->
@@ -24,6 +23,7 @@
     <link rel="stylesheet" href="assets/css/contact.css" />
     <link rel="stylesheet" href="assets/css/footer.css" />
     <link rel="stylesheet" href="assets/css/testimonials.css" />
+    <!-- ✅ Same FAQ CSS as VA page -->
     <link rel="stylesheet" href="assets/css/faq.css" />
 
     <noscript><style>.page-wipe{display:none!important}</style></noscript>
@@ -52,7 +52,6 @@
           <a href="#contact">Contact</a>
           <a href="#testimonials">Testimonials</a>
           <a href="#faq">FAQ</a>
-          <!-- (Removed Privacy Policy from header as requested) -->
         </nav>
 
         <button class="dcp-burger" aria-label="Toggle Menu" aria-controls="site-nav" aria-expanded="false">
@@ -218,77 +217,53 @@
       </div>
     </section>
 
-    <!-- UPDATED FAQ with left + right icons and accordion behavior -->
+    <!-- ✅ FAQ identical to VA page structure & behavior -->
     <section id="faq" class="dcp-faq-section page-section">
       <div class="dcp-faq-inner container">
         <h2 class="section-title text-gradient">Frequently Asked Questions</h2>
 
         <div class="dcp-faq-list">
-          <details class="dcp-faq-item glass">
-            <summary class="faq-summary">
-              <span class="faq-left">
-                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
-                <span class="faq-title">What services do you offer?</span>
-              </span>
-              <i class="fa-solid fa-plus faq-right" aria-hidden="true"></i>
+          <details class="dcp-faq-item">
+            <summary class="faq-summary" tabindex="0" aria-controls="faq-1">
+              <span class="faq-left"><i class="ri-question-line" aria-hidden="true"></i></span>
+              <span class="faq-title">What services do you offer?</span>
+              <span class="faq-right" aria-hidden="true">+</span>
             </summary>
-            <div class="faq-content">
-              <p>
-                We specialize in Janitorial Services for commercial and office
-                spaces, and Virtual Assistant Services for business support,
-                content management, and research.
-              </p>
+            <div id="faq-1" class="faq-content">
+              <p>We specialize in Janitorial Services for commercial and office spaces, and Virtual Assistant Services for business support, content management, and research.</p>
             </div>
           </details>
 
-          <details class="dcp-faq-item glass">
-            <summary class="faq-summary">
-              <span class="faq-left">
-                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
-                <span class="faq-title">How do you ensure quality for janitorial work?</span>
-              </span>
-              <i class="fa-solid fa-plus faq-right" aria-hidden="true"></i>
+          <details class="dcp-faq-item">
+            <summary class="faq-summary" tabindex="0" aria-controls="faq-2">
+              <span class="faq-left"><i class="ri-shield-check-line" aria-hidden="true"></i></span>
+              <span class="faq-title">How do you ensure quality for janitorial work?</span>
+              <span class="faq-right" aria-hidden="true">+</span>
             </summary>
-            <div class="faq-content">
-              <p>
-                Our staff undergoes extensive training, and we maintain strict
-                Service Level Agreements (SLAs). We also provide weekly reports
-                and have a clear communication channel to address any concerns.
-              </p>
+            <div id="faq-2" class="faq-content">
+              <p>Our staff undergoes extensive training, and we maintain strict Service Level Agreements (SLAs). We also provide weekly reports and have a clear communication channel to address any concerns.</p>
             </div>
           </details>
 
-          <details class="dcp-faq-item glass">
-            <summary class="faq-summary">
-              <span class="faq-left">
-                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
-                <span class="faq-title">What types of tasks can a Virtual Assistant handle?</span>
-              </span>
-              <i class="fa-solid fa-plus faq-right" aria-hidden="true"></i>
+          <details class="dcp-faq-item">
+            <summary class="faq-summary" tabindex="0" aria-controls="faq-3">
+              <span class="faq-left"><i class="ri-user-star-line" aria-hidden="true"></i></span>
+              <span class="faq-title">What types of tasks can a Virtual Assistant handle?</span>
+              <span class="faq-right" aria-hidden="true">+</span>
             </summary>
-            <div class="faq-content">
-              <p>
-                Our VAs are skilled in a wide range of tasks, including
-                administrative support, social media management, customer
-                service, email handling, and in-depth research.
-              </p>
+            <div id="faq-3" class="faq-content">
+              <p>Our VAs are skilled in a wide range of tasks, including administrative support, social media management, customer service, email handling, and in-depth research.</p>
             </div>
           </details>
 
-          <details class="dcp-faq-item glass">
-            <summary class="faq-summary">
-              <span class="faq-left">
-                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
-                <span class="faq-title">How can I get started with your services?</span>
-              </span>
-              <i class="fa-solid fa-plus faq-right" aria-hidden="true"></i>
+          <details class="dcp-faq-item">
+            <summary class="faq-summary" tabindex="0" aria-controls="faq-4">
+              <span class="faq-left"><i class="ri-rocket-line" aria-hidden="true"></i></span>
+              <span class="faq-title">How can I get started with your services?</span>
+              <span class="faq-right" aria-hidden="true">+</span>
             </summary>
-            <div class="faq-content">
-              <p>
-                It's simple! You can use the contact form on our website to tell
-                us what you need, and we'll get back to you to discuss a plan
-                that works for you. You can also contact us via phone or email.
-              </p>
+            <div id="faq-4" class="faq-content">
+              <p>It's simple! You can use the contact form on our website to tell us what you need, and we'll get back to you to discuss a plan that works for you. You can also contact us via phone or email.</p>
             </div>
           </details>
         </div>
@@ -382,6 +357,7 @@
     <script src="assets/js/nav.js" type="module" defer></script>
     <script src="assets/js/main.js" type="module" defer></script>
     <script src="assets/js/testimonial.js" type="module" defer></script>
-    <script src="assets/js/faq.js" type="module" defer></script>
+    <!-- ✅ Same FAQ JS as VA page -->
+    <script src="assets/js/faq.js" defer></script>
   </body>
 </html>
