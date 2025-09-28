@@ -1,176 +1,147 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const burger = document.querySelector('.dcp-burger');
-  const header = document.querySelector('.dcp-header');
-  let nav = document.querySelector('.dcp-nav');
+// assets/js/testimonial.js
+// Testimonials: auto-loop (mobile + desktop), native swipe on touch, drag-to-scroll on mouse/pen.
+// No nav/hamburger logic here (that lives in nav.js).
 
-  // === Overlay (create once if missing)
-  let overlay = document.querySelector('.menu-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.className = 'menu-overlay';
-    document.body.appendChild(overlay);
-  }
+(function () {
+  function init() {
+    const track = document.querySelector('.dcp-testimonial-cards');
+    if (!track) return;
 
-  // === Anchor to reinsert nav on desktop (when we portal it on mobile)
-  let navAnchor = document.getElementById('nav-anchor');
-  if (!navAnchor) {
-    navAnchor = document.createElement('div');
-    navAnchor.id = 'nav-anchor';
-    header?.querySelector('.dcp-header-container')?.appendChild(navAnchor);
-  }
+    // -------- Auto-loop --------
+    let autoTimer = null;
+    const SPEED = 0.8;   // px per tick
+    const TICK  = 16;    // ms
+    let pausedByHover  = false;
+    let pausedByDrag   = false;
+    let pausedByTouch  = false;
+    let pausedByHidden = false;
 
-  // ===== Responsive placement (same as before)
-  const BREAKPOINT = 991;
-  const placeNavMobile = () => { if (nav && nav.parentElement !== document.body) document.body.appendChild(nav); };
-  const placeNavDesktop = () => { if (nav && nav.parentElement === document.body) navAnchor.parentElement.insertBefore(nav, navAnchor); };
-  const ensurePlacement = () => { if (window.innerWidth <= BREAKPOINT) placeNavMobile(); else placeNavDesktop(); };
+    const atMax = () => {
+      const max = Math.max(0, track.scrollWidth - track.clientWidth);
+      const nearEnd = track.scrollLeft >= (max > 0 ? max - 1 : 0);
+      return { max, nearEnd, isMax: max <= 0 };
+    };
 
-  // ===== MOBILE drawer scroll-lock WITHOUT position:fixed (prevents jump-to-top)
-  let preventTouch = null;
-  let preventWheel = null;
+    const startAuto = () => {
+      if (autoTimer || pausedByHover || pausedByDrag || pausedByTouch || pausedByHidden) return;
+      autoTimer = setInterval(() => {
+        const { isMax, nearEnd } = atMax();
+        if (isMax) return;                // nothing to scroll
+        track.scrollLeft = nearEnd ? 0 : (track.scrollLeft + SPEED);
+      }, TICK);
+    };
 
-  const enableEventBlockers = () => {
-    // Block touchmove/wheel while drawer open (no background scroll) — mobile safe
-    preventTouch = (e) => { e.preventDefault(); };
-    preventWheel = (e) => { e.preventDefault(); };
-    document.addEventListener('touchmove', preventTouch, { passive: false });
-    document.addEventListener('wheel', preventWheel, { passive: false });
-    document.body.classList.add('menu-open'); // your CSS already sets overflow-y:hidden
-  };
+    const stopAuto = () => {
+      if (autoTimer) clearInterval(autoTimer);
+      autoTimer = null;
+    };
 
-  const disableEventBlockers = () => {
-    if (preventTouch) document.removeEventListener('touchmove', preventTouch);
-    if (preventWheel) document.removeEventListener('wheel', preventWheel);
-    preventTouch = null;
-    preventWheel = null;
-    document.body.classList.remove('menu-open');
-  };
+    // Hover pause (desktop)
+    track.addEventListener('mouseenter', () => { pausedByHover = true;  stopAuto(); });
+    track.addEventListener('mouseleave', () => { pausedByHover = false; startAuto(); });
 
-  // ===== Menu open/close (no position:fixed anymore)
-  const openMenu = () => {
-    ensurePlacement();
-    nav?.classList.add('is-active');
-    burger?.classList.add('is-active');
-    enableEventBlockers();
-  };
-  const closeMenu = () => {
-    nav?.classList.remove('is-active');
-    burger?.classList.remove('is-active');
-    disableEventBlockers();
-  };
-  const toggleMenu = () => (nav?.classList.contains('is-active') ? closeMenu() : openMenu());
+    // Page visibility (save battery)
+    document.addEventListener('visibilitychange', () => {
+      pausedByHidden = document.visibilityState !== 'visible';
+      if (pausedByHidden) stopAuto(); else startAuto();
+    });
 
-  // ===== Link helpers
-  const isSamePageHash = (href) => {
-    if (!href) return false;
-    if (href.startsWith('#')) return true;
-    try {
-      const u = new URL(href, window.location.href);
-      return u.origin === window.location.origin && u.pathname === window.location.pathname && !!u.hash;
-    } catch { return false; }
-  };
-  const getHashId = (href) => {
-    if (!href) return null;
-    if (href.startsWith('#')) return href.slice(1);
-    try { const u = new URL(href, window.location.href); return u.hash ? u.hash.slice(1) : null; }
-    catch { return null; }
-  };
+    // -------- Drag-to-scroll (desktop/pen) --------
+    let dragging = false;
+    let dragMoved = false;
+    let startX = 0;
+    let startLeft = 0;
 
-  // Compute absolute Y BEFORE closing the drawer (prevents any jump)
-  const computeTargetY = (el) => {
-    const headerH = (document.querySelector('.dcp-header')?.offsetHeight || 0) + 4; // buffer
-    const rect = el.getBoundingClientRect();
-    return Math.max(0, (window.pageYOffset || 0) + rect.top - headerH);
-  };
+    const onPointerDown = (e) => {
+      if (e.pointerType === 'touch') return;        // let touch be native
+      if (e.button !== undefined && e.button !== 0) return; // left button only
+      dragging = true; dragMoved = false;
+      pausedByDrag = true; stopAuto();
+      track.classList.add('dragging');
+      startX = e.clientX;
+      startLeft = track.scrollLeft;
+      if (track.setPointerCapture) {
+        try { track.setPointerCapture(e.pointerId); } catch {}
+      }
+    };
 
-  const smoothScrollToY = (y) => {
-    // No need for flags now; we never used position:fixed, so no restore jump
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  };
+    const onPointerMove = (e) => {
+      if (!dragging || e.pointerType === 'touch') return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 2) dragMoved = true;
+      track.scrollLeft = startLeft - dx;            // map drag to scroll
+      // prevent text selection while dragging
+      if (typeof e.preventDefault === 'function') e.preventDefault();
+    };
 
-  // ===== Wire events
-  if (burger && nav) {
-    burger.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
-    overlay.addEventListener('click', closeMenu);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+    const endPointer = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      track.classList.remove('dragging');
+      if (track.releasePointerCapture && e && e.pointerId !== undefined) {
+        try { track.releasePointerCapture(e.pointerId); } catch {}
+      }
+      // If user dragged, block the immediate click so cards/links won’t be triggered
+      if (dragMoved) {
+        const blocker = (ev) => { ev.stopPropagation(); ev.preventDefault(); track.removeEventListener('click', blocker, true); };
+        track.addEventListener('click', blocker, true);
+      }
+      pausedByDrag = false; startAuto();
+    };
 
-    // Guard to avoid duplicate bindings when HTML is reloaded/rehydrated
-    if (!nav.dataset.bound) {
-      nav.dataset.bound = '1';
-
-      nav.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', (e) => {
-          const href = a.getAttribute('href') || '';
-          e.preventDefault(); // deterministic control
-
-          // Same-page anchor: PRECOMPUTE target Y now (while drawer is still open)
-          let targetY = null;
-          let newHash = null;
-
-          if (isSamePageHash(href)) {
-            const id = getHashId(href);
-            const el = id ? (document.getElementById(id) || document.querySelector(`[name="${CSS.escape(id)}"]`)) : null;
-            if (el) {
-              targetY = computeTargetY(el);
-              newHash = `#${id}`;
-            }
-          }
-
-          // Close drawer first (no position:fixed → no jump)
-          closeMenu();
-
-          // Navigate/scroll shortly after close
-          setTimeout(() => {
-            if (targetY !== null) {
-              smoothScrollToY(targetY);          // exact Y, smooth
-              if (newHash) { try { history.pushState(null, '', newHash); } catch {} }
-            } else {
-              // External / other page
-              try {
-                const abs = new URL(href, window.location.href).toString();
-                window.location.assign(abs);
-              } catch {
-                if (href && href !== '#') window.location.href = href;
-              }
-            }
-          }, 50);
-        }, { passive:false });
-      });
-    }
-  }
-
-  // ===== Responsive safety (keep the portal, but no scroll restore needed)
-  const normalize = () => {
-    if (window.innerWidth > BREAKPOINT) {
-      placeNavDesktop();
-      closeMenu();
+    // Use Pointer Events when available
+    const hasPointer = 'PointerEvent' in window;
+    if (hasPointer) {
+      track.addEventListener('pointerdown', onPointerDown);
+      track.addEventListener('pointermove', onPointerMove, { passive: false });
+      track.addEventListener('pointerup',     endPointer);
+      track.addEventListener('pointercancel', endPointer);
+      track.addEventListener('pointerleave',  endPointer);
     } else {
-      placeNavMobile();
-      if (!nav?.classList.contains('is-active')) disableEventBlockers();
+      // Fallback for very old browsers (mouse only)
+      const onMouseDown = (e) => {
+        if (e.button !== 0) return;
+        dragging = true; dragMoved = false;
+        pausedByDrag = true; stopAuto();
+        track.classList.add('dragging');
+        startX = e.clientX;
+        startLeft = track.scrollLeft;
+        e.preventDefault();
+      };
+      const onMouseMove = (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 2) dragMoved = true;
+        track.scrollLeft = startLeft - dx;
+        e.preventDefault();
+      };
+      const onMouseUpLeave = () => {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove('dragging');
+        if (dragMoved) {
+          const blocker = (ev) => { ev.stopPropagation(); ev.preventDefault(); track.removeEventListener('click', blocker, true); };
+          track.addEventListener('click', blocker, true);
+        }
+        pausedByDrag = false; startAuto();
+      };
+      track.addEventListener('mousedown', onMouseDown);
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUpLeave);
+      track.addEventListener('mouseleave', onMouseUpLeave);
     }
-  };
-  window.addEventListener('resize', normalize, { passive:true });
-  window.addEventListener('orientationchange', normalize);
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') normalize(); });
 
-  ensurePlacement();
-  normalize();
+    // -------- Mobile touch: native swipe, just pause/resume auto --------
+    track.addEventListener('touchstart', () => { pausedByTouch = true;  stopAuto(); }, { passive: true });
+    track.addEventListener('touchend',   () => { pausedByTouch = false; startAuto(); }, { passive: true });
 
-  // ===== Testimonials auto-loop (kept same)
-  const track = document.querySelector('.dcp-testimonial-cards');
-  if (track) {
-    let auto = null;
-    const SPEED = 0.8, TICK = 16;
-    const start = () => { stop(); auto = setInterval(() => {
-      const max = track.scrollWidth - track.clientWidth;
-      if (max <= 0) return;
-      track.scrollLeft = (track.scrollLeft >= max - 1) ? 0 : (track.scrollLeft + SPEED);
-    }, TICK); };
-    const stop = () => { if (auto) clearInterval(auto); auto = null; };
-    track.addEventListener('mouseenter', stop);
-    track.addEventListener('mouseleave', start);
-    track.addEventListener('touchstart', (e) => e.preventDefault(), { passive:false });
-    track.addEventListener('mousedown',  (e) => e.preventDefault());
-    start();
+    // -------- Start --------
+    startAuto();
   }
-});
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();

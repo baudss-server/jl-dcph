@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Base CSS bundles -->
+    <!-- Global CSS bundles -->
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/hero-section.css" />
@@ -19,155 +19,47 @@
     <link rel="stylesheet" href="../css/contact.css" />
     <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="../css/testimonials.css" />
-    <link rel="stylesheet" href="../css/faq.css" />
     <link rel="stylesheet" href="../css/vaservices.css" />
     <link rel="stylesheet" href="../css/gallery.css" />
-    <link rel="stylesheet" href="../css/video.css" />
+    <link rel="stylesheet" href="../css/video.css?v=2" />
     <link rel="stylesheet" href="../css/modal.css" />
-
-    <!-- Inline fixes: mobile drawer + benefits/about + landscape video -->
-    <style>
-      /* Keep header container as the positioning context for burger */
-      .dcp-header .dcp-header-container{ position:relative !important; }
-
-      /* ===== BENEFITS ===== */
-      #benefits .dcp-benefits-inner { max-width: 1100px; }
-      #benefits .dcp-benefits-inner > p {
-        max-width: 900px; margin: 8px auto 18px; text-align: left;
-      }
-      #benefits ul {
-        list-style: none; padding: 0; margin: 18px auto 0;
-        display: grid; gap: 14px; max-width: 1000px;
-      }
-      @media (min-width: 900px){ #benefits ul { grid-template-columns: 1fr 1fr; } }
-      #benefits li {
-        display: grid; grid-template-columns: 32px 1fr; align-items: start; gap: 12px;
-        padding: 14px 16px; border: 1px solid var(--border); background: var(--panel-2); border-radius: 12px;
-      }
-      #benefits li i { font-size: 20px; line-height: 1; color: var(--gold-strong); margin-top: 2px; }
-      #benefits li b, #benefits li strong { color: var(--text); }
-      #benefits li span { display: block; color: var(--muted); }
-
-      /* ===== ABOUT ===== */
-      #about .about-big-card{
-        display:grid; grid-template-columns:320px 1fr; gap:clamp(16px,2.4vw,28px); align-items:center;
-        background:var(--panel-2); border:1px solid var(--border); border-radius:16px; padding:clamp(16px,2.4vw,28px);
-      }
-      #about .about-image img{ width:100%; height:auto; display:block; filter:drop-shadow(0 6px 18px rgba(0,0,0,.35)); }
-      #about .about-text{ text-align:left; }
-      #about .about-text h3{ margin:0 0 6px; }
-      #about .about-text p{ margin:10px 0; color:var(--muted); }
-      @media (max-width:860px){
-        #about .about-big-card{ grid-template-columns:1fr; }
-        #about .about-image{ order:-1; }
-      }
-
-      /* ===== Video: force 16:9 LANDSCAPE even if source is portrait ===== */
-      .dcp-video-slider .video-container{
-        width:100%;
-        aspect-ratio:16/9;            /* modern browsers */
-        position:relative;
-        overflow:hidden;
-        border-radius:12px;
-      }
-      /* fallback for older browsers without aspect-ratio */
-      .dcp-video-slider .video-container::before{
-        content:""; display:block; padding-top:56.25%;
-      }
-      .dcp-video-slider .video-container > video.dcp-video-item{
-        position:absolute; inset:0;
-        width:100%; height:100%;
-        object-fit:cover;             /* fill 16:9 frame nicely */
-      }
-
-      /* ===== Hardened Mobile Nav (RIGHT drawer) ===== */
-      .dcp-header { position: sticky; top: 0; z-index: 800; }
-
-      .dcp-burger{
-        position:absolute; top:10px; right:clamp(12px,4vw,20px);
-        width:44px; height:44px; border-radius:12px; display:none;
-        border:1px solid var(--border); background:rgba(255,255,255,.06);
-        cursor:pointer; place-items:center; z-index:1100; pointer-events:auto;
-      }
-      .dcp-burger span{ display:block; width:24px; height:2px; background:var(--text); margin:5px 0; transition:transform .35s, opacity .35s }
-      .dcp-burger.is-active span:nth-child(1){ transform:rotate(-45deg) translate(-6px,7px) }
-      .dcp-burger.is-active span:nth-child(2){ opacity:0 }
-      .dcp-burger.is-active span:nth-child(3){ transform:rotate(45deg) translate(-6px,-7px) }
-
-      .menu-overlay{
-        position:fixed; inset:0; background:rgba(0,0,0,.55);
-        opacity:0; pointer-events:none; transition:opacity .2s; display:none; z-index:900;
-      }
-      body.menu-open .menu-overlay{ display:block; opacity:1; pointer-events:auto }
-      body.menu-open{ overflow:hidden; }
-
-      /* Desktop base: nav clickable */
-      .dcp-header .dcp-nav{ pointer-events:auto; }
-
-      @media (max-width: 991px){
-        .dcp-burger{ display:grid; }
-        .dcp-header .dcp-nav{
-          position:fixed !important;
-          top:0 !important; bottom:0 !important; right:0 !important; left:auto !important;
-          width:min(320px,86vw) !important; height:100vh !important;
-          background:var(--panel) !important;
-          display:flex !important; flex-direction:column !important; align-items:stretch !important;
-          padding:76px 16px 24px !important;
-          transform:translateX(100%) !important;
-          transition:transform .30s ease-in-out !important;
-          border-left:1px solid var(--border) !important;
-          pointer-events:none !important; overflow-y:auto !important; -webkit-overflow-scrolling:touch !important;
-          text-align:left !important; margin-left:0 !important; z-index:1000 !important;
-        }
-        .dcp-header .dcp-nav.is-active{
-          transform:translateX(0) !important;
-          pointer-events:auto !important;
-        }
-        .dcp-header .dcp-nav a{
-          display:flex !important; width:100% !important;
-          justify-content:flex-start !important; text-align:left !important;
-          padding:16px 14px !important; border-radius:12px !important;
-        }
-      }
-      @media (max-width:480px){
-        .dcp-burger{ position:fixed; top:10px; right:10px; }
-      }
-    </style>
+    <link rel="stylesheet" href="../css/faq.css?v=2" />
 
     <noscript><style>.page-wipe{display:none!important}</style></noscript>
   </head>
   <body>
     <div class="stars-wrap">
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
+      <div id="stars"></div><div id="stars2"></div><div id="stars3"></div>
     </div>
 
     <!-- ================= HEADER ================= -->
-       <header class="dcp-header">
+    <header class="dcp-header">
       <div class="dcp-header-container">
-        <a href="../../index.html" class="dcp-brand" aria-label="DelaCruzPH Corporation">
-          <img
-            class="brand-logo"
-            src="../images/delacruzph.corporation copy1.png"
-            alt="DelaCruzPH Corporation"
-          />
+        <!-- brand → add .js-wipe so it transitions to main page -->
+        <a href="../../index.html" class="dcp-brand js-wipe" aria-label="DelaCruzPH Corporation">
+          <img class="brand-logo" src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" />
         </a>
-        <nav class="dcp-nav">
+
+        <!-- anchor for desktop reinsertion (used by nav.js) -->
+        <div id="nav-anchor"></div>
+
+        <nav class="dcp-nav" id="siteNav" aria-label="Primary">
           <a href="#va-hero">Home</a>
-          <a href="janitorial.html" data-wipe
-            >Janitorial Service</a
-          >
-          <a href="#about">About</a> <a href="#contact">Contact</a>
-          <a href="#testimonials">Testimonials</a> <a href="#faq">FAQ</a>
-          <a href="../../index.html" data-wipe>Main Page</a>
+          <!-- page-transition links use .js-wipe -->
+          <a href="janitorial.html" class="js-wipe">Janitorial Service</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#faq">FAQ</a>
+          <a href="../../index.html" class="js-wipe">Main Page</a>
         </nav>
-        <button class="dcp-burger" aria-label="Toggle Menu">
+
+        <button class="dcp-burger" id="burgerBtn" aria-label="Toggle menu" aria-controls="siteNav" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
     </header>
-    <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+    <!-- NOTE: .menu-overlay is auto-created by nav.js -->
 
     <!-- ================= HERO ================= -->
     <section id="va-hero" class="dcp-hero-section page-section">
@@ -319,11 +211,51 @@
     <section id="faq" class="dcp-faq-section page-section">
       <div class="dcp-faq-inner container">
         <h2 class="section-title text-gradient">Frequently Asked Questions</h2>
+
         <div class="dcp-faq-list">
-          <details class="dcp-faq-item glass"><summary>What services do you offer?</summary><div class="faq-content"><p>Commercial Janitorial Services and Virtual Assistant Services (admin, content, support, research).</p></div></details>
-          <details class="dcp-faq-item glass"><summary>How do you ensure quality?</summary><div class="faq-content"><p>Trained staff, SLAs, weekly reports, and clear communication.</p></div></details>
-          <details class="dcp-faq-item glass"><summary>What tasks can a VA handle?</summary><div class="faq-content"><p>Inbox/calendar, scheduling, data/doc prep, research, customer support, social media, and custom admin.</p></div></details>
-          <details class="dcp-faq-item glass"><summary>How do we start?</summary><div class="faq-content"><p>Send us your requirements via the contact form. We’ll propose a plan and get you onboarded quickly.</p></div></details>
+          <details class="dcp-faq-item">
+            <summary class="faq-summary" tabindex="0">
+              <span class="faq-left"><i class="ri-question-line"></i></span>
+              <span class="faq-title">What services do you offer?</span>
+              <span class="faq-right">+</span>
+            </summary>
+            <div class="faq-content">
+              <p>Commercial Janitorial Services and Virtual Assistant Services (admin, content, support, research).</p>
+            </div>
+          </details>
+
+          <details class="dcp-faq-item">
+            <summary class="faq-summary" tabindex="0">
+              <span class="faq-left"><i class="ri-shield-check-line"></i></span>
+              <span class="faq-title">How do you ensure quality?</span>
+              <span class="faq-right">+</span>
+            </summary>
+            <div class="faq-content">
+              <p>Trained staff, SLAs, weekly reports, and clear communication.</p>
+            </div>
+          </details>
+
+          <details class="dcp-faq-item">
+            <summary class="faq-summary" tabindex="0">
+              <span class="faq-left"><i class="ri-user-star-line"></i></span>
+              <span class="faq-title">What tasks can a VA handle?</span>
+              <span class="faq-right">+</span>
+            </summary>
+            <div class="faq-content">
+              <p>Inbox/calendar, scheduling, data/doc prep, research, customer support, social media, and custom admin.</p>
+            </div>
+          </details>
+
+          <details class="dcp-faq-item">
+            <summary class="faq-summary" tabindex="0">
+              <span class="faq-left"><i class="ri-rocket-line"></i></span>
+              <span class="faq-title">How do we start?</span>
+              <span class="faq-right">+</span>
+            </summary>
+            <div class="faq-content">
+              <p>Send us your requirements via the contact form. We’ll propose a plan and get you onboarded quickly.</p>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -345,7 +277,7 @@
           <ul class="dcp-contact-list">
             <li><i class="ri-phone-line"></i> Call Us: <a href="tel:+17787461231">(778) 746-1231</a></li>
             <li><i class="ri-mail-line"></i> Email: <a href="mailto:info@delacruzph.com">info@delacruzph.com</a></li>
-            <li><i class="ri-printer-line"></i> Fax: (778) 746-1431</li>
+            <li><i class="ri-printer-line"></i> Fax: <span>(778) 746-1431</span></li>
             <li><i class="ri-map-pin-line"></i> Office Address:
               <a href="https://www.google.com/maps/place/1383+W+8th+Ave,+Vancouver,+BC+V6H+3W4" target="_blank" rel="noopener">1383 W 8th Ave, Vancouver, BC V6H 3W4</a>
             </li>
@@ -362,19 +294,23 @@
       <div class="dcp-footer-inner container">
         <div class="dcp-col brand">
           <div class="logo">
-            <img class="brand-logo small" src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" />
+            <!-- quick link to main page with transition -->
+            <a href="../../index.html" class="js-wipe">
+              <img class="brand-logo small" src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" />
+            </a>
           </div>
           <p>Our team offers meticulous, reliable cleaning for your office or home. We use professional techniques to ensure every corner doesn't just look clean—it shines.</p>
         </div>
         <div class="dcp-col links">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="../../index.html" data-wipe><i class="ri-home-5-line"></i><span>Home</span></a></li>
-            <li><a href="janitorial.html" data-wipe><i class="ri-brush-3-line"></i><span>Janitorial</span></a></li>
+            <li><a href="../../index.html" class="js-wipe"><i class="ri-home-5-line"></i><span>Home</span></a></li>
+            <li><a href="janitorial.html" class="js-wipe"><i class="ri-brush-3-line"></i><span>Janitorial</span></a></li>
             <li><a href="#about"><i class="ri-information-line"></i><span>About</span></a></li>
             <li><a href="#contact"><i class="ri-contacts-line"></i><span>Contact</span></a></li>
-            <li><a href="#"><i class="ri-file-text-line"></i><span>Terms of Service</span></a></li>
-            <li><a href="#"><i class="ri-shield-line"></i><span>Privacy Policy</span></a></li>
+            <!-- ✅ Linked to local files in the same folder -->
+            <li><a href="tos.html" class="js-wipe"><i class="ri-file-text-line"></i><span>Terms of Service</span></a></li>
+            <li><a href="privacy.html" class="js-wipe"><i class="ri-shield-line"></i><span>Privacy Policy</span></a></li>
           </ul>
         </div>
         <div class="dcp-col social">
@@ -403,12 +339,7 @@
     <!-- Libs / import maps -->
     <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
     <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
-        }
-      }
+      {"imports":{"three":"https://unpkg.com/three@0.158.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.158.0/examples/jsm/"}}
     </script>
 
     <!-- App scripts -->
@@ -419,42 +350,18 @@
     <script type="module" src="../js/video.js"></script>
     <script src="../js/wipe-transition.js" type="module" defer></script>
 
-    <!-- Drawer + year (with ESC + ARIA) -->
+    <!-- Global FAQ behaviors -->
+    <script src="../js/faq.js?v=2" defer></script>
+
+    <!-- Global Nav (burger/drawer) -->
+    <script src="../js/nav.js?v=2" defer></script>
+
+    <!-- Year -->
     <script>
-      (function () {
-        const nav = document.getElementById('siteNav');
-        const burger = document.getElementById('burgerBtn');
-        const overlay = document.getElementById('menuOverlay');
-
-        if (!nav || !burger || !overlay) return;
-
-        function setAria(open){
-          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-          overlay.setAttribute('aria-hidden', open ? 'false' : 'true');
-        }
-        function openMenu(){
-          nav.classList.add('is-active');
-          burger.classList.add('is-active');
-          document.body.classList.add('menu-open');
-          setAria(true);
-        }
-        function closeMenu(){
-          nav.classList.remove('is-active');
-          burger.classList.remove('is-active');
-          document.body.classList.remove('menu-open');
-          setAria(false);
-        }
-
-        burger.addEventListener('click', () => {
-          (nav.classList.contains('is-active') ? closeMenu : openMenu)();
-        });
-        overlay.addEventListener('click', closeMenu);
-        nav.addEventListener('click', e => { if (e.target.closest('a')) closeMenu(); });
-        window.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-
+      document.addEventListener('DOMContentLoaded', () => {
         const y = document.getElementById('year');
         if (y) y.textContent = new Date().getFullYear();
-      })();
+      });
     </script>
   </body>
 </html>

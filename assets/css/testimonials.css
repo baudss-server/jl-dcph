@@ -1,4 +1,4 @@
-/* ===== TESTIMONIALS (no manual scroll; auto-loop only) ===== */
+/* ===== TESTIMONIALS (draggable + auto-loop) ===== */
 .dcp-testimonials-section{ background:transparent; padding-bottom:0 }
 .dcp-testimonials-inner{ text-align:center }
 
@@ -8,17 +8,19 @@
   max-width:1100px; margin-left:auto; margin-right:auto;
   padding-bottom:20px; position:relative;
 
-  /* HIDE native scrollbar & disallow manual pan */
-  overflow-x:auto;                 /* programmatic scrollLeft pa rin */
+  overflow-x:auto;                 /* programmatic + manual drag */
   -ms-overflow-style:none;         /* IE/Edge */
   scrollbar-width:none;            /* Firefox */
   overscroll-behavior-x:contain;
-  touch-action:none;               /* disable touch panning */
-  cursor:default;
+
+  /* DRAG behavior */
+  touch-action: pan-x;             /* allow horizontal panning */
+  cursor: grab;
 }
+.dcp-testimonial-cards.dragging{ cursor: grabbing; }
 .dcp-testimonial-cards::-webkit-scrollbar{ display:none }
 
-/* Optional fade edges (keeps clean look) */
+/* Nice fade edges */
 .dcp-testimonial-cards{
   -webkit-mask-image:linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   mask-image:linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);

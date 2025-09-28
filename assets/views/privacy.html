@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy | DELACRUZPH. CORPORATION</title>
+  <meta name="description" content="Privacy Policy of DELACRUZPH. CORPORATION explaining what data we collect, how we use it, and your rights." />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Privacy Policy | DELACRUZPH. CORPORATION" />
+  <meta property="og:description" content="Learn how DELACRUZPH. CORPORATION handles your data and your privacy rights." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.your-domain.com/privacy" />
+  <meta property="og:image" content="https://www.your-domain.com/og-image.jpg" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.your-domain.com/privacy" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/footer.css">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "DELACRUZPH. CORPORATION",
+        "url": "https://www.your-domain.com",
+        "logo": "https://www.your-domain.com/logo.png",
+        "email": "privacy@delacruzph.com",
+        "address": { "@type": "PostalAddress", "streetAddress": "123 Example St.", "addressLocality": "San Miguel", "addressRegion": "Bulacan", "postalCode": "3001", "addressCountry": "PH" }
+      },
+      { "@type": "WebPage", "name": "Privacy Policy", "url": "https://www.your-domain.com/privacy", "dateModified": "2025-09-28", "inLanguage": "en-PH" }
+    ]
+  }
+  </script>
+
+  <style>
+    :root { --bg:#000; --panel:#0e0e0e; --panel-2:#121212; --text:#ededed; --muted:#b8b8b8; --gold:#f4d55c; --gold-strong:#ffd84d; --border:rgba(255,255,255,.08); }
+    /* header spacing (desktop) */
+    .dcp-header .dcp-header-container{ display:flex; align-items:center; justify-content:space-between; gap:16px }
+    .dcp-nav{ display:flex; align-items:center; gap:16px }
+    .dcp-nav a{ display:inline-block; padding:10px 12px }
+    @media (max-width:991px){ .dcp-nav{ gap:10px } .dcp-nav.is-active{ display:flex } }
+
+    /* links = white in content */
+    a{ color:#fff } a:visited{ color:#fff } a:hover{ opacity:.85 }
+    .anchor-link{ text-decoration:none; border-bottom:1px dotted rgba(255,255,255,.6) }
+
+    /* hero */
+    .hero{ text-align:center; padding-top:calc(var(--va-nav-offset,0px) + 20px); padding-bottom:22px }
+    .hero h1{ margin:0; font-size:clamp(2rem,5vw,3rem) }
+    .policy-meta{ color:var(--muted); font-size:.95rem; margin-top:.25rem }
+    .lead{ color:var(--muted) }
+
+    /* card */
+    .policy-wrap.glass{ margin:16px auto 28px; padding:24px; border-radius:16px; border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03)); box-shadow:var(--shadow); max-width:1000px }
+    .section{ margin:18px 0 } .section h2{ font-size:1.3rem; margin:0 0 8px }
+    .list{ margin:.25rem 0 1rem; padding-left:1.1rem } .list li{ margin:.35rem 0 }
+    .divider{ height:1px; background:var(--border); margin:18px 0 }
+
+    /* footer look (same grid as screenshot) */
+    .dcp-footer{ background:#0f0f0f; color:var(--text); border-top:1px solid var(--border); padding:48px 0 18px }
+    .dcp-footer-inner{ width:min(1200px,92vw); margin-inline:auto; display:grid; grid-template-columns:2fr 1.2fr 1.2fr 1.8fr; gap:28px; align-items:flex-start; text-align:left }
+    .dcp-col h4{ margin:0 0 10px 0; font-size:1.05rem; font-weight:600; color:#fff }
+    .dcp-col p{ color:#cfcfcf; margin:.35rem 0 1rem }
+    .dcp-col ul{ list-style:none; padding:0; margin:0; display:grid; gap:10px; place-items:flex-start }
+    .dcp-col ul li{ display:flex; align-items:center; gap:10px; color:#cfcfcf }
+    .dcp-footer a{ color:#cfcfcf !important; text-decoration:none; display:inline-flex; align-items:center; gap:8px }
+    .dcp-footer a:hover{ color:#fff !important }
+    .dcp-footer i{ color:var(--gold-strong) !important; filter:drop-shadow(0 0 6px rgba(255,216,77,.25)); font-size:1.08rem; line-height:1 }
+    .brand-logo.small{ height:34px; width:auto }
+    .dcp-copy{ margin-top:32px; text-align:center; font-size:.85rem; color:#a4a4a4 }
+    @media (max-width:992px){ .dcp-footer-inner{ grid-template-columns:1fr; gap:36px } }
+
+    /* motion safety for stars */
+    @media (prefers-reduced-motion:reduce){ #stars,#stars2,#stars3{ animation:none !important } }
+  </style>
+</head>
+<body>
+  <!-- Page transition overlay -->
+  <div class="page-wipe" id="pageWipe" aria-hidden="true"></div>
+
+  <!-- Starfield -->
+  <div class="stars-wrap background-stars" aria-hidden="true">
+    <div id="stars"></div><div id="stars2"></div><div id="stars3"></div>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="dcp-header" role="banner">
+    <div class="dcp-header-container">
+      <a href="#hero" class="logo" aria-label="DELACRUZPH. CORPORATION Home (privacy page)">
+        <img src="../images/delacruzph.corporation copy1.png" alt="DELACRUZPH. CORPORATION" class="brand-logo">
+      </a>
+
+      <button class="dcp-burger" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="dcp-nav" id="siteNav" aria-label="Main navigation">
+        <a href="#hero">Home</a>
+        <a href="#footer-contact">Contact</a>
+        <a href="../../index.html#home" class="btn js-wipe">Main Page</a>
+        <a href="janitorial.html" class="btn js-wipe">Janitorial Service</a>
+        <a href="va.html" class="btn js-wipe">VA Service</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main id="content" class="no-bleed" role="main">
+    <section class="page-section" id="hero">
+      <div class="container hero">
+        <h1 class="text-gradient">Privacy Policy</h1>
+        <p class="policy-meta">Last updated: <time datetime="2025-09-28">September 28, 2025</time></p>
+        <p class="lead"><strong>DELACRUZPH. CORPORATION</strong> values your privacy. This policy explains what personal data we collect, why and how we use it, and your rights.</p>
+      </div>
+    </section>
+
+    <section class="container">
+      <article class="glass policy-wrap" id="policy">
+        <div class="section" id="s1">
+          <h2>1. Scope & Definitions</h2>
+          <p>This policy covers all services offered on or through
+            <a class="anchor-link" href="https://www.your-domain.com">www.your-domain.com</a>, including subdomains and support channels.</p>
+          <ul class="list">
+            <li><strong>“Personal Data”</strong>: information that identifies or can identify an individual.</li>
+            <li><strong>Controller</strong>: <strong>DELACRUZPH. CORPORATION</strong>.</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s2">
+          <h2>2. Data We Collect</h2>
+          <ul class="list">
+            <li><strong>Account & Contact</strong>: name, email, phone, address (if provided).</li>
+            <li><strong>Transactional</strong>: orders, billing (handled by PCI-compliant processors; we do not store full card numbers).</li>
+            <li><strong>Usage & Device</strong>: IP, browser/OS, device IDs, pages visited, referrer.</li>
+            <li><strong>Communications</strong>: chat, email, support tickets.</li>
+            <li><strong>Cookies/Similar</strong>: preferences, analytics, marketing (if allowed).</li>
+            <li><strong>From third parties</strong>: authentication, payments, analytics, marketing partners.</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s3">
+          <h2>3. How We Use Your Data</h2>
+          <ul class="list">
+            <li>Provide and improve services and features.</li>
+            <li>Authentication, security, and fraud prevention.</li>
+            <li>Customer support and updates/announcements.</li>
+            <li>Analytics to optimize user experience.</li>
+            <li>Marketing with consent or where permitted by law.</li>
+            <li>Compliance with legal and regulatory obligations.</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s4">
+          <h2>4. Legal Bases</h2>
+          <ul class="list">
+            <li><strong>Contract</strong></li>
+            <li><strong>Legitimate interests</strong></li>
+            <li><strong>Consent</strong></li>
+            <li><strong>Legal obligation</strong></li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s5">
+          <h2>5. Cookies & Analytics</h2>
+          <p>We use necessary, preferences, analytics, and marketing cookies depending on your consent choices.</p>
+          <ul class="list">
+            <li>Manage via browser settings and our cookie preferences.</li>
+            <li>You can update your choices anytime.</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s6">
+          <h2>6. Sharing & Recipients</h2>
+          <p>We do not sell personal data.</p>
+          <ul class="list">
+            <li>Service providers (e.g., hosting, support, payments)</li>
+            <li>Business partners where applicable</li>
+            <li>Authorities when required by law</li>
+            <li>Corporate transactions (e.g., merger, acquisition) as permitted</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s7">
+          <h2>7. International Transfers</h2>
+          <p>Processing may occur outside your country; we use appropriate legal and technical safeguards.</p>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s8">
+          <h2>8. Data Retention</h2>
+          <p>We retain personal data only as long as necessary for the purposes described or as required by law.</p>
+          <ul class="list">
+            <li>After retention, we securely delete or de-identify data.</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s9">
+          <h2>9. Security</h2>
+          <ul class="list">
+            <li>Organizational and technical measures (encryption in transit, access controls, monitoring).</li>
+            <li>No system is 100% secure — use strong passwords and enable 2FA.</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s10">
+          <h2>10. Your Rights</h2>
+          <ul class="list">
+            <li>Access, rectification, deletion</li>
+            <li>Objection/restriction, portability</li>
+            <li>Withdraw consent at any time</li>
+            <li>Lodge a complaint with the NPC or your local DPA</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s11">
+          <h2>11. Children’s Privacy</h2>
+          <p>This site is not directed to children under 13 (or the minimum age in your jurisdiction).</p>
+          <ul class="list">
+            <li>If a child provided data, <a class="anchor-link" href="#footer-contact">contact us</a> so we can take action.</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s12">
+          <h2>12. Changes to This Policy</h2>
+          <ul class="list">
+            <li>We will post updates here and revise the “Last updated” date.</li>
+            <li>We may send notices for material changes.</li>
+          </ul>
+          <div class="divider"></div>
+        </div>
+
+        <div class="section" id="s13">
+          <h2>13. Contact / DPO</h2>
+          <ul class="list">
+            <li><strong>Company</strong>: DELACRUZPH. CORPORATION</li>
+            <li><strong>Email (DPO)</strong>: <a class="anchor-link" href="mailto:privacy@delacruzph.com">privacy@delacruzph.com</a></li>
+            <li><strong>Address</strong>: 123 Example St., San Miguel, Bulacan 3001, Philippines</li>
+            <li class="lead">Timezone: Asia/Manila (PH)</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="dcp-footer" role="contentinfo">
+    <div class="dcp-footer-inner">
+      <div class="dcp-col brand">
+        <div class="logo">
+          <a href="#hero" aria-label="Back to top">
+            <img src="../images/delacruzph.corporation copy1.png" alt="DELACRUZPH. CORPORATION" class="brand-logo small">
+          </a>
+        </div>
+        <p>Our team offers meticulous, reliable cleaning for your office or home. We use professional techniques to ensure every corner doesn’t just look clean—it shines.</p>
+      </div>
+
+      <div class="dcp-col links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#hero"><i class="ri-home-5-line"></i>Home</a></li>
+          <li><a href="../../index.html#home" class="js-wipe"><i class="ri-external-link-line"></i>Main Page</a></li>
+          <li><a href="../../index.html#about" class="js-wipe"><i class="ri-information-line"></i>About</a></li>
+          <li><a href="tos.html" class="js-wipe"><i class="ri-file-text-line"></i>Terms of Service</a></li>
+          <li><a href="privacy.html" aria-current="page"><i class="ri-shield-line"></i>Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="dcp-col social">
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://facebook.com/yourpage" target="_blank" rel="noopener"><i class="ri-facebook-fill"></i>Facebook</a></li>
+          <li><a href="https://instagram.com/yourpage" target="_blank" rel="noopener"><i class="ri-instagram-line"></i>Instagram</a></li>
+          <li><a href="https://linkedin.com/company/yourpage" target="_blank" rel="noopener"><i class="ri-linkedin-box-fill"></i>LinkedIn</a></li>
+        </ul>
+      </div>
+
+      <div class="dcp-col contact" id="footer-contact">
+        <h4>Contact Info</h4>
+        <ul>
+          <li><a href="tel:+17787461231"><i class="ri-phone-line"></i>(778) 746-1231</a></li>
+          <li><a href="mailto:info@delacruzph.com"><i class="ri-mail-line"></i>info@delacruzph.com</a></li>
+          <li><a href="tel:+17787461431"><i class="ri-printer-line"></i>(778) 746-1431</a></li>
+          <li><a href="https://maps.google.com/?q=1383%20W%208th%20Ave%2C%20Vancouver%2C%20BC%20V6H%203W4" target="_blank" rel="noopener"><i class="ri-map-pin-2-line"></i>1383 W 8th Ave, Vancouver, BC<br>V6H 3W4</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dcp-copy">© <span id="year"></span> DelaCruzPH Corporation. All rights reserved.</div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="../js/wipe-transition.js" defer></script>
+  <script src="../js/nav.js" defer></script>
+  <script>
+    // Footer year + motion safety
+    (function(){ const y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear(); })();
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('#stars,#stars2,#stars3').forEach(el=>el.style.animation='none');
+    }
+  </script>
+</body>
+</html>

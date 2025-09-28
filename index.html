@@ -4,16 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DelaCruzPH Corporation Home</title>
+
+    <!-- SEO hint: where the privacy policy lives -->
+    <link rel="privacy-policy" href="assets/views/privacy.html" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <!-- Font Awesome (for FAQ icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <!-- CSS bundles -->
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -26,9 +26,7 @@
     <link rel="stylesheet" href="assets/css/testimonials.css" />
     <link rel="stylesheet" href="assets/css/faq.css" />
 
-    <noscript>
-      <style>.page-wipe{display:none!important}</style>
-    </noscript>
+    <noscript><style>.page-wipe{display:none!important}</style></noscript>
   </head>
   <body>
     <div class="stars-wrap">
@@ -39,29 +37,25 @@
 
     <header class="dcp-header">
       <div class="dcp-header-container">
-        <!-- brand link: smooth scroll only (NO wipe) -->
         <a href="#home" class="dcp-brand" aria-label="DelaCruzPH Corporation">
-          <img
-            class="brand-logo"
-            src="assets/images/delacruzph.corporation copy1.png"
-            alt="DelaCruzPH Corporation"
-          />
+          <img class="brand-logo" src="assets/images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" />
         </a>
 
         <!-- NAVBAR -->
-        <nav class="dcp-nav">
+        <nav class="dcp-nav" id="site-nav">
           <a href="#home">Home</a>
-          <!-- EXTERNAL (with wipe) -->
-          <a href="assets/views/janitorial.html" class="btn" data-wipe>Janitorial Service</a>
-          <a href="assets/views/va.html" class="btn" data-wipe>VA Service</a>
+          <!-- EXTERNAL (with one-way wipe via js-wipe) -->
+          <a href="assets/views/janitorial.html" class="btn js-wipe">Janitorial Service</a>
+          <a href="assets/views/va.html" class="btn js-wipe">VA Service</a>
           <!-- IN-PAGE (no wipe) -->
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
           <a href="#testimonials">Testimonials</a>
           <a href="#faq">FAQ</a>
+          <!-- (Removed Privacy Policy from header as requested) -->
         </nav>
 
-        <button class="dcp-burger" aria-label="Toggle Menu">
+        <button class="dcp-burger" aria-label="Toggle Menu" aria-controls="site-nav" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -69,11 +63,6 @@
 
     <section id="home" class="dcp-hero-section page-section">
       <div class="dcp-hero-inner container">
-        <!-- (Optional) hero CTA to #how is commented: no wipe -->
-        <!-- <p style="text-align:center;margin-bottom:24px">
-          <a href="#how" class="dcp-btn"><i class="ri-arrow-down-line"></i> See how it works</a>
-        </p> -->
-
         <div class="hero-cards container">
           <div class="card" aria-label="Janitorial Service">
             <div class="face face1">
@@ -85,8 +74,8 @@
             <div class="face face2">
               <div class="content">
                 <p>Professional Office & Commercial Cleaning</p>
-                <!-- EXTERNAL (with wipe) -->
-                <a href="assets/views/janitorial.html" class="btn" data-wipe>Explore</a>
+                <!-- ONE-WAY WIPE (Explore buttons) -->
+                <a href="assets/views/janitorial.html" class="btn js-wipe">Explore</a>
               </div>
             </div>
           </div>
@@ -101,8 +90,8 @@
             <div class="face face2">
               <div class="content">
                 <p>Admin, content, support, and research delegate and scale.</p>
-                <!-- EXTERNAL (with wipe) -->
-                <a href="assets/views/va.html" class="btn" data-wipe>Explore</a>
+                <!-- ONE-WAY WIPE (Explore buttons) -->
+                <a href="assets/views/va.html" class="btn js-wipe">Explore</a>
               </div>
             </div>
           </div>
@@ -135,10 +124,7 @@
         <h2 class="section-title text-gradient">About Us</h2>
         <div class="about-big-card glass">
           <div class="about-image">
-            <img
-              src="assets/images/delacruzph.corporation copy1.png"
-              alt="DelaCruzPH Corporation Logo"
-            />
+            <img src="assets/images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation Logo" />
           </div>
           <div class="about-text">
             <h3>DelaCruzPH Corporation</h3>
@@ -232,12 +218,20 @@
       </div>
     </section>
 
+    <!-- UPDATED FAQ with left + right icons and accordion behavior -->
     <section id="faq" class="dcp-faq-section page-section">
       <div class="dcp-faq-inner container">
         <h2 class="section-title text-gradient">Frequently Asked Questions</h2>
+
         <div class="dcp-faq-list">
           <details class="dcp-faq-item glass">
-            <summary>What services do you offer?</summary>
+            <summary class="faq-summary">
+              <span class="faq-left">
+                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+                <span class="faq-title">What services do you offer?</span>
+              </span>
+              <i class="fa-solid fa-plus faq-right" aria-hidden="true"></i>
+            </summary>
             <div class="faq-content">
               <p>
                 We specialize in Janitorial Services for commercial and office
@@ -246,8 +240,15 @@
               </p>
             </div>
           </details>
+
           <details class="dcp-faq-item glass">
-            <summary>How do you ensure quality for janitorial work?</summary>
+            <summary class="faq-summary">
+              <span class="faq-left">
+                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+                <span class="faq-title">How do you ensure quality for janitorial work?</span>
+              </span>
+              <i class="fa-solid fa-plus faq-right" aria-hidden="true"></i>
+            </summary>
             <div class="faq-content">
               <p>
                 Our staff undergoes extensive training, and we maintain strict
@@ -256,9 +257,14 @@
               </p>
             </div>
           </details>
+
           <details class="dcp-faq-item glass">
-            <summary>
-              What types of tasks can a Virtual Assistant handle?
+            <summary class="faq-summary">
+              <span class="faq-left">
+                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+                <span class="faq-title">What types of tasks can a Virtual Assistant handle?</span>
+              </span>
+              <i class="fa-solid fa-plus faq-right" aria-hidden="true"></i>
             </summary>
             <div class="faq-content">
               <p>
@@ -268,8 +274,15 @@
               </p>
             </div>
           </details>
+
           <details class="dcp-faq-item glass">
-            <summary>How can I get started with your services?</summary>
+            <summary class="faq-summary">
+              <span class="faq-left">
+                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+                <span class="faq-title">How can I get started with your services?</span>
+              </span>
+              <i class="fa-solid fa-plus faq-right" aria-hidden="true"></i>
+            </summary>
             <div class="faq-content">
               <p>
                 It's simple! You can use the contact form on our website to tell
@@ -301,33 +314,16 @@
         <div class="dcp-map-card glass">
           <h3 class="text-gradient">Contact us</h3>
           <ul class="dcp-contact-list">
-            <li>
-              <i class="ri-phone-line"></i> Call Us:
-              <a href="tel:+17787461231">(778) 746-1231</a>
-            </li>
-            <li>
-              <i class="ri-mail-line"></i> Email:
-              <a href="mailto:info@delacruzph.com">info@delacruzph.com</a>
-            </li>
+            <li><i class="ri-phone-line"></i> Call Us: <a href="tel:+17787461231">(778) 746-1231</a></li>
+            <li><i class="ri-mail-line"></i> Email: <a href="mailto:info@delacruzph.com">info@delacruzph.com</a></li>
             <li><i class="ri-printer-line"></i> Fax: (778) 746-1431</li>
             <li>
               <i class="ri-map-pin-line"></i> Office Address:
-              <a
-                href="https://www.google.com/maps/place/1383+W+8th+Ave,+Vancouver,+BC+V6H+3W4"
-                target="_blank"
-                rel="noopener"
-                >1383 W 8th Ave, Vancouver, BC V6H 3W4</a
-              >
+              <a href="https://www.google.com/maps/place/1383+W+8th+Ave,+Vancouver,+BC+V6H+3W4" target="_blank" rel="noopener">1383 W 8th Ave, Vancouver, BC V6H 3W4</a>
             </li>
           </ul>
           <div class="dcp-map">
-            <iframe
-              title="Map - 1383 W 8th Ave, Vancouver, BC V6H 3W4"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.839806509904!2d-123.13886548434863!3d49.2662095811776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673a5a8f27329%3A0xc3f6d7730e26b1c4!2s1383%20W%208th%20Ave%2C%20Vancouver%2C%20BC%20V6H%203W4%2C%20Canada!5e0!3m2!1sen!2sph!4v1614050609337!5m2!1sen!2sph"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            >
-            </iframe>
+            <iframe title="Map - 1383 W 8th Ave, Vancouver, BC V6H 3W4" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.839806509904!2d-123.13886548434863!3d49.2662095811776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673a5a8f27329%3A0xc3f6d7730e26b1c4!2s1383%20W%208th%20Ave,%20Vancouver,%20BC%20V6H%203W4,%20Canada!5e0!3m2!1sen!2sph!4v1614050609337!5m2!1sen!2sph" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
@@ -337,101 +333,55 @@
       <div class="dcp-footer-inner container">
         <div class="dcp-col brand">
           <div class="logo">
-            <img
-              class="brand-logo small"
-              src="assets/images/delacruzph.corporation copy1.png"
-              alt="DelaCruzPH Corporation"
-            />
+            <img class="brand-logo small" src="assets/images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" />
           </div>
-          <p>
-            Our team offers meticulous, reliable cleaning for your office or home. We use professional techniques to ensure every corner doesn't just look clean—it shines.
-          </p>
+          <p>Our team offers meticulous, reliable cleaning for your office or home. We use professional techniques to ensure every corner doesn't just look clean—it shines.</p>
         </div>
 
         <div class="dcp-col links">
           <h4>Quick Links</h4>
           <ul>
-            <li>
-              <a href="#home"
-                ><i class="ri-home-5-line"></i><span>Home</span></a
-              >
-            </li>
-            <!-- keep footer in-page as smooth scroll only -->
-            <li>
-              <a href="#about"
-                ><i class="ri-information-line"></i><span>About</span></a
-              >
-            </li>
-            <li>
-              <a href="#contact"
-                ><i class="ri-contacts-line"></i><span>Contact</span></a
-              >
-            </li>
-            <li>
-              <a href="#"><i class="ri-file-text-line"></i><span>Terms of Service</span></a>
-            </li>
-            <li>
-              <a href="#"><i class="ri-shield-line"></i><span>Privacy Policy</span></a>
-            </li>
+            <li><a href="#home"><i class="ri-home-5-line"></i><span>Home</span></a></li>
+            <li><a href="#about"><i class="ri-information-line"></i><span>About</span></a></li>
+            <li><a href="#contact"><i class="ri-contacts-line"></i><span>Contact</span></a></li>
+            <!-- TOS with correct path + page transition -->
+            <li><a href="assets/views/tos.html" class="js-wipe"><i class="ri-file-text-line"></i><span>Terms of Service</span></a></li>
+            <!-- Privacy Policy link kept in footer only -->
+            <li><a href="assets/views/privacy.html" class="js-wipe"><i class="ri-shield-line"></i><span>Privacy Policy</span></a></li>
           </ul>
         </div>
 
         <div class="dcp-col social">
           <h4>Follow</h4>
           <ul>
-            <li>
-              <a href="#"
-                ><i class="ri-facebook-circle-fill"></i><span>Facebook</span></a
-              >
-            </li>
-            <li>
-              <a href="#"
-                ><i class="ri-instagram-fill"></i><span>Instagram</span></a
-              >
-            </li>
-            <li>
-              <a href="#"
-                ><i class="ri-linkedin-box-fill"></i><span>LinkedIn</span></a
-              >
-            </li>
+            <li><a href="#"><i class="ri-facebook-circle-fill"></i><span>Facebook</span></a></li>
+            <li><a href="#"><i class="ri-instagram-fill"></i><span>Instagram</span></a></li>
+            <li><a href="#"><i class="ri-linkedin-box-fill"></i><span>LinkedIn</span></a></li>
           </ul>
         </div>
 
         <div class="dcp-col contact-info">
           <h4>Contact Info</h4>
           <ul class="contact-mini">
-            <li>
-              <i class="ri-phone-line"></i
-              ><a href="tel:+17787461231">(778) 746-1231</a>
-            </li>
-            <li>
-              <i class="ri-mail-line"></i
-              ><a href="mailto:info@delacruzph.com">info@delacruzph.com</a>
-            </li>
+            <li><i class="ri-phone-line"></i><a href="tel:+17787461231">(778) 746-1231</a></li>
+            <li><i class="ri-mail-line"></i><a href="mailto:info@delacruzph.com">info@delacruzph.com</a></li>
             <li><i class="ri-printer-line"></i><span>(778) 746-1431</span></li>
-            <li>
-              <i class="ri-map-pin-line"></i
-              ><a
-                href="https://www.google.com/maps/place/1383+W+8th+Ave,+Vancouver,+BC+V6H+3W4"
-                target="_blank"
-                rel="noopener"
-                >1383 W 8th Ave, Vancouver, BC V6H 3W4</a
-              >
-            </li>
+            <li><i class="ri-map-pin-line"></i><a href="https://www.google.com/maps/place/1383+W+8th+Ave,+Vancouver,+BC+V6H+3W4" target="_blank" rel="noopener">1383 W 8th Ave, Vancouver, BC V6H 3W4</a></li>
           </ul>
         </div>
       </div>
 
-      <p class="dcp-copy">
-        © <span id="year"></span> DelaCruzPH Corporation. All rights reserved.
-      </p>
+      <p class="dcp-copy">© <span id="year"></span> DelaCruzPH Corporation. All rights reserved.</p>
     </footer>
 
-    <!-- Wipe overlay -->
+    <!-- Wipe overlay (script handles this) -->
     <div class="page-wipe" aria-hidden="true"></div>
 
     <!-- Scripts -->
     <script src="assets/js/wipe-transition.js" type="module" defer></script>
+    <script src="assets/js/nav.js" type="module" defer></script>
+    <script src="assets/js/main.js" type="module" defer></script>
     <script src="assets/js/testimonial.js" type="module" defer></script>
+    <script src="assets/js/faq.js" type="module" defer></script>
   </body>
 </html>

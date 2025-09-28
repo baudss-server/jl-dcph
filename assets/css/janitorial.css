@@ -1,0 +1,119 @@
+/* ─────────────────────────────────────────────
+   Janitorial-only styles (bright + fast)
+   Place in: assets/css/janitorial.css
+   ───────────────────────────────────────────── */
+
+:root{
+  --gold-strong: #ffd84d;
+  --card-bg: rgba(255,255,255,.08);
+  --card-hover: rgba(255,255,255,.12);
+  --border: rgba(255,255,255,.22);
+  --muted: rgba(255,255,255,.75);
+  --text-strong: #ffffff;
+}
+
+/* HERO: static janitorial background (NOT VA image) */
+.jan-hero{
+  position: relative;
+  min-height: clamp(320px, 46vw, 520px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(11,11,16,.6), rgba(11,11,16,.6)),
+    url("../images/ja-mp.png") center/cover no-repeat;
+}
+.jan-hero__inner{ text-align: center; }
+.jan-hero .dcp-hero-title{ margin-bottom: 10px; color: var(--text-strong); }
+.jan-hero .dcp-hero-subtitle{
+  max-width: 720px; margin: 0 auto; color: var(--text-strong);
+}
+
+/* ── BENEFITS CARD (brighter glass) ───────────────────────── */
+.benefits-card.glass{
+  width:min(1100px, 96%);
+  margin: 0 auto;
+  padding: 22px;
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 38px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06);
+  color: var(--text-strong);
+}
+.benefits-card .lead{
+  font-style: italic;
+  color: var(--muted);
+  margin: 6px 0 10px;
+}
+.benefits-note{
+  color: var(--text-strong);
+  opacity: .95;
+  margin-bottom: 10px;
+}
+
+/* bullets */
+.benefits-list{
+  list-style: none;
+  margin: 14px 0 6px;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(260px,1fr));
+}
+.benefits-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-strong);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  will-change: transform;
+}
+.benefits-item:hover{
+  background: var(--card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+}
+.benefits-item i{
+  font-size: 1.35rem;
+  color: var(--gold-strong);
+  filter: drop-shadow(0 1px 4px rgba(255,216,77,.35));
+}
+
+/* Section title (with icon) */
+#benefits .section-title{
+  display:flex; align-items:center; justify-content:center;
+}
+#benefits .section-title i{
+  margin-right:10px; color: var(--gold-strong);
+}
+
+/* ── GALLERY CARDS (no layout shift, fast) ───────────────── */
+.dcp-gallery-grid{ display:grid; gap:12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.dcp-gallery-card{ border-radius:12px; overflow:hidden; background: var(--card-bg); border:1px solid var(--border); }
+.dcp-gallery-card picture, .dcp-gallery-card img{
+  display:block; width:100%; aspect-ratio: 3/2; object-fit: cover;
+}
+.dcp-gallery-card figcaption{
+  padding:10px 12px; color: var(--text-strong); opacity:.95;
+}
+.dcp-gallery-card:hover{ background: var(--card-hover); transform: translateY(-1px); transition: .2s ease; }
+
+/* ── Mobile tweaks ────────────────────────────────────────── */
+@media (max-width: 900px){
+  .benefits-list{ grid-template-columns: 1fr; }
+}
+@media (max-width: 768px){
+  .jan-hero{ min-height: 360px; }
+  .benefits-card.glass{ padding: 18px; }
+}
+
+/* Reduced motion: smoother on low-end devices */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}

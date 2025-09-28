@@ -1,33 +1,31 @@
 /* ===== Z-INDEX MAP =====
-   overlay (page-wipe): 2147483646 (CSS file: main.css)
+   page-wipe overlay: 2147483646 (see main.css)
    burger:              1100
    drawer(nav):         1000
-   menu overlay:        900
-   header bar:          800
+   menu overlay:         900
+   header bar:           800
 */
 .dcp-header{
   position:sticky; top:0; z-index:800;
   background:linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.65));
   border-bottom:1px solid rgba(255,255,255,.08);
   backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
 }
 
-/* Desktop header layout: logo left, nav pushed right */
 .dcp-header-container{
-  position:relative;
+  position:relative; z-index:1001; /* keeps header contents above overlay */
   width:min(1200px, 92%); margin-inline:auto;
   display:flex; align-items:center; gap:20px;
   min-height:60px; padding:8px 0;
 }
 .brand-logo{ height:38px; display:block; flex:0 0 auto }
 
-/* Desktop nav (clickable by default) */
+/* Desktop nav */
 .dcp-nav{
   display:flex; align-items:center; gap:24px;
   pointer-events:auto;
-  margin-left:auto;          /* push nav to the right */
-
-  /* NEW: prevent micro horizontal nudge on drawer open/close */
+  margin-left:auto;
   overflow-x:hidden;
 }
 .dcp-nav a{
@@ -40,13 +38,13 @@
   border-color:var(--gold-strong); box-shadow:0 0 10px rgba(255,216,77,.15);
 }
 
-/* Burger (absolute para di gumalaw ang pwesto sa mobile) */
+/* Burger */
 .dcp-burger{
   display:none; cursor:pointer; position:absolute;
-  top:10px; right:clamp(12px, 4vw, 20px);   /* stays on the RIGHT */
+  top:10px; right:clamp(12px, 4vw, 20px);
   width:44px; height:44px; border-radius:12px; place-items:center;
   border:1px solid var(--border); background:rgba(255,255,255,.06);
-  z-index:1100;
+  z-index:1100; pointer-events:auto;
 }
 .dcp-burger span{
   display:block; width:24px; height:2px; background:var(--text); margin:5px 0;
@@ -54,54 +52,56 @@
 }
 .dcp-burger:hover span{ background:var(--gold-strong) }
 
-/* Overlay (nasa ilalim ng drawer) */
+/* Overlay (supports aria-hidden toggling) */
 .menu-overlay{
   position:fixed; inset:0; background:rgba(0,0,0,.55);
-  z-index:900; opacity:0; pointer-events:none; transition:opacity .2s; display:none;
+  z-index:900; transition:opacity .2s;
 }
-body.menu-open .menu-overlay{ display:block; opacity:1; pointer-events:auto }
+.menu-overlay[aria-hidden="true"]{ opacity:0; pointer-events:none; }
+.menu-overlay[aria-hidden="false"]{ opacity:1; pointer-events:auto; }
 
-/* prevent horizontal nudge while menu open */
-body.menu-open{ overflow-x:hidden; }
+/* Legacy toggle (still supported) */
+.menu-overlay{ display:block; }
+body.menu-open .menu-overlay{ opacity:1; pointer-events:auto; }
+
+/* Lock page while open */
+body.menu-open{ overflow-x:hidden; overflow-y:hidden; }
 
 /* ===== MOBILE DRAWER ===== */
 @media (max-width:991px){
-  .dcp-burger{ display:grid } /* show burger on mobile; still on RIGHT */
+  .dcp-burger{ display:grid }
 
-  /* Drawer — RIGHT aligned, slide-in from RIGHT */
   .dcp-nav{
-    position:fixed; top:0; right:0; left:auto;     /* align to RIGHT edge */
+    position:fixed; top:0; right:0; left:auto;
     width:min(320px, 86vw); height:100vh;
     background:var(--panel);
-    flex-direction:column; align-items:stretch;     /* full-width links */
+    flex-direction:column; align-items:stretch;
     padding:76px 16px 24px;
-    transform:translateX(100%);                     /* hidden off-screen RIGHT */
+    transform:translateX(100%);
     transition:transform .30s ease-in-out;
-    border-left:1px solid var(--border);            /* border sa right drawer edge */
-    border-right:none;
+    border-left:1px solid var(--border);
     z-index:1000; will-change:transform;
-    pointer-events:none;                            /* closed: ignore taps */
+    pointer-events:none;
     overflow-y:auto; -webkit-overflow-scrolling:touch;
-    margin-left:0;                                  /* reset desktop push */
-    text-align:left;                                /* ensure left text alignment */
+    margin-left:0; text-align:left;
   }
-  .dcp-nav.is-active{
-    transform:translateX(0);                        /* slide in from RIGHT */
-    pointer-events:auto;                            /* open: links clickable */
-  }
+  .dcp-nav.is-active{ transform:translateX(0); pointer-events:auto; }
 
-  /* big tap targets + strictly left-aligned text/content */
   .dcp-nav a{
     display:flex; width:100%;
-    justify-content:flex-start; align-items:center; /* keep content left */
-    text-align:left;                                 /* ensure text left */
+    justify-content:flex-start; align-items:center;
+    text-align:left;
     padding:16px 14px;
     border-radius:12px;
     touch-action:manipulation;
   }
 
-  /* burger animation */
   .dcp-burger.is-active span:nth-child(1){ transform:rotate(-45deg) translate(-6px, 7px) }
   .dcp-burger.is-active span:nth-child(2){ opacity:0 }
   .dcp-burger.is-active span:nth-child(3){ transform:rotate(45deg) translate(-6px, -7px) }
+}
+
+/* keep burger visible on ultra-small screens */
+@media (max-width:480px){
+  .dcp-burger{ position:fixed; top:10px; right:10px; }
 }

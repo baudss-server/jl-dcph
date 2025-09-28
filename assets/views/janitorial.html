@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/janitorial.css" />
     <link rel="stylesheet" href="../css/header.css" />
-
     <link rel="stylesheet" href="../css/hero-section.css" />
     <link rel="stylesheet" href="../css/how-it-works.css" />
     <link rel="stylesheet" href="../css/about.css" />
@@ -20,70 +20,148 @@
     <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="../css/testimonials.css" />
     <link rel="stylesheet" href="../css/faq.css" />
-
     <link rel="stylesheet" href="../css/vaservices.css" />
     <link rel="stylesheet" href="../css/gallery.css" />
     <link rel="stylesheet" href="../css/video.css" />
     <link rel="stylesheet" href="../css/modal.css" />
 
-    <!-- Mobile-focused tweaks (non-breaking) -->
+    <!-- Mobile tweaks + Drawer + BRIGHTER Single-card benefits styles -->
     <style>
-      /* make top nav comfy on small screens without touching burger behavior */
-      .dcp-nav {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
-      }
-      .dcp-nav::-webkit-scrollbar { display: none; }
-
-      /* responsive media */
-      .dcp-video-item,
-      .dcp-map iframe {
-        max-width: 100%;
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9;
-        border: 0;
+      :root{
+        --gold-strong:#FFD84D;
+        --gold-soft:#FFE082;
+        --text-strong:#F7F8FA;
+        --text-soft:#D8DAE2;
+        --panel-raise:rgba(255,255,255,.1);
       }
 
-      /* testimonial carousel becomes swipeable on mobile */
+      .dcp-nav { display:flex; gap:16px; align-items:center; overflow-x:auto; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; }
+      .dcp-nav::-webkit-scrollbar { display:none; }
+      .dcp-video-item, .dcp-map iframe { max-width:100%; width:100%; height:auto; aspect-ratio:16/9; border:0; }
+
+      /* ===== Single Glassmorphic Benefits Card (BRIGHTER) ===== */
+      .benefits-card.glass{
+        width:min(1100px, 96%);
+        margin: 0 auto;
+        padding: 24px 22px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+        border: 1px solid rgba(255,255,255,.22);
+        box-shadow: 0 14px 36px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.08);
+        color: var(--text-strong);
+      }
+      .benefits-card .lead{
+        font-style: italic;
+        color: var(--text-soft);
+        margin: 6px 0 10px;
+      }
+      .benefits-top{ margin-bottom: 10px; }
+
+      .benefits-list{
+        list-style:none; margin: 14px 0 6px; padding:0;
+        display:grid; gap:12px;
+        grid-template-columns: repeat(2, minmax(240px,1fr));
+      }
+      .benefits-item{
+        display:flex; align-items:center; gap:12px;
+        padding: 14px 16px; border-radius: 12px;
+        background: rgba(255,255,255,.10);
+        border:1px solid rgba(255,255,255,.28);
+        box-shadow: 0 6px 18px rgba(0,0,0,.28);
+        color: var(--text-strong);
+        transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      }
+      .benefits-item i{
+        font-size:1.35rem; color: var(--gold-soft);
+        filter: drop-shadow(0 1px 4px rgba(255,216,77,.35));
+      }
+      .benefits-item span{ color: var(--text-strong); font-weight:500; }
+
+      .benefits-item:hover{
+        background: rgba(255,255,255,.14);
+        border-color: rgba(255,255,255,.35);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 26px rgba(0,0,0,.36);
+      }
+
+      .benefits-note{ margin: 2px 2px 0; color: var(--text-soft); }
+
+      #benefits .section-title{ display:flex; align-items:center; justify-content:center; }
+      #benefits .section-title i{ margin-right:10px; color: var(--gold-strong); }
+
+      @media (max-width: 900px){ .benefits-list{ grid-template-columns: 1fr; } }
+
       @media (max-width: 768px) {
         .dcp-header-container { padding: 0 12px; }
         .dcp-hero-title { font-size: clamp(28px, 8vw, 56px); line-height: 1.1; }
         .dcp-hero-subtitle { font-size: clamp(14px, 4vw, 18px); }
-        .dcp-testimonial-cards {
-          display: flex;
-          gap: 12px;
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-          scroll-snap-type: x mandatory;
-          padding-bottom: 8px;
-        }
-        .dcp-testimonial-card { min-width: 80%; scroll-snap-align: start; }
-        .dcp-gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-        .dcp-steps { display: grid; gap: 12px; }
-        .dcp-step-card { min-height: auto; }
-        .dcp-benefits-inner.container,
-        .dcp-about-inner.container,
-        .dcp-video-inner.container,
-        .dcp-gallery-inner.container,
-        .dcp-contacts-container.container,
-        .dcp-testimonials-inner.container,
-        .dcp-faq-inner.container { padding-left: 12px; padding-right: 12px; }
+        #benefits .section-title { text-align:left; margin-left:2px; justify-content:flex-start; }
+        #benefits .dcp-benefits-inner.container { padding-left:12px; padding-right:12px; }
+        .benefits-item{ padding: 13px 14px; }
+        .benefits-item i{ font-size:1.2rem; }
       }
 
-      /* respect reduced motion */
       @media (prefers-reduced-motion: reduce) {
-        * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       }
+
+      /* ======= Drawer / Sidebar (mobile) ======= */
+      .menu-overlay{
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,.45);
+        opacity: 0; pointer-events: none;
+        transition: opacity .25s ease;
+        z-index: 9997;
+      }
+      .dcp-nav{ z-index: 9998; }
+      @media (max-width: 991px){
+        .dcp-nav{
+          position: fixed;
+          top: 0; right: 0; bottom: 0;
+          width: min(84vw, 340px);
+          background: var(--panel-2, #0f0f15);
+          border-left: 1px solid rgba(255,255,255,.12);
+          transform: translateX(100%);
+          transition: transform .32s cubic-bezier(.22,.61,.36,1);
+          padding: 72px 16px 16px;
+          display: flex; flex-direction: column; gap: 10px;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        .dcp-nav.is-active{ transform: translateX(0); }
+        .menu-overlay[aria-hidden="false"]{ opacity: 1; pointer-events: auto; }
+        body.menu-open{ overflow: hidden; }
+
+        .dcp-nav a{
+          display: flex; align-items: center; gap: 10px;
+          padding: 12px 10px;
+          border-radius: 10px;
+          border: 1px solid transparent;
+        }
+        .dcp-nav a:active, .dcp-nav a:focus, .dcp-nav a:hover{
+          border-color: rgba(255,216,77,.35);
+          background: rgba(255,255,255,.07);
+        }
+
+        .dcp-burger.is-active span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+        .dcp-burger.is-active span:nth-child(2){ opacity: 0; }
+        .dcp-burger.is-active span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+        .dcp-burger span{ display:block; width:22px; height:2px; background:#fff; margin:4px 0; transition:.22s ease; }
+      }
+
+      /* ===== Page-wipe overlay ===== */
+      .page-wipe{
+        position:fixed; inset:0;
+        background:#0b0b10;
+        transform: translateX(-100%);
+        z-index: 9999;
+        pointer-events: none;
+      }
+      .wipe-cover-left{ animation: wipeCoverLeft .9s cubic-bezier(.22,.61,.36,1) forwards; }
+      @keyframes wipeCoverLeft{ from{transform:translateX(-100%)} to{transform:translateX(0)} }
     </style>
 
-    <noscript>
-      <style>.page-wipe { display: none !important; }</style>
-    </noscript>
+    <noscript><style>.page-wipe{display:none!important}</style></noscript>
   </head>
   <body>
     <div class="stars-wrap" aria-hidden="true">
@@ -94,21 +172,23 @@
 
     <header class="dcp-header">
       <div class="dcp-header-container">
-        <a href="../../index.html" class="dcp-brand" aria-label="DelaCruzPH Corporation" data-wipe data-wipe-dir="right">
+        <a href="../../index.html" class="dcp-brand js-wipe" aria-label="DelaCruzPH Corporation">
           <img class="brand-logo" src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" loading="lazy" />
         </a>
-        <nav class="dcp-nav" aria-label="Primary">
+
+        <div id="nav-anchor"></div>
+
+        <nav class="dcp-nav" id="siteNav" aria-label="Primary">
           <a href="#janitorial-hero">Home</a>
-          <!-- VA Services link (kept between Home and About) -->
-          <a href="./va.html" data-wipe data-wipe-dir="right">VA Services</a>
+          <a href="./va.html" class="js-wipe">VA Services</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
           <a href="#testimonials">Testimonials</a>
           <a href="#faq">FAQ</a>
-          <a href="../../index.html" data-wipe data-wipe-dir="right">Main Page</a>
+          <a href="../../index.html" class="js-wipe">Main Page</a>
         </nav>
-        <!-- NOTE: per request, hamburger button behavior not modified -->
-        <button class="dcp-burger" aria-label="Toggle Menu">
+
+        <button class="dcp-burger" aria-label="Toggle Menu" aria-controls="siteNav" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -117,13 +197,10 @@
     <main id="content">
       <section id="janitorial-hero" class="dcp-hero-section page-section">
         <div class="dcp-hero-inner container">
-          <!-- wrapper para makapag-park ang walis sa kaliwang bahagi ng “J” -->
           <div class="hero-title">
             <h1 class="dcp-hero-title text-gradient dcp-hero-shine">JANITORIAL SERVICES</h1>
-            <!-- Walis: eksaktong kilos (entry→park@J→sweep→exit→return&park) -->
             <img src="../images/broom.png" alt="" class="broom broom--exact" aria-hidden="true" loading="lazy" />
           </div>
-
           <p class="dcp-hero-subtitle" style="max-width:600px;margin:0 auto 20px;">
             Professional cleaning for offices, buildings, and facilities.
           </p>
@@ -150,26 +227,38 @@
         </div>
       </section>
 
-      <!-- UPDATED BENEFITS SECTION -->
+      <!-- ===== SINGLE-CARD BENEFITS SECTION (reordered & brighter) ===== -->
       <section id="benefits" class="dcp-benefits-section page-section">
         <div class="dcp-benefits-inner container">
           <h2 class="section-title text-gradient"><i class="ri-lightbulb-line" aria-hidden="true"></i> Our Janitorial Services</h2>
 
-          <p><em>“We don’t just provide cleaning services; we cheerfully deliver our best!”</em></p>
-          <p><em>“We understand that your business has different cleaning needs, which vary daily.”</em></p>
+          <article class="benefits-card glass">
+            <p class="benefits-note">
+              At <strong>DelaCruzPH</strong>, we take pride in delivering a comprehensive cleaning solution—from meticulous restroom sanitation to thorough workstation cleaning, efficient trash disposal, and detailed floor care. We are committed to maintaining a germ-free, hygienic environment for your business.
+            </p>
 
-          <ul>
-            <li><i class="ri-check-line" aria-hidden="true"></i> Say goodbye to paying for fixed hours of cleaning time.</li>
-            <li><i class="ri-check-line" aria-hidden="true"></i> We only charge for the actual number of work hours.</li>
-            <li><i class="ri-check-line" aria-hidden="true"></i> We are the company that changes the game.</li>
-          </ul>
+            <div class="benefits-top">
+              <p class="lead">“We don’t just provide cleaning services; we cheerfully deliver our best!”</p>
+              <p class="lead">“We understand that your business has different cleaning needs, which vary daily.”</p>
+            </div>
 
-          <p>
-            At <strong>DelaCruzPH</strong>, we take pride in delivering a comprehensive cleaning solution—from meticulous restroom sanitation to thorough workstation cleaning, efficient trash disposal, and detailed floor care. We are committed to maintaining a germ-free, hygienic environment for your business.
-          </p>
+            <ul class="benefits-list">
+              <li class="benefits-item">
+                <i class="ri-check-line" aria-hidden="true"></i>
+                <span>Say goodbye to paying for fixed hours of cleaning time.</span>
+              </li>
+              <li class="benefits-item">
+                <i class="ri-check-line" aria-hidden="true"></i>
+                <span>We only charge for the actual number of work hours.</span>
+              </li>
+              <li class="benefits-item">
+                <i class="ri-check-line" aria-hidden="true"></i>
+                <span>We are the company that changes the game.</span>
+              </li>
+            </ul>
+          </article>
         </div>
       </section>
-      <!-- END UPDATED BENEFITS SECTION -->
 
       <section id="company-video" class="dcp-videos-section page-section">
         <div class="dcp-video-inner container">
@@ -208,7 +297,6 @@
         <div class="dcp-gallery-inner container">
           <h2 class="section-title text-gradient">Services</h2>
           <p>Comprehensive cleaning solutions tailored for offices and facilities.</p>
-
           <ul class="dcp-services-list">
             <li class="glass" data-service-id="restroom-cleaning"><i class="ri-hand-sanitizer-line" aria-hidden="true"></i><span>✔ Restroom Cleaning – Ensuring sanitized and fresh-smelling restrooms.</span></li>
             <li class="glass" data-service-id="workstation-cleaning"><i class="ri-computer-line" aria-hidden="true"></i><span>✔ Workstation Cleaning – Keeping desks and office spaces spotless.</span></li>
@@ -220,7 +308,6 @@
             <li class="glass" data-service-id="carpet-cleaning"><i class="ri-brush-3-line" aria-hidden="true"></i><span>✔ Carpet Cleaning – Deep cleaning for fresh and stain-free carpets.</span></li>
             <li class="glass" data-service-id="interior-exterior-cleaning"><i class="ri-building-line" aria-hidden="true"></i><span>✔ Interior &amp; Exterior Cleaning – Keeping your entire facility spotless, inside and out.</span></li>
           </ul>
-
           <div id="gallery-grid" class="dcp-gallery-grid"></div>
         </div>
       </section>
@@ -233,81 +320,73 @@
         </div>
       </div>
 
-      <section id="about" class="dcp-about-us-section page-section">
-        <div class="dcp-about-inner container">
-          <h2 class="section-title text-gradient">About Us</h2>
-          <div class="about-big-card glass">
-            <div class="about-image">
-              <img src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation Logo" loading="lazy" />
-            </div>
-            <div class="about-text">
-              <p>DelaCruzPH Corporation provides reliable <b>Janitorial Services</b> for offices, buildings, and facilities. Our straightforward approach focuses on providing skilled teams, maintaining high-quality standards, and delivering measurable results. We prioritize reliability, proactive communication, and weekly reports to ensure you are always informed about the progress of our work.</p>
-              <p>Our goal is to handle the cleaning and maintenance of your space so you can concentrate on your business's growth. By using customized strategies and tools that fit your specific needs, we ensure that delegating tasks to us is a smooth and scalable process.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="testimonials" class="dcp-testimonials-section page-section">
-        <div class="dcp-testimonials-inner container">
-          <h2 class="section-title text-gradient">Client Testimonials</h2>
-          <div class="dcp-testimonial-cards dcp-carousel">
-            <blockquote class="dcp-testimonial-card glass dcp-carousel-item">
-              <p>They're the best! Our office has never been cleaner. The team is professional, punctual, and always goes the extra mile. Highly recommend their janitorial service.</p>
-              <cite>Alex V., CEO of TechStart Solutions</cite>
-            </blockquote>
-            <blockquote class="dcp-testimonial-card glass dcp-carousel-item">
-              <p>Fantastic service. We've been using their janitorial services for over a year now. Communication is always clear, and their work is consistently excellent.</p>
-              <cite>Ben M., Office Manager at Global Innovators Inc.</cite>
-            </blockquote>
-            <blockquote class="dcp-testimonial-card glass dcp-carousel-item">
-              <p>The cleaning crew is incredibly thorough. Their flexibility with our schedule is a huge plus. Top-notch service.</p>
-              <cite>David R., Operations Director</cite>
-            </blockquote>
-            <blockquote class="dcp-testimonial-card glass dcp-carousel-item">
-              <p>We trust DelaCruzPH for all our cleaning needs. Their team is always on time, respectful, and leaves our space immaculate.</p>
-              <cite>Linda F., Restaurant Owner</cite>
-            </blockquote>
-          </div>
-        </div>
-      </section>
-
+      <!-- ================= UPDATED FAQ ================= -->
       <section id="faq" class="dcp-faq-section page-section">
         <div class="dcp-faq-inner container">
           <h2 class="section-title text-gradient">Frequently Asked Questions</h2>
+
           <div class="dcp-faq-list">
             <details class="dcp-faq-item glass">
-              <summary>What services do you offer?</summary>
+              <summary class="faq-summary" tabindex="0">
+                <span class="faq-left"><i class="ri-question-line" aria-hidden="true"></i></span>
+                <span class="faq-title">What services do you offer?</span>
+                <span class="faq-right" aria-hidden="true">+</span>
+              </summary>
               <div class="faq-content">
                 <p>We specialize in Janitorial Services for commercial and office spaces.</p>
               </div>
             </details>
+
             <details class="dcp-faq-item glass">
-              <summary>How do you ensure quality for janitorial work?</summary>
+              <summary class="faq-summary" tabindex="0">
+                <span class="faq-left"><i class="ri-shield-check-line" aria-hidden="true"></i></span>
+                <span class="faq-title">How do you ensure quality for janitorial work?</span>
+                <span class="faq-right" aria-hidden="true">+</span>
+              </summary>
               <div class="faq-content">
                 <p>Our staff undergoes extensive training, and we maintain strict quality standards. We also provide weekly reports and keep clear communication channels for any concerns.</p>
               </div>
             </details>
+
             <details class="dcp-faq-item glass">
-              <summary>How can I get started with your services?</summary>
+              <summary class="faq-summary" tabindex="0">
+                <span class="faq-left"><i class="ri-rocket-2-line" aria-hidden="true"></i></span>
+                <span class="faq-title">How can I get started with your services?</span>
+                <span class="faq-right" aria-hidden="true">+</span>
+              </summary>
               <div class="faq-content">
                 <p>Use the contact form to tell us what you need, and we'll propose a plan that works for you.</p>
               </div>
             </details>
+
             <details class="dcp-faq-item glass">
-              <summary>What is your pricing model?</summary>
+              <summary class="faq-summary" tabindex="0">
+                <span class="faq-left"><i class="ri-money-dollar-circle-line" aria-hidden="true"></i></span>
+                <span class="faq-title">What is your pricing model?</span>
+                <span class="faq-right" aria-hidden="true">+</span>
+              </summary>
               <div class="faq-content">
                 <p>Our pricing is customized based on your specific needs, the size of the space, the frequency of cleaning, and the services required. Please contact us for a free, no-obligation quote.</p>
               </div>
             </details>
+
             <details class="dcp-faq-item glass">
-              <summary>Are your cleaning products safe for the environment?</summary>
+              <summary class="faq-summary" tabindex="0">
+                <span class="faq-left"><i class="ri-leaf-line" aria-hidden="true"></i></span>
+                <span class="faq-title">Are your cleaning products safe for the environment?</span>
+                <span class="faq-right" aria-hidden="true">+</span>
+              </summary>
               <div class="faq-content">
                 <p>Yes, we are committed to using eco-friendly and non-toxic cleaning products to ensure a safe and healthy environment for your staff and clients, while also being mindful of the planet.</p>
               </div>
             </details>
+
             <details class="dcp-faq-item glass">
-              <summary>Can you handle special requests or deep cleaning?</summary>
+              <summary class="faq-summary" tabindex="0">
+                <span class="faq-left"><i class="ri-brush-2-line" aria-hidden="true"></i></span>
+                <span class="faq-title">Can you handle special requests or deep cleaning?</span>
+                <span class="faq-right" aria-hidden="true">+</span>
+              </summary>
               <div class="faq-content">
                 <p>Absolutely. We offer deep cleaning services for carpets, floors, and high-touch areas. We can also accommodate special requests to meet your unique cleaning needs.</p>
               </div>
@@ -315,6 +394,7 @@
           </div>
         </div>
       </section>
+      <!-- =============== END UPDATED FAQ =============== -->
 
       <section id="contact" class="dcp-contacts-section page-section">
         <div class="dcp-contacts-container container">
@@ -342,7 +422,7 @@
             <div class="dcp-map">
               <iframe
                 title="Map - 1383 W 8th Ave, Vancouver, BC V6H 3W4"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.839806509904!2d-123.13886548434863!3d49.2662095811776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673a5a8f27329%3A0xc3f6d7730e26b1c4!2s1383%20W%208th%20Ave%2C%20Vancouver%2C%20BC%20V6H%203W4%2C%20Canada!5e0!3m2!1sen!2sph!4v1614050609337!5m2!1sen!2sph"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.839806509904!2d-123.13886548434863!3d49.2662095811776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673a5a8f27329%3A0xc3f6d7730e26b1c4!2s1383%20W%208th%20Ave,%20Vancouver,%20BC%20V6H%203W4,%20Canada!5e0!3m2!1sen!2sph!4v1614050609337!5m2!1sen!2sph"
                 loading="lazy" referrerpolicy="no-referrer-when-downgrade">
               </iframe>
             </div>
@@ -362,13 +442,13 @@
         <div class="dcp-col links">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="../../index.html" data-wipe data-wipe-dir="right"><i class="ri-home-5-line" aria-hidden="true"></i><span>Home</span></a></li>
-            <li><a href="janitorial.html" data-wipe data-wipe-dir="right"><i class="ri-brush-3-line" aria-hidden="true"></i><span>Janitorial</span></a></li>
-            <li><a href="./va.html" data-wipe data-wipe-dir="right"><i class="ri-user-voice-line" aria-hidden="true"></i><span>VA Services</span></a></li>
+            <li><a href="../../index.html" class="js-wipe"><i class="ri-home-5-line" aria-hidden="true"></i><span>Home</span></a></li>
+            <li><a href="janitorial.html"><i class="ri-brush-3-line" aria-hidden="true"></i><span>Janitorial</span></a></li>
+            <li><a href="./va.html" class="js-wipe"><i class="ri-user-voice-line" aria-hidden="true"></i><span>VA Services</span></a></li>
             <li><a href="#about"><i class="ri-information-line" aria-hidden="true"></i><span>About</span></a></li>
             <li><a href="#contact"><i class="ri-contacts-line" aria-hidden="true"></i><span>Contact</span></a></li>
-            <li><a href="#"><i class="ri-file-text-line" aria-hidden="true"></i><span>Terms of Service</span></a></li>
-            <li><a href="#"><i class="ri-shield-line" aria-hidden="true"></i><span>Privacy Policy</span></a></li>
+            <li><a href="tos.html" class="js-wipe"><i class="ri-file-text-line" aria-hidden="true"></i><span>Terms of Service</span></a></li>
+            <li><a href="privacy.html" class="js-wipe"><i class="ri-shield-line" aria-hidden="true"></i><span>Privacy Policy</span></a></li>
           </ul>
         </div>
         <div class="dcp-col social">
@@ -398,9 +478,20 @@
     <script src="../js/main.js" type="module" defer></script>
     <script src="../js/testimonial.js" defer></script>
     <script src="../js/video.js" defer></script>
-    <script src="../js/gallery.js" defer></script>
     <script src="../js/modal.js" defer></script>
-    <!-- Page transition (requested) -->
+
+    <!-- Use janitorial-specific gallery (images at ../images/iStock-*.png) -->
+    <script src="../js/janitorial-gallery.js" defer></script>
+
+    <script src="../js/faq.js" defer></script>
+    <script src="../js/nav.js" defer></script>
     <script src="../js/wipe-transition.js" type="module" defer></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const y = document.getElementById('year');
+        if (y) y.textContent = new Date().getFullYear();
+      });
+    </script>
   </body>
 </html>

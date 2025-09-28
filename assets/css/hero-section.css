@@ -25,36 +25,125 @@
   pointer-events: none; z-index: 1;
 }
 
-/* === HERO CARD EFFECT (unchanged) === */
-.hero-cards { width: min(1000px, 92vw); position: relative; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 12px auto 0; }
+/* === HERO CARD EFFECT (unchanged layout) === */
+.hero-cards {
+  width: min(1000px, 92vw);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px auto 0;
+}
 .hero-cards .card { position: relative; width: 300px; text-decoration: none; color: var(--text); }
-.hero-cards .card .face { width: 300px; height: 200px; transition: .35s; border-radius: 14px; }
-.hero-cards .card .face.face1 { position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; transform: translateY(100px); border: 1px solid var(--border); box-shadow: 0 8px 24px rgba(0,0,0,.45); }
-.hero-cards .card:nth-child(1) .face.face1 { background-image: url('../images/ja-mp.png'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.hero-cards .card:nth-child(2) .face.face1 { background-image: url('../images/va-mp.png'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.hero-cards .card:hover .face.face1, .hero-cards .card:focus-visible .face.face1 { transform: translateY(0); }
-.hero-cards .card .face.face1 .content { opacity: 1; transition: opacity .35s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.hero-cards .card:hover .face.face1 .content, .hero-cards .card:focus-visible .face.face1 .content { opacity: 1; }
+.hero-cards .card .face {
+  width: 300px; height: 200px; border-radius: 14px;
+  transition: .35s; /* base transitions; glow overrides below will extend this */
+}
+
+/* TOP FACE (with blurred bg images) */
+.hero-cards .card .face.face1 {
+  position: relative;
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1; transform: translateY(100px);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+
+  /* important to clip blurred edges */
+  overflow: hidden;
+
+  /* disable any direct bg so ::before takes over */
+  background-image: none !important;
+  background: transparent;
+}
+
+/* blurred bg layer */
+.hero-cards .card .face.face1::before{
+  content: "";
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* slight blur + scale to hide blur edges */
+  filter: blur(2.2px) brightness(0.98);
+  transform: scale(1.04);
+  z-index: 0;
+  transition: inherit;
+  will-change: filter, transform;
+}
+
+/* assign each image to the ::before layer */
+.hero-cards .card:nth-child(1) .face.face1::before{
+  background-image: url('../images/ja-mp.png');
+}
+.hero-cards .card:nth-child(2) .face.face1::before{
+  background-image: url('../images/va-mp.png');
+}
+
+/* keep foreground crisp above the blur */
+.hero-cards .card .face.face1 .content {
+  position: relative;
+  opacity: 1;
+  transition: opacity .35s ease;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 1;
+}
+
+.hero-cards .card:hover .face.face1,
+.hero-cards .card:focus-visible .face.face1 { transform: translateY(0); }
+
 .hero-cards .card .face.face1 .content i { font-size: 3rem; color: #000; transition: color .3s ease, filter .3s ease; }
 .hero-cards .card .face.face1 .content h3 { font-size: 1em; margin: .25rem 0 0; color: #000; transition: color .3s ease, filter .3s ease; }
 .hero-cards .card:hover .face.face1 .content i,
 .hero-cards .card:hover .face.face1 .content h3,
 .hero-cards .card:focus-visible .face.face1 .content i,
 .hero-cards .card:focus-visible .face.face1 .content h3 { color: var(--gold-strong); filter: drop-shadow(0 0 6px rgba(255,216,77,.35)); }
-.hero-cards .card .face.face2 { position: relative; background: var(--panel-2); display: flex; align-items: center; justify-content: center; padding: 20px; transform: translateY(-90px); border: 1px solid var(--border); box-shadow: 0 12px 30px rgba(0,0,0,.55); }
-.hero-cards .card:hover .face.face2, .hero-cards .card:focus-visible .face.face2 { transform: translateY(0); }
+
+/* tiny lift on hover for the blurred bg */
+.hero-cards .card:hover .face.face1::before,
+.hero-cards .card:focus-visible .face.face1::before{
+  transform: scale(1.045);
+}
+
+/* BOTTOM FACE */
+.hero-cards .card .face.face2 {
+  position: relative; background: var(--panel-2);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; transform: translateY(-90px);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 30px rgba(0,0,0,.55);
+}
+.hero-cards .card:hover .face.face2,
+.hero-cards .card:focus-visible .face.face2 { transform: translateY(0); }
 .hero-cards .card .face.face2 .content p { font-size: 10pt; margin: 0; color: var(--muted); text-align: center; }
 
-/* =========================================================
-    🧹 BROOM — EXACT MOVEMENT (entry → park beside "J" → etc.)
-    ========================================================= */
+/* === GLOWING BORDERS ON HOVER/FOCUS (no extra boxes/pseudo) === */
+.hero-cards .card .face {
+  transition:
+    transform .35s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    filter .25s ease;
+}
+.hero-cards .card:hover .face,
+.hero-cards .card:focus-within .face,
+.hero-cards .card:focus-visible .face {
+  border-color: rgba(255, 216, 77, 0.65);
+  box-shadow:
+    0 0 0 1px rgba(255, 216, 77, 0.40) inset,
+    0 0 16px rgba(255, 216, 77, 0.32),
+    0 8px 22px rgba(0, 0, 0, 0.45);
+  filter: drop-shadow(0 0 6px rgba(255, 216, 77, 0.25));
+}
 
-/* Parking space sa kaliwa ng "J" — MAS DIKIT NANG KAUNTI */
+/* =========================================================
+   🧹 BROOM — EXACT MOVEMENT (entry → park beside "J")
+   ========================================================= */
 .hero-title{
   position: relative;
   display: inline-block;
-  /* dating: clamp(40px, 5vw, 88px) */
-  padding-left: clamp(px, 4.6vw, 80px);
+  padding-left: clamp(px, 3.8vw, 56px);
 }
 
 /* Broom base size + shadow (responsive) */
@@ -73,7 +162,7 @@
 /* Linear, one-shot */
 .broom--exact{ animation: broom-loop-park-linear 5.6s linear .05s both; }
 
-/* Path & timing — PARK OFFSET MAS DIKIT */
+/* Path & timing — PARK HALOS DIKIT SA "J" */
 @keyframes broom-loop-park-linear{
   0%   { transform: translate(120vw, -34vh) rotate(36deg)  scale(.96); opacity:0; }
   10%  { transform: translate(70vw,   -8vh) rotate(26deg)  scale(.98); opacity:1; }
@@ -82,17 +171,16 @@
   40%  { transform: translate(20vw,     6vh) rotate(16deg) scale(1);   }
   50%  { transform: translate(38vw,    -4vh) rotate(22deg) scale(1);   }
   60%  { transform: translate(10vw,   -10vh) rotate(8deg)  scale(1);   }
-  70%  { transform: translate(4vw,    -8vh) rotate(4deg)  scale(1);   }
+  70%  { transform: translate(4vw,    -8vh) rotate(4deg)   scale(1);   }
   80%  { transform: translate(-6%,     1.2vh) rotate(-24deg) scale(1); }
   90%  { transform: translate(-40%,      .6vh) rotate(-21deg) scale(1); }
-  /* dating: -101% at -103% → ginawa kong -97% at -99% para mas dikit */
-  98%  { transform: translate(-97%,      .2vh) rotate(-19deg) scale(1); }
-  100% { transform: translate(-99%,        0)  rotate(-18deg) scale(1); }
+  98%  { transform: translate(-78%,      .2vh) rotate(-19deg) scale(1); }
+  100% { transform: translate(-72%,        0)  rotate(-18deg) scale(1); }
 }
 
 /* =========================================================
-    TITLE GLOW-ONCE (no background-clip; keeps original look)
-    ========================================================= */
+   TITLE GLOW-ONCE (kept)
+   ========================================================= */
 .dcp-hero-title.text-gradient.dcp-hero-shine{
   position: relative;
   will-change: text-shadow, filter, letter-spacing, transform;
@@ -110,52 +198,23 @@
   transform: translateY(-1px);
 }
 
-/* Mobile tweaks: idinikit din ang park + padding */
-@media (max-width: 560px){
-  /* dating: clamp(28px, 14vw, 64px) */
-  .hero-title{ padding-left: clamp(24px, 13vw, 56px); }
-  .broom{ width: clamp(48px, 14vw, 96px); bottom: -2px; }
-  .broom--exact{ animation: broom-loop-park-linear-m 4.6s linear .05s both; }
-  .dcp-hero-title.text-gradient.dcp-hero-shine{ animation-delay: 3.6s; }
-
-  @keyframes broom-loop-park-linear-m{
-    0%   { transform: translate(110vw, -28vh) rotate(30deg)  scale(.95); opacity:0; }
-    12%  { transform: translate(64vw,   -6vh) rotate(22deg)  scale(.97); opacity:1; }
-    24%  { transform: translate(22vw,     9vh) rotate(10deg) scale(1);   }
-    36%  { transform: translate(-12vw,   -6vh) rotate(2deg)  scale(1);   }
-    52%  { transform: translate(26vw,      4vh) rotate(16deg) scale(1);   }
-    68%  { transform: translate(8vw,      -7vh) rotate(6deg)  scale(1);   }
-    84%  { transform: translate(-6%,        1vh) rotate(-22deg) scale(1); }
-    /* dating final: -105% → ginawa kong -96% para mas dikit */
-    100% { transform: translate(-96%,        0)  rotate(-16deg) scale(1); }
-  }
-}
-
-/* A11y */
-@media (prefers-reduced-motion: reduce){
-  .broom--exact{ animation: none !important; }
-  .dcp-hero-title.text-gradient.dcp-hero-shine{ animation: none !important; }
-}
 /* ============ MOBILE TYPE TUNING (Overrides) ============ */
 
 /* Small phones: ≤ 560px */
 @media (max-width: 560px) {
-  /* Main hero title */
   .dcp-hero-title {
-    /* dating: 80px → gawin nating responsive */
-    font-size: clamp(28px, 10vw, 40px);
+    font-size: clamp(20px, 10vw, 40px);
     line-height: 1.12;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.00em;
     margin-bottom: 18px;
   }
 
-  /* Kung gumagamit ka ng .hero-title (para sa broom spacing), bawasan din */
   .hero-title {
     font-size: clamp(26px, 9.5vw, 38px);
     line-height: 1.14;
+    padding-left: clamp(px, 2.2vw, 15px);
   }
 
-  /* Section headings (e.g., How It Works, Services, etc.) */
   .section-title,
   h2.section-title.text-gradient {
     font-size: clamp(20px, 6.5vw, 28px);
@@ -163,25 +222,36 @@
     margin-bottom: 14px;
   }
 
-  /* Sub-headings sa cards/blocks */
   h3 {
     font-size: clamp(15px, 4.5vw, 18px);
     line-height: 1.25;
   }
 
-  /* Body text sa hero / lead paragraphs (optional, para mas basa) */
   .dcp-hero-inner p,
   .dcp-benefits-inner p,
   .dcp-about-inner p {
     font-size: clamp(13px, 3.7vw, 16px);
     line-height: 1.55;
   }
+
+  .broom { width: clamp(48px, 14vw, 96px); bottom: -2px; }
+  .broom--exact { animation: broom-loop-park-linear-m 4.6s linear .05s both; }
+
+  @keyframes broom-loop-park-linear-m {
+    0%   { transform: translate(110vw, -28vh) rotate(30deg)  scale(.95); opacity:0; }
+    12%  { transform: translate(64vw,   -6vh) rotate(22deg)  scale(.97); opacity:1; }
+    24%  { transform: translate(22vw,     9vh) rotate(10deg) scale(1);   }
+    36%  { transform: translate(-12vw,   -6vh) rotate(2deg)  scale(1);   }
+    52%  { transform: translate(26vw,      4vh) rotate(16deg) scale(1);  }
+    68%  { transform: translate(8vw,      -7vh) rotate(6deg)  scale(1);  }
+    84%  { transform: translate(-6%,        1vh) rotate(-22deg) scale(1); }
+    100% { transform: translate(-64%,       0)  rotate(-16deg) scale(1); }
+  }
 }
 
-/* Mid screens: 561px – 992px (tablets at small laptops) */
+/* Mid screens: 561px – 992px */
 @media (min-width: 561px) and (max-width: 992px) {
   .dcp-hero-title {
-    /* dating 80px → soften a bit sa medium screens */
     font-size: clamp(45px, 6vw, 56px);
     line-height: 1.1;
     letter-spacing: 0.005em;
@@ -197,134 +267,15 @@
   }
 }
 
-/* Optional: mas maayos na wrapping para iwas overflow ng mahahabang salita */
+/* Optional: better wrapping */
 .dcp-hero-title,
 .section-title {
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
-/* ===== JANITORIAL HERO — MOBILE FIX (paste at the very end) ===== */
-@media (max-width: 560px) {
-  /* Center ang laman ng hero */
-  .dcp-hero-section .dcp-hero-inner.container {
-    text-align: center;
-    padding-left: 14px;
-    padding-right: 14px;
-  }
 
-  /* Wrapper ng title: tunay na center + maliit lang na puwang para sa walis */
-  .dcp-hero-section .hero-title {
-    display: inline-block;
-    margin: 0 auto;
-    /* dati malaki — babaan para hindi mag-drift ang text */
-    padding-left: clamp(8px, 6.5vw, 24px);
-  }
-
-  /* H1 sizing + center */
-  .dcp-hero-section .dcp-hero-title {
-    font-size: clamp(28px, 10vw, 40px);
-    line-height: 1.12;
-    letter-spacing: .01em;
-    margin: 0 auto 18px;
-  }
-
-  /* Walis size/posisyon */
-  .dcp-hero-section .broom {
-    width: clamp(48px, 14vw, 90px);
-    bottom: -2px;
-  }
-
-  /* Gamitin ang mobile keyframes na mas dikit sa "J" */
-  .dcp-hero-section .broom--exact {
-    animation: broom-loop-park-linear-m 4.6s linear .05s both;
-  }
-
-  /* MOBILE PATH: idinikit ang final park sa kaliwa ng “J” */
-  @keyframes broom-loop-park-linear-m {
-    0%   { transform: translate(110vw, -28vh) rotate(30deg)  scale(.95); opacity:0; }
-    12%  { transform: translate(64vw,   -6vh) rotate(22deg)  scale(.97); opacity:1; }
-    24%  { transform: translate(22vw,     9vh) rotate(10deg) scale(1);   }
-    36%  { transform: translate(-12vw,   -6vh) rotate(2deg)  scale(1);   }
-    52%  { transform: translate(26vw,      4vh) rotate(16deg) scale(1);  }
-    68%  { transform: translate(8vw,      -7vh) rotate(6deg)  scale(1);  }
-    84%  { transform: translate(-6%,        1vh) rotate(-22deg) scale(1); }
-    /* FINAL PARK — halos dikit sa "J": pwede mong gawing -92% o -88% kung gusto mong mas dikit/mas layo ng kaunti */
-    100% { transform: translate(-90%, 0) rotate(-16deg) scale(1); }
-  }
-}
-
-/* A11y: huwag gumalaw kapag reduced motion */
+/* A11y / reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .dcp-hero-section .broom--exact { animation: none !important; }
+  .broom--exact{ animation: none !important; }
+  .dcp-hero-title.text-gradient.dcp-hero-shine{ animation: none !important; }
 }
-/* ===== MOBILE — MAS DIKIT ANG WALIS SA "J" (override) ===== */
-@media (max-width: 560px) {
-  /* Bahagyang liitan pa ang reserved space para mas sumiksik ang walis */
-  .dcp-hero-section .hero-title {
-    padding-left: clamp(6px, 5.5vw, 20px);
-  }
-
-  /* Gamit pa rin ang mobile animation, pero mas "kanan" ang final translate */
-  .dcp-hero-section .broom--exact {
-    animation: broom-loop-park-linear-m 4.6s linear .05s both;
-  }
-
-  /* REDEFINE keyframes (kopya ng dati pero mas dikit ang 100%) */
-  @keyframes broom-loop-park-linear-m{
-    0%   { transform: translate(110vw, -28vh) rotate(30deg)  scale(.95); opacity:0; }
-    12%  { transform: translate(64vw,   -6vh) rotate(22deg)  scale(.97); opacity:1; }
-    24%  { transform: translate(22vw,     9vh) rotate(10deg) scale(1);   }
-    36%  { transform: translate(-12vw,   -6vh) rotate(2deg)  scale(1);   }
-    52%  { transform: translate(26vw,      4vh) rotate(16deg) scale(1);  }
-    68%  { transform: translate(8vw,      -7vh) rotate(6deg)  scale(1);  }
-    84%  { transform: translate(-6%,        1vh) rotate(-22deg) scale(1); }
-    /* FINAL PARK — mas dikit pa sa "J" (dating -90%, ngayon -86%) */
-    100% { transform: translate(-86%, 0) rotate(-16deg) scale(1); }
-  }
-}
-
-/* Optional: kung gusto mong idikit na idikit, subukan -84% o -82%
-@media (max-width: 560px){
-  @keyframes broom-loop-park-linear-m{
-    100% { transform: translate(-84%, 0) rotate(-16deg) scale(1); }
-  }
-}
-*/
-/* ===== MOBILE — SUPER DIKIT ANG WALIS SA "J" (final override) ===== */
-@media (max-width: 560px) {
-  /* Bawasan pa ang reserved space para sumiksik ang walis sa kaliwa ng "J" */
-  .dcp-hero-section .hero-title {
-    padding-left: clamp(2px, 4vw, 14px);
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
-
-  /* Panatilihing center ang H1 */
-  .dcp-hero-section .dcp-hero-title {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
-
-  /* Gumamit pa rin ng mobile animation pero mas dikit ang final */
-  .dcp-hero-section .broom--exact {
-    animation: broom-loop-park-linear-m 4.6s linear .05s both;
-  }
-
-  /* REDEFINE keyframes: ilapit pa ang final translate sa “J” */
-  @keyframes broom-loop-park-linear-m{
-    0%   { transform: translate(110vw, -28vh) rotate(30deg)  scale(.95); opacity:0; }
-    12%  { transform: translate(64vw,   -6vh) rotate(22deg)  scale(.97); opacity:1; }
-    24%  { transform: translate(22vw,     9vh) rotate(10deg) scale(1);   }
-    36%  { transform: translate(-12vw,   -6vh) rotate(2deg)  scale(1);   }
-    52%  { transform: translate(26vw,      4vh) rotate(16deg) scale(1);  }
-    68%  { transform: translate(8vw,      -7vh) rotate(6deg)  scale(1);  }
-    84%  { transform: translate(-6%,        1vh) rotate(-22deg) scale(1); }
-    /* FINAL PARK — idikit na idikit (dating -86% → ngayon -82%) */
-    100% { transform: translate(35%, 0) rotate(-16deg) scale(1); }
-  }
-}
-
-/* Tip: kung gusto mo pang dikit (halos sumayad), gawing -80% ang final:
-   100% { transform: translate(-80%, 0) rotate(-16deg) scale(1); }  */

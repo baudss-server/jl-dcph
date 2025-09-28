@@ -203,3 +203,6 @@ iframe, video { max-width:100%; }
 
 /* ---- universal flex/grid child guards ---- */
 :where(.flex > *, .grid > *, [class*="grid"] > *){ min-width:0; min-height:0; }
+
+/* ---------- Anchor offset for actual section ids ---------- */
+#home, #about, #contact, #testimonials, #faq { scroll-margin-top: var(--va-nav-offset); }

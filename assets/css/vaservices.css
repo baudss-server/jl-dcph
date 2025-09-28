@@ -36,3 +36,47 @@
 #benefits .section-title i {
   margin-right: 10px;
 }
+/* ===== BENEFITS: mobile left-aligned ===== */
+@media (max-width: 768px){
+  /* Title + intro paragraph */
+  #benefits .section-title { 
+    text-align: left; 
+    margin-left: 2px;          /* slight visual balance */
+  }
+  #benefits .dcp-benefits-inner > p{
+    text-align: left;
+    margin-left: 2px;
+  }
+
+  /* List wrapper */
+  #benefits ul{
+    margin: 14px 0 0 0;        /* remove auto-centering */
+    padding-left: 0;
+    max-width: none;           /* let it fill the container */
+  }
+
+  /* Cards */
+  #benefits li{
+    text-align: left;
+    align-items: start;        /* ensure left alignment of grid content */
+    grid-template-columns: 28px 1fr; /* tighter icon column on mobile */
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  /* Icon + text stack */
+  #benefits li i{
+    font-size: 18px;
+    margin-top: 2px;
+  }
+  #benefits li div{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+/* Keep 2-column only on wider screens (already present, just ensuring) */
+@media (min-width: 900px){
+  #benefits ul{ grid-template-columns: 1fr 1fr; }
+}

@@ -1,82 +1,104 @@
 /* ===== FAQ ===== */
-.dcp-faq-section {
-  background: transparent;
-}
-.dcp-faq-inner {
-  text-align: center;
-}
-.dcp-faq-list {
-  max-width: 900px;
-  margin: 20px auto 0;
-  display: grid;
-  gap: 12px;
-}
-.dcp-faq-item {
-  padding: 18px 22px;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
-.dcp-faq-item:hover {
-  border-color: rgba(255, 216, 77, 0.45);
-}
-.dcp-faq-item summary {
-  display: block;
-  position: relative;
-  font-size: 1.15rem;
-  font-weight: 600;
-  list-style: none;
-  outline: none;
-  color: #fff;
-}
-.dcp-faq-item summary::-webkit-details-marker {
-  display: none;
-}
-.dcp-faq-item summary::after {
-  content: '\ea41'; /* Bagong icon: '+' */
-  font-family: 'remixicon';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--gold-strong);
-  transition: transform 0.2s ease;
-}
-.dcp-faq-item[open] summary::after {
-  transform: translateY(-50%) rotate(45deg); /* Paikot para maging 'X' */
-}
-.dcp-faq-item[open] summary {
-  color: var(--gold-strong);
-}
-.dcp-faq-item p {
-  /* Animation para sa smooth na pagbukas at pagsara */
-  max-height: 0;
-  padding-top: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
-  margin: 0;
-  font-size: 1rem;
-  color: var(--muted);
-}
-.dcp-faq-item[open] p {
-  /* Ang taas kapag bukas, dapat sapat para sa content */
-  max-height: 500px;
-  padding-top: 10px;
+.dcp-faq-section { background: transparent; }
+
+.dcp-faq-inner{
+  width:min(1200px,92%);
+  margin-inline:auto;
+  text-align:center;
 }
 
-/* Responsive styles */
-@media (max-width: 992px) {
-  .dcp-faq-item summary {
-    font-size: 1.1rem;
-  }
+.dcp-faq-list{
+  max-width:900px;
+  margin:20px auto 0;
+  display:grid;
+  gap:12px;
 }
 
-@media (max-width: 600px) {
-  .dcp-faq-item summary {
-    font-size: 1rem;
-  }
-  .dcp-faq-item p {
-    font-size: 0.9rem;
-  }
+/* Card container */
+.dcp-faq-item{
+  border:1px solid var(--border);
+  border-radius:12px;
+  transition:border-color .2s ease, background .2s ease;
+  overflow:hidden; /* clip rounded corners while animating */
+}
+.dcp-faq-item:hover{ border-color:rgba(255,216,77,.45); }
+
+/* remove native marker */
+.dcp-faq-item > summary{ list-style:none; }
+.dcp-faq-item > summary::-webkit-details-marker{ display:none; }
+
+/* Summary: 3-column grid = [left icon][CENTERED TITLE][right icon] */
+.faq-summary{
+  display:grid;
+  grid-template-columns: 1.5em 1fr 1.5em;
+  align-items:center;
+  gap:12px;
+  padding:16px 18px;
+  cursor:pointer;
+  user-select:none;
+  outline:none;
+  -webkit-tap-highlight-color:transparent;
+  background:transparent;
+}
+
+/* Make inner wrapper “transparent” to grid so children can place themselves */
+.faq-left{ display: contents; }
+
+/* Left icon */
+.faq-left > i{
+  grid-column: 1;
+  justify-self:start;
+  width:1.5em; height:1.5em;
+  line-height:1; text-align:center;
+  font-size:1.05rem;
+  color:var(--gold-strong);
+  text-shadow:0 0 6px rgba(255,216,77,.15);
+}
+
+/* Centered title */
+.faq-title{
+  grid-column: 2;
+  color:#fff;
+  font-weight:600;
+  line-height:1.45;
+  word-break:break-word;
+  text-align:center;          /* <- truly centered */
+}
+
+/* Right icon (+) */
+.faq-right{
+  grid-column: 3;
+  justify-self:end;
+  width:1.5em; height:1.5em;
+  line-height:1; text-align:center;
+  font-size:1.05rem;
+  color:var(--gold-strong);
+  transition: transform .2s ease;
+}
+
+/* open state visuals */
+.dcp-faq-item[open] .faq-summary{
+  background:rgba(255,255,255,.035);
+}
+.dcp-faq-item[open] .faq-right{ transform: rotate(45deg); } /* + -> × */
+
+/* Content (height animated via JS; keep overflow hidden) */
+.faq-content{
+  overflow:hidden;
+  max-height:0;               /* JS will set real px value */
+  padding:0 18px 0 18px;      /* symmetric now that title is centered */
+}
+
+/* Content text */
+.faq-content p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+  padding:10px 0 16px 0;      /* inner spacing */
+}
+
+/* Responsive */
+@media (max-width: 600px){
+  .faq-summary{ padding:14px; }
+  .faq-left > i, .faq-right{ width:1.35em; height:1.35em; }
 }

@@ -1,0 +1,340 @@
+<!-- File: assets/views/tos.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms of Service | DELACRUZPH. CORPORATION</title>
+  <meta name="description" content="Terms of Service of DELACRUZPH. CORPORATION. Please read these terms carefully before using our website and services." />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Site CSS (paths from /assets/views/) -->
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/footer.css" />
+  <link rel="stylesheet" href="../css/tos.css" />
+
+  <meta name="theme-color" content="#000000" />
+  <noscript><style>.page-wipe{display:none!important}</style></noscript>
+
+  <style>
+    .dcp-header-container,
+    .tos-section .container,
+    .dcp-footer-inner.container { width: min(1580px, 96%); }
+
+    .tos-section .section-title { text-align:center; margin-top:10px; }
+    .tos-meta { text-align:center; margin:6px 0 16px; color:var(--muted); }
+
+    .toc{
+      width:100%; padding:26px 28px; margin:0 auto 18px; border-radius:var(--radius);
+      border:1px solid rgba(255,216,77,.35);
+      box-shadow:0 0 0 1px rgba(255,216,77,.25), 0 0 26px rgba(255,216,77,.20), var(--shadow);
+      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03));
+    }
+    .toc:hover{
+      border-color:rgba(255,216,77,.5);
+      box-shadow:0 0 0 1px rgba(255,216,77,.35), 0 0 34px rgba(255,216,77,.28), var(--shadow);
+    }
+    .toc .toc-title{ margin:0 0 14px 0; display:inline-flex; align-items:center; gap:.5rem; }
+    .toc .toc-title::before{ content:"\eb7b"; font-family:"remixicon"; font-size:1.15em; opacity:.9; }
+
+    .toc ol{
+      list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr; gap:14px 16px; width:100%;
+    }
+    @media (min-width:700px){ .toc ol{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px 20px; } }
+    @media (min-width:1100px){ .toc ol{ grid-template-columns:repeat(3, minmax(0,1fr)); gap:18px 24px; } }
+
+    .toc ol a{
+      display:inline-flex; align-items:center; justify-content:flex-start; width:100%;
+      gap:.6rem; padding:.7rem 1rem; color:#fff; text-decoration:none; font-weight:700;
+      border:1px solid var(--border); border-radius:999px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.035));
+      transition:color .2s, text-shadow .2s, background .2s, border-color .2s, transform .12s, box-shadow .2s;
+      white-space:normal;
+    }
+    .toc ol a:hover,.toc ol a:focus-visible{
+      text-shadow:0 0 10px rgba(255,216,77,.65), 0 0 18px rgba(255,216,77,.35);
+      background:rgba(255,255,255,.09); border-color:rgba(255,216,77,.5);
+      box-shadow:0 0 12px rgba(255,216,77,.25); transform:translateY(-1px); outline:none;
+    }
+
+    .tos-card a{ color:#fff; text-decoration:none; border-bottom:1px dashed rgba(255,255,255,.38); }
+    .tos-card a:hover,.tos-card a:focus-visible{ border-bottom-color:rgba(255,255,255,.8); }
+
+    .acknowledge{
+      width:100%; margin-top:18px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:14px;
+      border:1px solid rgba(255,216,77,.3);
+      box-shadow:0 0 0 1px rgba(255,216,77,.18), 0 0 18px rgba(255,216,77,.16), var(--shadow);
+    }
+    .acknowledge:hover{
+      border-color:rgba(255,216,77,.45);
+      box-shadow:0 0 0 1px rgba(255,216,77,.3), 0 0 24px rgba(255,216,77,.22), var(--shadow);
+    }
+    .ack input{ transform:translateY(1px); }
+
+    .dcp-footer-inner.container{
+      display:grid; grid-template-columns:1fr; gap:16px;
+    }
+    @media (min-width:768px){ .dcp-footer-inner.container{ grid-template-columns:1.2fr 1fr 1fr; gap:22px; } }
+
+    @media (max-width:480px){
+      .toc{ padding:20px 16px; }
+      .toc ol a{ padding:.7rem .9rem; border-radius:14px; }
+      .acknowledge{ flex-direction:column; align-items:stretch; }
+      .acknowledge .dcp-btn-primary{ width:100%; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Stars -->
+  <div class="stars-wrap" aria-hidden="true">
+    <div id="stars"></div><div id="stars2"></div><div id="stars3"></div>
+  </div>
+
+  <div class="page-wipe" id="wipe" aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="dcp-header">
+    <div class="dcp-header-container">
+      <a href="#home" class="dcp-brand" aria-label="DelaCruzPH Corporation">
+        <img class="brand-logo" src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" />
+      </a>
+      <nav class="dcp-nav" id="site-nav">
+        <!-- Home: in-page anchor on this TOS page -->
+        <a href="#home">Home</a>
+        <a href="./janitorial.html" class="js-wipe">Janitorial Service</a>
+        <a href="./va.html" class="js-wipe">VA Service</a>
+        <!-- Contact: in-page anchor pointing to footer contact -->
+        <a href="#contact">Contact</a>
+        <!-- Main Page: the ONLY way back to index -->
+        <a href="../../index.html" class="js-wipe">Main Page</a>
+      </nav>
+      <button class="dcp-burger" aria-label="Toggle Menu" aria-controls="site-nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- In-page HOME anchor -->
+  <div id="home"></div>
+
+  <main id="content" class="page-section tos-section no-bleed">
+    <div class="container">
+      <h1 class="section-title text-gradient">Terms of Service</h1>
+      <p class="tos-meta">Last updated: <time datetime="2025-09-27">September 27, 2025</time></p>
+
+      <!-- TOC -->
+      <nav class="glass toc" aria-label="Terms Sections">
+        <h2 class="toc-title">Table of Contents</h2>
+        <ol>
+          <li><a href="#acceptance">Acceptance of Terms</a></li>
+          <li><a href="#eligibility">Eligibility & Accounts</a></li>
+          <li><a href="#services">Scope of Services</a></li>
+          <li><a href="#billing">Fees, Billing & Refunds</a></li>
+          <li><a href="#ip">User Content & Intellectual Property</a></li>
+          <li><a href="#aup">Acceptable Use</a></li>
+          <li><a href="#thirdparty">Third-Party Links & Tools</a></li>
+          <li><a href="#privacy">Privacy & Data</a></li>
+          <li><a href="#disclaimer">Disclaimers</a></li>
+          <li><a href="#liability">Limitation of Liability</a></li>
+          <li><a href="#indemnity">Indemnification</a></li>
+          <li><a href="#termination">Termination</a></li>
+          <li><a href="#law">Governing Law & Dispute Resolution</a></li>
+          <li><a href="#changes">Changes to these Terms</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ol>
+      </nav>
+
+      <article class="glass tos-card" style="width:100%">
+        <!-- sections unchanged ... -->
+        <section id="acceptance">
+          <h2>1) Acceptance of Terms</h2>
+          <p>By accessing or using the website and services of <strong>DELACRUZPH. CORPORATION</strong> (“<strong>DELACRUZPH</strong>,” “we,” “us”), you agree to be bound by these Terms of Service (“<strong>Terms</strong>” or “<strong>TOS</strong>”). If you do not agree, do not use our website or services.</p>
+          <p>Additional terms may apply to specific services, promotions, or deliverables. Where there is a conflict, those specific terms will control for the relevant service or deliverable.</p>
+        </section>
+
+        <section id="eligibility">
+          <h2>2) Eligibility & Accounts</h2>
+          <ul>
+            <li><strong>Age:</strong> You must be of legal age to form a binding contract in your jurisdiction (typically 18+).</li>
+            <li><strong>Accurate Information:</strong> You agree to provide accurate, complete, and current information when creating an account, making inquiries, or booking services.</li>
+            <li><strong>Security:</strong> You are responsible for safeguarding your credentials and for any activities under your account. Notify us immediately of any unauthorized use.</li>
+          </ul>
+        </section>
+
+        <section id="services">
+          <h2>3) Scope of Services</h2>
+          <p>DELACRUZPH offers digital, IT, and related services as described on our <a class="js-wipe" href="../../index.html#how">Services</a> section and/or in specific proposals. We reserve the right to modify, suspend, or discontinue any service at any time, with reasonable notice where required.</p>
+        </section>
+
+        <section id="billing">
+          <h2>4) Fees, Billing & Refunds</h2>
+          <ul>
+            <li><strong>Rates & Quotes:</strong> Fees are typically set forth in proposals or invoices and are subject to change unless otherwise agreed in writing.</li>
+            <li><strong>Invoices:</strong> Unless specified otherwise, invoices are due on the date indicated. Late payments may incur a surcharge or service suspension.</li>
+            <li><strong>Refunds:</strong> Refunds are handled on a case-by-case basis pursuant to the applicable project/service agreement. Completed or in-progress deliverables may be non-refundable.</li>
+            <li><strong>Taxes:</strong> Clients are responsible for applicable taxes (e.g., VAT) unless otherwise stated.</li>
+          </ul>
+        </section>
+
+        <section id="ip">
+          <h2>5) User Content & Intellectual Property</h2>
+          <ul>
+            <li><strong>DELACRUZPH IP:</strong> All trademarks, logos, code, design systems, and site content are owned by DELACRUZPH or licensed to us. Any use without prior written permission is prohibited.</li>
+            <li><strong>Client Licensing:</strong> For paid projects, clients receive the license specified in the applicable contract/proposal for final deliverables, subject to any third-party asset restrictions.</li>
+            <li><strong>User Content:</strong> By submitting materials, you represent you have the rights to do so and that your content does not infringe the rights of others.</li>
+          </ul>
+        </section>
+
+        <section id="aup">
+          <h2>6) Acceptable Use</h2>
+          <p>You agree not to use the site or services for unlawful or prohibited activities, including but not limited to:</p>
+          <ul>
+            <li>Violating any applicable laws or regulations;</li>
+            <li>Sending spam, engaging in phishing, distributing malware, or any deceptive practices;</li>
+            <li>Infringing copyright, trademarks, privacy, or other rights;</li>
+            <li>Attempting to breach or circumvent our security or access controls.</li>
+          </ul>
+        </section>
+
+        <section id="thirdparty">
+          <h2>7) Third-Party Links & Tools</h2>
+          <p>The site may include links to third-party websites or use external tools/APIs. We do not control and are not responsible for their content, policies, or practices. Review the terms and privacy policies of those third parties.</p>
+        </section>
+
+        <section id="privacy">
+          <h2>8) Privacy & Data</h2>
+          <p>We respect your data and comply with applicable privacy laws. For details on how we collect, use, and safeguard information, see our
+            <a href="./privacy.html" class="js-wipe">Privacy Policy</a>.
+          </p>
+        </section>
+
+        <section id="disclaimer">
+          <h2>9) Disclaimers</h2>
+          <p>The site and services are provided on an “as is” and “as available” basis without warranties of any kind, whether express or implied.</p>
+        </section>
+
+        <section id="liability">
+          <h2>10) Limitation of Liability</h2>
+          <p>To the maximum extent permitted by law, DELACRUZPH will not be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or for any loss of profits, revenues, or data, arising from or related to your use of the site or services.</p>
+        </section>
+
+        <section id="indemnity">
+          <h2>11) Indemnification</h2>
+          <p>You agree to indemnify, defend, and hold harmless DELACRUZPH and its officers, directors, employees, and agents from and against any claims arising out of your violation of these Terms or any law/rights of any third party.</p>
+        </section>
+
+        <section id="termination">
+          <h2>12) Termination</h2>
+          <p>We may suspend or terminate your access to the site or services immediately, with or without notice, for any breach of these Terms or applicable law.</p>
+        </section>
+
+        <section id="law">
+          <h2>13) Governing Law & Dispute Resolution</h2>
+          <p>These Terms are governed by the laws of the <strong>Republic of the Philippines</strong>. Disputes will first be addressed through good-faith negotiation for 30 days before escalation.</p>
+        </section>
+
+        <section id="changes">
+          <h2>14) Changes to these Terms</h2>
+          <p>We may update these Terms from time to time. When material changes are made, we will post a notice on the site and revise the “Last updated” date above.</p>
+        </section>
+
+        <section id="contact">
+          <h2>15) Contact Us</h2>
+          <p>Questions about these Terms? Reach us at:</p>
+          <ul class="contact-list">
+            <li><strong>Company:</strong> DELACRUZPH. CORPORATION</li>
+            <li><strong>Email:</strong> <a href="mailto:support@delacruzph.example">support@delacruzph.example</a></li>
+            <li><strong>Phone:</strong> +63 900 000 0000</li>
+            <li><strong>Address:</strong> San Miguel, Bulacan, Philippines (example)</li>
+          </ul>
+        </section>
+      </article>
+
+      <aside class="acknowledge glass">
+        <label class="ack"><input type="checkbox" id="agreeBox" /><span>I accept the Terms of Service.</span></label>
+        <a class="dcp-btn-primary js-wipe" id="proceedBtn" href="../../index.html#home" aria-disabled="true">Proceed</a>
+      </aside>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="dcp-footer">
+    <div class="dcp-footer-inner container">
+      <!-- Left column: Brand + Description + Contact Info -->
+      <div class="dcp-col brand">
+        <div class="logo">
+          <img class="brand-logo small" src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" />
+        </div>
+        <p><i class="ri-sparkling-2-line" aria-hidden="true"></i> Our team offers meticulous, reliable cleaning for your office or home. We use professional techniques to ensure every corner doesn't just look clean—it shines.</p>
+
+        <!-- Contact Info (anchor target) -->
+        <h4 id="contact"><i class="ri-information-line"></i> Contact Info</h4>
+        <ul class="contact-mini">
+          <li><i class="ri-phone-line"></i><a href="tel:+17787461231">(778) 746-1231</a></li>
+          <li><i class="ri-mail-line"></i><a href="mailto:info@delacruzph.com">info@delacruzph.com</a></li>
+          <li><i class="ri-printer-line"></i><span>(778) 746-1431</span></li>
+          <li><i class="ri-map-pin-line"></i><a href="https://www.google.com/maps/place/1383+W+8th+Ave,+Vancouver,+BC+V6H+3W4" target="_blank" rel="noopener">1383 W 8th Ave, Vancouver, BC V6H 3W4</a></li>
+        </ul>
+      </div>
+
+      <!-- Middle column: Quick Links -->
+      <div class="dcp-col links">
+        <h4><i class="ri-links-line"></i> Quick Links</h4>
+        <ul>
+          <li><a href="#home"><i class="ri-home-5-line"></i><span>Home</span></a></li>
+          <li><a href="../../index.html#about" class="js-wipe"><i class="ri-information-line"></i><span>About</span></a></li>
+          <li><a href="#contact"><i class="ri-contacts-line"></i><span>Contact</span></a></li>
+          <li><a href="./tos.html" aria-current="page"><i class="ri-file-text-line"></i><span>Terms of Service</span></a></li>
+          <li><a href="./privacy.html" class="js-wipe"><i class="ri-shield-line"></i><span>Privacy Policy</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Right column: Follow only -->
+      <div class="dcp-col">
+        <h4 style="margin-top:0"><i class="ri-share-circle-line"></i> Follow</h4>
+        <ul class="social-list" style="list-style:none; margin:8px 0 0 0; padding:0; display:grid; gap:8px;">
+          <li><a href="#"><i class="ri-facebook-circle-fill"></i> Facebook</a></li>
+          <li><a href="#"><i class="ri-instagram-fill"></i> Instagram</a></li>
+          <li><a href="#"><i class="ri-linkedin-box-fill"></i> LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="dcp-copy">© <span id="year"></span> DelaCruzPH Corporation. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // initial reveal for this page
+    const wipe = document.getElementById('wipe');
+    if (wipe) {
+      wipe.classList.add('wipe-reveal-right');
+      wipe.addEventListener('animationend', () => wipe.remove(), { once: true });
+    }
+
+    // TOS proceed button enable/disable
+    const box = document.getElementById('agreeBox');
+    const btn = document.getElementById('proceedBtn');
+    function syncBtn(){
+      const ok = box.checked;
+      btn.setAttribute('aria-disabled', ok ? 'false' : 'true');
+      btn.style.pointerEvents = ok ? 'auto' : 'none';
+      btn.style.opacity = ok ? '1' : '.6';
+    }
+    box.addEventListener('change', syncBtn);
+    syncBtn();
+  </script>
+
+  <!-- Page transition + nav handling -->
+  <script src="../js/wipe-transition.js" type="module" defer></script>
+  <script src="../js/nav.js" type="module" defer></script>
+</body>
+</html>

@@ -1,67 +1,87 @@
+// assets/js/va-hero-models.js
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-// Get the container for the 3D model
-// A Y U S I N: Gamitin ang tamang ID na 'three-js-container'
+// Target container
 const container = document.getElementById('three-js-container');
 
-if (container) {
-    // 1. Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    
-    // 2. Renderer setup
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
-    
-    // 3. Add lights (Ambient at Directional para may anino at highlights)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5); // Tumaas ang intensity
-    scene.add(ambientLight);
-    
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-    directionalLight.position.set(5, 5, 5);
-    scene.add(directionalLight);
+if (!container) {
+  console.warn('[VA 3D] Container #three-js-container not found.');
+} else {
+  // Scene
+  const scene = new THREE.Scene();
 
-    let model; // Idineklara ang model sa labas ng loader.load
+  // Camera
+  const camera = new THREE.PerspectiveCamera(
+    65,
+    1, // temp aspect; corrected after first size()
+    0.1,
+    1000
+  );
 
-    // 4. Load the 3D model (gamit ang GLTFLoader)
-    const loader = new GLTFLoader();
-    loader.load(
-        // A Y U S I N: Gumagamit ng absolute path para sa modelo
-        '/assets/models/headsets/scene.gltf', 
-        function (gltf) {
-            model = gltf.scene; // I-assign ang gltf.scene sa model variable
-            // Scale and position the model to be visible
-            model.scale.set(0.08, 0.08, 0.08); 
-            model.position.y = -0.5;
-            scene.add(model);
-        },
-        undefined,
-        function (error) {
-            console.error(error);
-        }
-    );
+  // Renderer
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  container.appendChild(renderer.domElement);
 
-    // 5. Camera position
-    camera.position.z = 2.5; // In-adjust ang camera para mas malapit sa model
+  // Lights
+  scene.add(new THREE.AmbientLight(0xffffff, 1.25));
+  const dir = new THREE.DirectionalLight(0xffffff, 1.75);
+  dir.position.set(5, 5, 6);
+  scene.add(dir);
 
-    // 6. Animation loop
-    function animate() {
-        requestAnimationFrame(animate);
-        // Ito ang linya na magpapa-ikot sa modelo.
-        if (model) {
-            model.rotation.y += 0.005; 
-        }
-        renderer.render(scene, camera);
+  // Size / resize helpers
+  const sizeRenderer = () => {
+    const w = container.clientWidth || 1;
+    const h = container.clientHeight || Math.max(320, Math.round(w * 0.5));
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  };
+
+  // First size
+  sizeRenderer();
+
+  // Keep sized with container
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(sizeRenderer);
+    ro.observe(container);
+  } else {
+    window.addEventListener('resize', sizeRenderer);
+  }
+
+  // Camera position
+  camera.position.set(0, 0.2, 2.2);
+
+  // Load model (robust relative URL from this JS file)
+  const loader = new GLTFLoader();
+  // from /assets/js/  →  ../models/headsets/scene.gltf
+  const MODEL_URL = new URL('../models/headsets/scene.gltf', import.meta.url);
+
+  let model = null;
+
+  loader.load(
+    MODEL_URL.href,
+    (gltf) => {
+      model = gltf.scene;
+      // Tweak scale/position a bit so it sits nicely in frame
+      model.scale.set(0.08, 0.08, 0.08);
+      model.position.set(0, -0.5, 0);
+      scene.add(model);
+      // One more resize in case layout settled after load
+      sizeRenderer();
+    },
+    undefined,
+    (err) => {
+      console.error('[VA 3D] GLTF load error:', err);
     }
-    animate();
+  );
 
-    // 7. Handle window resizing
-    window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-    });
+  // Animate
+  const tick = () => {
+    requestAnimationFrame(tick);
+    if (model) model.rotation.y += 0.005;
+    renderer.render(scene, camera);
+  };
+  tick();
 }
