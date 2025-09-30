@@ -77,17 +77,22 @@
     }
     .ack input{ transform:translateY(1px); }
 
+    /* ===== Footer alignment (4 columns, left-aligned) ===== */
+    .dcp-footer{ background:#0f0f0f; color:#ededed; border-top:1px solid rgba(255,255,255,.08); padding:48px 0 18px }
     .dcp-footer-inner.container{
-      display:grid; grid-template-columns:1fr; gap:16px;
+      display:grid; gap:28px; align-items:flex-start; text-align:left;
+      grid-template-columns:2fr 1.2fr 1.2fr 1.8fr;
     }
-    @media (min-width:768px){ .dcp-footer-inner.container{ grid-template-columns:1.2fr 1fr 1fr; gap:22px; } }
-
-    @media (max-width:480px){
-      .toc{ padding:20px 16px; }
-      .toc ol a{ padding:.7rem .9rem; border-radius:14px; }
-      .acknowledge{ flex-direction:column; align-items:stretch; }
-      .acknowledge .dcp-btn-primary{ width:100%; text-align:center; }
-    }
+    .dcp-col h4{ margin:0 0 10px 0; font-size:1.05rem; font-weight:600; color:#fff }
+    .dcp-col p{ color:#cfcfcf; margin:.35rem 0 1rem }
+    .dcp-col ul{ list-style:none; padding:0; margin:0; display:grid; gap:10px; place-items:flex-start }
+    .dcp-col ul li{ display:flex; align-items:center; gap:10px; color:#cfcfcf }
+    .dcp-footer a{ color:#cfcfcf !important; text-decoration:none; display:inline-flex; align-items:center; gap:8px }
+    .dcp-footer a:hover{ color:#fff !important }
+    .dcp-footer i{ color:#ffd84d !important; filter:drop-shadow(0 0 6px rgba(255,216,77,.25)); font-size:1.08rem; line-height:1 }
+    .brand-logo.small{ height:34px; width:auto }
+    .dcp-copy{ margin-top:32px; text-align:center; font-size:.85rem; color:#a4a4a4 }
+    @media (max-width:992px){ .dcp-footer-inner.container{ grid-template-columns:1fr; gap:24px } }
   </style>
 </head>
 <body>
@@ -263,45 +268,48 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (ALIGNED: 4 COLUMNS) -->
   <footer class="dcp-footer">
     <div class="dcp-footer-inner container">
-      <!-- Left column: Brand + Description + Contact Info -->
+      <!-- 1) Brand + Slogan -->
       <div class="dcp-col brand">
         <div class="logo">
           <img class="brand-logo small" src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" />
         </div>
-        <p><i class="ri-sparkling-2-line" aria-hidden="true"></i> Our team offers meticulous, reliable cleaning for your office or home. We use professional techniques to ensure every corner doesn't just look clean—it shines.</p>
-
-        <!-- Contact Info (anchor target) -->
-        <h4 id="contact"><i class="ri-information-line"></i> Contact Info</h4>
-        <ul class="contact-mini">
-          <li><i class="ri-phone-line"></i><a href="tel:+17787461231">(778) 746-1231</a></li>
-          <li><i class="ri-mail-line"></i><a href="mailto:info@delacruzph.com">info@delacruzph.com</a></li>
-          <li><i class="ri-printer-line"></i><span>(778) 746-1431</span></li>
-          <li><i class="ri-map-pin-line"></i><a href="https://www.google.com/maps/place/1383+W+8th+Ave,+Vancouver,+BC+V6H+3W4" target="_blank" rel="noopener">1383 W 8th Ave, Vancouver, BC V6H 3W4</a></li>
-        </ul>
+        <p>Where trusted service meets personal care.</p>
       </div>
 
-      <!-- Middle column: Quick Links -->
+      <!-- 2) Quick Links -->
       <div class="dcp-col links">
         <h4><i class="ri-links-line"></i> Quick Links</h4>
         <ul>
-          <li><a href="#home"><i class="ri-home-5-line"></i><span>Home</span></a></li>
-          <li><a href="../../index.html#about" class="js-wipe"><i class="ri-information-line"></i><span>About</span></a></li>
+          <li><a href="../../index.html" class="js-wipe"><i class="ri-home-5-line"></i><span>Home</span></a></li>
+          <li><a href="./janitorial.html" class="js-wipe"><i class="ri-brush-3-line"></i><span>Janitorial</span></a></li>
+          <li><a href="./va.html" class="js-wipe"><i class="ri-user-voice-line"></i><span>VA Services</span></a></li>
           <li><a href="#contact"><i class="ri-contacts-line"></i><span>Contact</span></a></li>
           <li><a href="./tos.html" aria-current="page"><i class="ri-file-text-line"></i><span>Terms of Service</span></a></li>
           <li><a href="./privacy.html" class="js-wipe"><i class="ri-shield-line"></i><span>Privacy Policy</span></a></li>
         </ul>
       </div>
 
-      <!-- Right column: Follow only -->
+      <!-- 3) Follow -->
       <div class="dcp-col">
         <h4 style="margin-top:0"><i class="ri-share-circle-line"></i> Follow</h4>
         <ul class="social-list" style="list-style:none; margin:8px 0 0 0; padding:0; display:grid; gap:8px;">
           <li><a href="#"><i class="ri-facebook-circle-fill"></i> Facebook</a></li>
           <li><a href="#"><i class="ri-instagram-fill"></i> Instagram</a></li>
           <li><a href="#"><i class="ri-linkedin-box-fill"></i> LinkedIn</a></li>
+        </ul>
+      </div>
+
+      <!-- 4) Contact Info -->
+      <div class="dcp-col contact" id="footer-contact">
+        <h4 id="contact"><i class="ri-information-line"></i> Contact Info</h4>
+        <ul class="contact-mini">
+          <li><i class="ri-phone-line"></i><a href="tel:+17787461231">(778) 746-1231</a></li>
+          <li><i class="ri-mail-line"></i><a href="mailto:info@delacruzph.com">info@delacruzph.com</a></li>
+          <li><i class="ri-printer-line"></i><span>(778) 746-1431</span></li>
+          <li><i class="ri-map-pin-line"></i><a href="https://www.google.com/maps/place/1383+W+8th+Ave,+Vancouver,+BC+V6H+3W4" target="_blank" rel="noopener">1383 W 8th Ave, Vancouver, BC V6H 3W4</a></li>
         </ul>
       </div>
     </div>

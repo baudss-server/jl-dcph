@@ -7,7 +7,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- ✅ Match VA page icon set -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
@@ -20,156 +19,93 @@
     <link rel="stylesheet" href="../css/contact.css" />
     <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="../css/testimonials.css" />
-    <!-- ✅ Same FAQ CSS as VA page -->
-    <link rel="stylesheet" href="../css/faq.css" />
     <link rel="stylesheet" href="../css/vaservices.css" />
     <link rel="stylesheet" href="../css/gallery.css" />
     <link rel="stylesheet" href="../css/video.css" />
     <link rel="stylesheet" href="../css/modal.css" />
 
-    <!-- Mobile tweaks + Drawer + BRIGHTER Single-card benefits styles -->
     <style>
       :root{
         --gold-strong:#FFD84D;
         --gold-soft:#FFE082;
-        --text-strong:#F7F8FA;
-        --text-soft:#D8DAE2;
+        --text-strong:#1a1a1a;
+        --text-soft:#4a4a4a;
         --panel-raise:rgba(255,255,255,.1);
       }
 
-      .dcp-nav { display:flex; gap:16px; align-items:center; overflow-x:auto; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; }
-      .dcp-nav::-webkit-scrollbar { display:none; }
-      .dcp-video-item, .dcp-map iframe { max-width:100%; width:100%; height:auto; aspect-ratio:16/9; border:0; }
+      .dcp-nav{display:flex;gap:16px;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+      .dcp-nav::-webkit-scrollbar{display:none}
+      .dcp-video-item,.dcp-map iframe{max-width:100%;width:100%;height:auto;aspect-ratio:16/9;border:0}
 
-      /* ===== Single Glassmorphic Benefits Card (BRIGHTER) ===== */
+      /* Benefits card */
       .benefits-card.glass{
-        width:min(1100px, 96%);
-        margin: 0 auto;
-        padding: 24px 22px;
-        border-radius: 16px;
-        background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
-        border: 1px solid rgba(255,255,255,.22);
-        box-shadow: 0 14px 36px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.08);
-        color: var(--text-strong);
+        width:min(1100px,96%);margin:0 auto;padding:24px 22px;border-radius:16px;
+        background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.06));
+        border:1px solid rgba(255,255,255,.22);
+        box-shadow:0 14px 36px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.08);
+        color:var(--text-strong)
       }
-      .benefits-card .lead{
-        font-style: italic;
-        color: var(--text-soft);
-        margin: 6px 0 10px;
-      }
-      .benefits-top{ margin-bottom: 10px; }
-
-      .benefits-list{
-        list-style:none; margin: 14px 0 6px; padding:0;
-        display:grid; gap:12px;
-        grid-template-columns: repeat(2, minmax(240px,1fr));
-      }
+      .benefits-card .lead{font-style:italic;color:var(--text-soft);margin:6px 0 10px}
+      .benefits-top{margin-bottom:10px}
+      .benefits-list{list-style:none;margin:14px 0 6px;padding:0;display:grid;gap:12px;grid-template-columns:repeat(2,minmax(240px,1fr))}
       .benefits-item{
-        display:flex; align-items:center; gap:12px;
-        padding: 14px 16px; border-radius: 12px;
-        background: rgba(255,255,255,.10);
-        border:1px solid rgba(255,255,255,.28);
-        box-shadow: 0 6px 18px rgba(0,0,0,.28);
-        color: var(--text-strong);
-        transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+        display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;
+        background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);
+        box-shadow:0 6px 18px rgba(0,0,0,.28);color:var(--text-strong);
+        transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease
       }
-      .benefits-item i{
-        font-size:1.35rem; color: var(--gold-soft);
-        filter: drop-shadow(0 1px 4px rgba(255,216,77,.35));
+      .benefits-item i{font-size:1.35rem;color:var(--gold-soft);filter:drop-shadow(0 1px 4px rgba(255,216,77,.35))}
+      .benefits-item span{color:var(--text-strong);font-weight:500}
+      .benefits-item:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.36)}
+      .benefits-note{margin:2px 2px 0;color:var(--text-soft)}
+      #benefits .section-title{display:flex;align-items:center;justify-content:center}
+      #benefits .section-title i{margin-right:10px;color:var(--gold-strong)}
+
+      @media (max-width:900px){.benefits-list{grid-template-columns:1fr}}
+      @media (max-width:768px){
+        .dcp-header-container{padding:0 12px}
+        .dcp-hero-title{font-size:clamp(28px,8vw,56px);line-height:1.1}
+        .dcp-hero-subtitle{font-size:clamp(14px,4vw,18px)}
+        #benefits .section-title{text-align:left;margin-left:2px;justify-content:flex-start}
+        #benefits .dcp-benefits-inner.container{padding-left:12px;padding-right:12px}
+        .benefits-item{padding:13px 14px}.benefits-item i{font-size:1.2rem}
       }
-      .benefits-item span{ color: var(--text-strong); font-weight:500; }
+      @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
-      .benefits-item:hover{
-        background: rgba(255,255,255,.14);
-        border-color: rgba(255,255,255,.35);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 26px rgba(0,0,0,.36);
-      }
-
-      .benefits-note{ margin: 2px 2px 0; color: var(--text-soft); }
-
-      #benefits .section-title{ display:flex; align-items:center; justify-content:center; }
-      #benefits .section-title i{ margin-right:10px; color: var(--gold-strong); }
-
-      @media (max-width: 900px){ .benefits-list{ grid-template-columns: 1fr; } }
-
-      @media (max-width: 768px) {
-        .dcp-header-container { padding: 0 12px; }
-        .dcp-hero-title { font-size: clamp(28px, 8vw, 56px); line-height: 1.1; }
-        .dcp-hero-subtitle { font-size: clamp(14px, 4vw, 18px); }
-        #benefits .section-title { text-align:left; margin-left:2px; justify-content:flex-start; }
-        #benefits .dcp-benefits-inner.container { padding-left:12px; padding-right:12px; }
-        .benefits-item{ padding: 13px 14px; }
-        .benefits-item i{ font-size:1.2rem; }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      }
-
-      /* ======= Drawer / Sidebar (mobile) ======= */
-      .menu-overlay{
-        position: fixed; inset: 0;
-        background: rgba(0,0,0,.45);
-        opacity: 0; pointer-events: none;
-        transition: opacity .25s ease;
-        z-index: 9997;
-      }
-      .dcp-nav{ z-index: 9998; }
-      @media (max-width: 991px){
+      /* Drawer / mobile nav */
+      .menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:9997}
+      .dcp-nav{z-index:9998}
+      @media (max-width:991px){
         .dcp-nav{
-          position: fixed;
-          top: 0; right: 0; bottom: 0;
-          width: min(84vw, 340px);
-          background: var(--panel-2, #0f0f15);
-          border-left: 1px solid rgba(255,255,255,.12);
-          transform: translateX(100%);
-          transition: transform .32s cubic-bezier(.22,.61,.36,1);
-          padding: 72px 16px 16px;
-          display: flex; flex-direction: column; gap: 10px;
-          overflow-y: auto;
-          -webkit-overflow-scrolling: touch;
+          position:fixed;top:0;right:0;bottom:0;width:min(84vw,340px);
+          background:var(--panel-2,#0f0f15);border-left:1px solid rgba(255,255,255,.12);
+          transform:translateX(100%);transition:transform .32s cubic-bezier(.22,.61,.36,1);
+          padding:72px 16px 16px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;-webkit-overflow-scrolling:touch
         }
-        .dcp-nav.is-active{ transform: translateX(0); }
-        .menu-overlay[aria-hidden="false"]{ opacity: 1; pointer-events: auto; }
-        body.menu-open{ overflow: hidden; }
-
-        .dcp-nav a{
-          display: flex; align-items: center; gap: 10px;
-          padding: 12px 10px;
-          border-radius: 10px;
-          border: 1px solid transparent;
-        }
-        .dcp-nav a:active, .dcp-nav a:focus, .dcp-nav a:hover{
-          border-color: rgba(255,216,77,.35);
-          background: rgba(255,255,255,.07);
-        }
-
-        .dcp-burger.is-active span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
-        .dcp-burger.is-active span:nth-child(2){ opacity: 0; }
-        .dcp-burger.is-active span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
-        .dcp-burger span{ display:block; width:22px; height:2px; background:#fff; margin:4px 0; transition:.22s ease; }
+        .dcp-nav.is-active{transform:translateX(0)}
+        .menu-overlay[aria-hidden="false"]{opacity:1;pointer-events:auto}
+        body.menu-open{overflow:hidden}
+        .dcp-nav a{display:flex;align-items:center;gap:10px;padding:12px 10px;border-radius:10px;border:1px solid transparent}
+        .dcp-nav a:active,.dcp-nav a:focus,.dcp-nav a:hover{border-color:rgba(255,216,77,.35);background:rgba(255,255,255,.07)}
+        .dcp-burger.is-active span{background:#fff}
+        .dcp-burger.is-active span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+        .dcp-burger.is-active span:nth-child(2){opacity:0}
+        .dcp-burger.is-active span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+        .dcp-burger span{display:block;width:22px;height:2px;background:#fff;margin:4px 0;transition:.22s ease}
       }
 
-      /* ===== Page-wipe overlay ===== */
-      .page-wipe{
-        position:fixed; inset:0;
-        background:#0b0b10;
-        transform: translateX(-100%);
-        z-index: 9999;
-        pointer-events: none;
-      }
-      .wipe-cover-left{ animation: wipeCoverLeft .9s cubic-bezier(.22,.61,.36,1) forwards; }
-      @keyframes wipeCoverLeft{ from{transform:translateX(-100%)} to{transform:translateX(0)} }
+      /* Page-wipe overlay */
+      .page-wipe{position:fixed;inset:0;background:#0b0b10;transform:translateX(-100%);z-index:9999;pointer-events:none}
+      .wipe-cover-left{animation:wipeCoverLeft .9s cubic-bezier(.22,.61,.36,1) forwards}
+      @keyframes wipeCoverLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
     </style>
 
     <noscript><style>.page-wipe{display:none!important}</style></noscript>
   </head>
-  <body>
+
+  <body class="page-janitorial">
     <div class="stars-wrap" aria-hidden="true">
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
+      <div id="stars"></div><div id="stars2"></div><div id="stars3"></div>
     </div>
 
     <header class="dcp-header">
@@ -186,11 +122,10 @@
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
           <a href="#testimonials">Testimonials</a>
-          <a href="#faq">FAQ</a>
           <a href="../../index.html" class="js-wipe">Main Page</a>
         </nav>
 
-        <button class="dcp-burger" aria-label="Toggle Menu" aria-controls="siteNav" aria-expanded="false">
+        <button class="dcp-burger" id="burgerBtn" aria-label="Toggle Menu" aria-controls="siteNav" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -204,59 +139,48 @@
             <img src="../images/broom.png" alt="" class="broom broom--exact" aria-hidden="true" loading="lazy" />
           </div>
           <p class="dcp-hero-subtitle" style="max-width:600px;margin:0 auto 20px;">
-            Professional cleaning for offices, buildings, and facilities.
+            We don’t just provide cleaning services; we cheerfully deliver our best!
           </p>
         </div>
       </section>
 
+      <!-- Updated How It Works -->
       <section id="how" class="dcp-how-it-works-section page-section">
         <div class="dcp-hiw-inner container">
           <h2 class="section-title text-gradient">How It Works</h2>
           <div class="dcp-steps">
             <div class="dcp-step-card glass">
-              <h3><i class="ri-edit-2-line" aria-hidden="true"></i> Tell us what you need</h3>
-              <p>Pick the service, schedule, and outcomes. Simple and transparent.</p>
+              <h3><i class="ri-phone-line" aria-hidden="true"></i> Contact Us for a Free, No-Obligation Quote</h3>
+              <p>Reach out and we’ll provide a clear, upfront estimate—no pressure, no hidden fees.</p>
             </div>
             <div class="dcp-step-card glass">
-              <h3><i class="ri-shield-check-line" aria-hidden="true"></i> We match a trained team</h3>
-              <p>Vetted cleaning professionals aligned with your specific needs.</p>
+              <h3><i class="ri-sliders-line" aria-hidden="true"></i> Customized Cleaning Plan</h3>
+              <p>We’ll tailor our services to fit your business needs, ensuring the right solution every time.</p>
             </div>
             <div class="dcp-step-card glass">
-              <h3><i class="ri-rocket-2-line" aria-hidden="true"></i> Launch & iterate</h3>
-              <p>Start fast, report clearly, and optimize with your feedback.</p>
+              <h3><i class="ri-shield-check-line" aria-hidden="true"></i> Enjoy Contract-Free Cleaning</h3>
+              <p>Experience reliable, top-quality service—your last stop in searching for a trusted cleaning provider.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ===== SINGLE-CARD BENEFITS SECTION (reordered & brighter) ===== -->
+      <!-- Benefits -->
       <section id="benefits" class="dcp-benefits-section page-section">
         <div class="dcp-benefits-inner container">
           <h2 class="section-title text-gradient"><i class="ri-lightbulb-line" aria-hidden="true"></i> Our Janitorial Services</h2>
-
           <article class="benefits-card glass">
             <p class="benefits-note">
               At <strong>DelaCruzPH</strong>, we take pride in delivering a comprehensive cleaning solution—from meticulous restroom sanitation to thorough workstation cleaning, efficient trash disposal, and detailed floor care. We are committed to maintaining a germ-free, hygienic environment for your business.
             </p>
-
             <div class="benefits-top">
               <p class="lead">“We don’t just provide cleaning services; we cheerfully deliver our best!”</p>
               <p class="lead">“We understand that your business has different cleaning needs, which vary daily.”</p>
             </div>
-
             <ul class="benefits-list">
-              <li class="benefits-item">
-                <i class="ri-check-line" aria-hidden="true"></i>
-                <span>Say goodbye to paying for fixed hours of cleaning time.</span>
-              </li>
-              <li class="benefits-item">
-                <i class="ri-check-line" aria-hidden="true"></i>
-                <span>We only charge for the actual number of work hours.</span>
-              </li>
-              <li class="benefits-item">
-                <i class="ri-check-line" aria-hidden="true"></i>
-                <span>We are the company that changes the game.</span>
-              </li>
+              <li class="benefits-item"><i class="ri-check-line" aria-hidden="true"></i><span>Say goodbye to paying for fixed hours of cleaning time.</span></li>
+              <li class="benefits-item"><i class="ri-check-line" aria-hidden="true"></i><span>We only charge for the actual number of work hours.</span></li>
+              <li class="benefits-item"><i class="ri-check-line" aria-hidden="true"></i><span>We are the company that changes the game.</span></li>
             </ul>
           </article>
         </div>
@@ -267,27 +191,10 @@
           <h2 class="section-title text-gradient">Our Videos</h2>
           <div class="dcp-video-slider">
             <div class="dcp-video-track">
-              <div class="video-container glass">
-                <video class="dcp-video-item" controls muted loop preload="metadata" playsinline>
-                  <source src="your-janitorial-video-1.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <div class="video-container glass">
-                <video class="dcp-video-item" controls muted loop preload="metadata" playsinline>
-                  <source src="your-janitorial-video-2.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <div class="video-container glass">
-                <video class="dcp-video-item" controls muted loop preload="metadata" playsinline>
-                  <source src="your-janitorial-video-3.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <div class="video-container glass">
-                <video class="dcp-video-item" controls muted loop preload="metadata" playsinline>
-                  <source src="your-janitorial-video-4.mp4" type="video/mp4" />
-                </video>
-              </div>
+              <div class="video-container glass"><video class="dcp-video-item" controls muted loop preload="metadata" playsinline><source src="your-janitorial-video-1.mp4" type="video/mp4" />Your browser does not support the video tag.</video></div>
+              <div class="video-container glass"><video class="dcp-video-item" controls muted loop preload="metadata" playsinline><source src="your-janitorial-video-2.mp4" type="video/mp4" /></video></div>
+              <div class="video-container glass"><video class="dcp-video-item" controls muted loop preload="metadata" playsinline><source src="your-janitorial-video-3.mp4" type="video/mp4" /></video></div>
+              <div class="video-container glass"><video class="dcp-video-item" controls muted loop preload="metadata" playsinline><source src="your-janitorial-video-4.mp4" type="video/mp4" /></video></div>
             </div>
             <button class="dcp-slider-btn dcp-prev-btn" aria-label="Previous Video"><i class="ri-arrow-left-s-line" aria-hidden="true"></i></button>
             <button class="dcp-slider-btn dcp-next-btn" aria-label="Next Video"><i class="ri-arrow-right-s-line" aria-hidden="true"></i></button>
@@ -314,90 +221,56 @@
         </div>
       </section>
 
-      <div id="service-modal" class="dcp-modal" aria-hidden="true">
-        <div class="dcp-modal-content glass" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-          <button class="dcp-modal-close-btn" aria-label="Close modal">×</button>
-          <h3 id="modal-title" class="text-gradient"></h3>
-          <p id="modal-description"></p>
-        </div>
-      </div>
-
-      <!-- ================= UPDATED FAQ (identical behavior/structure to VA page) ================= -->
-      <section id="faq" class="dcp-faq-section page-section">
-        <div class="dcp-faq-inner container">
-          <h2 class="section-title text-gradient">Frequently Asked Questions</h2>
-
-          <div class="dcp-faq-list">
-            <details class="dcp-faq-item">
-              <summary class="faq-summary" tabindex="0" aria-controls="faq-1">
-                <span class="faq-left"><i class="ri-question-line" aria-hidden="true"></i></span>
-                <span class="faq-title">What services do you offer?</span>
-                <span class="faq-right" aria-hidden="true">+</span>
-              </summary>
-              <div id="faq-1" class="faq-content">
-                <p>We specialize in Janitorial Services for commercial and office spaces.</p>
-              </div>
-            </details>
-
-            <details class="dcp-faq-item">
-              <summary class="faq-summary" tabindex="0" aria-controls="faq-2">
-                <span class="faq-left"><i class="ri-shield-check-line" aria-hidden="true"></i></span>
-                <span class="faq-title">How do you ensure quality for janitorial work?</span>
-                <span class="faq-right" aria-hidden="true">+</span>
-              </summary>
-              <div id="faq-2" class="faq-content">
-                <p>Our staff undergoes extensive training, and we maintain strict quality standards. We also provide weekly reports and keep clear communication channels for any concerns.</p>
-              </div>
-            </details>
-
-            <details class="dcp-faq-item">
-              <summary class="faq-summary" tabindex="0" aria-controls="faq-3">
-                <span class="faq-left"><i class="ri-rocket-line" aria-hidden="true"></i></span>
-                <span class="faq-title">How can I get started with your services?</span>
-                <span class="faq-right" aria-hidden="true">+</span>
-              </summary>
-              <div id="faq-3" class="faq-content">
-                <p>Use the contact form to tell us what you need, and we'll propose a plan that works for you.</p>
-              </div>
-            </details>
-
-            <details class="dcp-faq-item">
-              <summary class="faq-summary" tabindex="0" aria-controls="faq-4">
-                <span class="faq-left"><i class="ri-money-dollar-circle-line" aria-hidden="true"></i></span>
-                <span class="faq-title">What is your pricing model?</span>
-                <span class="faq-right" aria-hidden="true">+</span>
-              </summary>
-              <div id="faq-4" class="faq-content">
-                <p>Our pricing is customized based on your specific needs, the size of the space, the frequency of cleaning, and the services required. Please contact us for a free, no-obligation quote.</p>
-              </div>
-            </details>
-
-            <details class="dcp-faq-item">
-              <summary class="faq-summary" tabindex="0" aria-controls="faq-5">
-                <span class="faq-left"><i class="ri-leaf-line" aria-hidden="true"></i></span>
-                <span class="faq-title">Are your cleaning products safe for the environment?</span>
-                <span class="faq-right" aria-hidden="true">+</span>
-              </summary>
-              <div id="faq-5" class="faq-content">
-                <p>Yes, we are committed to using eco-friendly and non-toxic cleaning products to ensure a safe and healthy environment for your staff and clients, while also being mindful of the planet.</p>
-              </div>
-            </details>
-
-            <details class="dcp-faq-item">
-              <summary class="faq-summary" tabindex="0" aria-controls="faq-6">
-                <span class="faq-left"><i class="ri-brush-2-line" aria-hidden="true"></i></span>
-                <span class="faq-title">Can you handle special requests or deep cleaning?</span>
-                <span class="faq-right" aria-hidden="true">+</span>
-              </summary>
-              <div id="faq-6" class="faq-content">
-                <p>Absolutely. We offer deep cleaning services for carpets, floors, and high-touch areas. We can also accommodate special requests to meet your unique cleaning needs.</p>
-              </div>
-            </details>
+      <!-- ================= ABOUT ================= -->
+      <section id="about" class="dcp-about-us-section page-section">
+        <div class="dcp-about-inner container">
+          <h2 class="section-title text-gradient">About Us</h2>
+          <div class="about-big-card glass">
+            <div class="about-image">
+              <img src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation Logo" />
+            </div>
+            <div class="about-text">
+              <h3>A Leading, Family-Owned Cleaning &amp; Virtual Assistance Provider</h3>
+              <p>At <strong>DelaCruzPH</strong>, we take pride in being a prominent and fast-growing service provider. As a family-owned company, we specialize in after-hours cleaning for buildings, offices, and various businesses. We are fully insured, bonded, and covered by Workers’ Compensation Board (WCB) insurance, ensuring safety, reliability, and peace of mind in every service we deliver.</p>
+              <p>But we don’t stop there—our services now extend beyond cleaning. DelaCruzPH also offers professional Virtual Assistance services, helping businesses stay organized and productive. From administrative support to scheduling, data entry, and customer service, our virtual team ensures smooth day-to-day operations so you can focus on growing your business.</p>
+              <p>Are you looking for a spotless, professional environment and reliable back-office support? Look no further! Our expert team provides comprehensive commercial cleaning and virtual assistance solutions tailored to meet your unique needs. Using the latest techniques, eco-friendly products, and efficient digital tools, we ensure your workspace and operations are not only clean and organized but also safe and productive.</p>
+              <p>Whether you require daily, weekly, or one-time cleaning, or ongoing administrative support, our flexible services are designed to fit your schedule. Our highly trained and insured staff guarantee thorough and efficient results every time. At DelaCruzPH, we are committed to excellence—and your satisfaction is our top priority.</p>
+            </div>
           </div>
         </div>
       </section>
-      <!-- =============== END UPDATED FAQ =============== -->
 
+      <!-- ================= TESTIMONIALS ================= -->
+      <section id="testimonials" class="dcp-testimonials-section page-section">
+        <div class="dcp-testimonials-inner container">
+          <h2 class="section-title text-gradient">Client Testimonials</h2>
+          <div class="dcp-testimonial-cards dcp-carousel">
+            <blockquote class="dcp-testimonial-card glass dcp-carousel-item">
+              <p>Our building has never looked better. Their after-hours team is punctual and thorough—no disruption to our operations.</p>
+              <cite>Alex V., CEO of TechStart Solutions</cite>
+            </blockquote>
+            <blockquote class="dcp-testimonial-card glass dcp-carousel-item">
+              <p>Consistent, detailed, and friendly crew. They adapted the plan to our changing traffic and saved us costs.</p>
+              <cite>Ben M., Office Manager</cite>
+            </blockquote>
+            <blockquote class="dcp-testimonial-card glass dcp-carousel-item">
+              <p>From restrooms to carpets, the quality is top-notch. Communication is clear and issues are resolved fast.</p>
+              <cite>David R., Operations Director</cite>
+            </blockquote>
+            <blockquote class="dcp-testimonial-card glass dcp-carousel-item">
+              <p>We love the flexibility—no fixed hours billing. You pay only for actual work done. Highly recommended.</p>
+              <cite>Linda F., Restaurant Owner</cite>
+            </blockquote>
+            <blockquote class="dcp-testimonial-card glass dcp-carousel-item">
+              <p>Dependable janitorial partner. They keep our facility spotless and audit-ready every week.</p>
+              <cite>Richard K., Facilities Lead</cite>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ removed -->
+      
       <section id="contact" class="dcp-contacts-section page-section">
         <div class="dcp-contacts-container container">
           <div class="dcp-contact-card glass">
@@ -405,9 +278,7 @@
             <form class="dcp-form" onsubmit="return false;">
               <label>Name <input type="text" placeholder="Your name" required /></label>
               <label>Email <input type="email" placeholder="you@example.com" required /></label>
-              <label>Message
-                <textarea rows="5" placeholder="How can we help?" required></textarea>
-              </label>
+              <label>Message <textarea rows="5" placeholder="How can we help?" required></textarea></label>
               <button type="submit" class="dcp-btn-primary"><i class="ri-send-plane-2-fill" aria-hidden="true"></i> Send Message</button>
             </form>
           </div>
@@ -422,11 +293,7 @@
               </li>
             </ul>
             <div class="dcp-map">
-              <iframe
-                title="Map - 1383 W 8th Ave, Vancouver, BC V6H 3W4"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.839806509904!2d-123.13886548434863!3d49.2662095811776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673a5a8f27329%3A0xc3f6d7730e26b1c4!2s1383%20W%208th%20Ave,%20Vancouver,%20BC%20V6H%203W4,%20Canada!5e0!3m2!1sen!2sph!4v1614050609337!5m2!1sen!2sph"
-                loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-              </iframe>
+              <iframe title="Map - 1383 W 8th Ave, Vancouver, BC V6H 3W4" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.839806509904!2d-123.13886548434863!3d49.2662095811776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673a5a8f27329%3A0xc3f6d7730e26b1c4!2s1383%20W%208th%20Ave,%20Vancouver,%20BC%20V6H%203W4,%20Canada!5e0!3m2!1sen!2sph!4v1614050609337!5m2!1sen!2sph" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
         </div>
@@ -439,7 +306,7 @@
           <div class="logo">
             <img class="brand-logo small" src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" loading="lazy" />
           </div>
-          <p>Our team offers meticulous, reliable cleaning for your office or home. We use professional techniques to ensure every corner doesn't just look clean—it shines.</p>
+          <p>Where trusted service meets personal care.</p>
         </div>
         <div class="dcp-col links">
           <h4>Quick Links</h4>
@@ -481,12 +348,7 @@
     <script src="../js/testimonial.js" defer></script>
     <script src="../js/video.js" defer></script>
     <script src="../js/modal.js" defer></script>
-
-    <!-- Use janitorial-specific gallery (images at ../images/iStock-*.png) -->
     <script src="../js/janitorial-gallery.js" defer></script>
-
-    <!-- ✅ Same FAQ JS as VA page -->
-    <script src="../js/faq.js" defer></script>
     <script src="../js/nav.js" defer></script>
     <script src="../js/wipe-transition.js" type="module" defer></script>
 

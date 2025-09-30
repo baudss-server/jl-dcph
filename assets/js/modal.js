@@ -1,118 +1,221 @@
+// ../js/modal.js
+// Modal for Services (VA & Janitorial). Robust + accessible.
+
 document.addEventListener('DOMContentLoaded', () => {
-    const serviceItems = document.querySelectorAll('.dcp-services-list li');
-    const modal = document.getElementById('service-modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const closeBtn = document.querySelector('.dcp-modal-close-btn');
+  // ----- Ensure modal exists (auto-create if missing) -----
+  let modal = document.getElementById('service-modal');
+  if (!modal) {
+    const tpl = document.createElement('div');
+    tpl.id = 'service-modal';
+    tpl.className = 'dcp-modal';
+    tpl.setAttribute('role', 'dialog');
+    tpl.setAttribute('aria-modal', 'true');
+    tpl.setAttribute('aria-labelledby', 'modal-title');
+    tpl.hidden = true;
+    tpl.innerHTML = `
+      <div class="dcp-modal-content glass">
+        <button class="dcp-modal-close-btn" aria-label="Close modal">×</button>
+        <h3 id="modal-title" class="text-gradient"></h3>
+        <img id="modal-image" class="modal-image" alt="" />
+        <p id="modal-description"></p>
+      </div>`;
+    document.body.appendChild(tpl);
+    modal = tpl;
+  }
+  modal.hidden = true; // start hidden
 
-    // Descriptions para sa VA Services page
-    const vaServiceDescriptions = {
-        'email-calendar-management': {
-            title: 'Email & Calendar Management',
-            description: `Stay on top of your day with our organized approach to email and scheduling. We manage your inbox, filter important messages, and keep your calendar updated so you never miss a meeting, deadline, or opportunity.`
-        },
-        'customer-support': {
-            title: 'Customer Support',
-            description: `Build stronger relationships with your clients through friendly and professional communication. Whether it’s via phone, email, or chat, we provide prompt support that represents your business with care and reliability.`
-        },
-        'data-entry': {
-            title: 'Data Entry & Record Keeping',
-            description: `Accuracy matters. We handle data entry and record management with precision, ensuring your business information is always up to date, well-organized, and easy to access when you need it.`
-        },
-        'scheduling': {
-            title: 'Scheduling & Appointment Setting',
-            description: `Save time and reduce stress with seamless appointment coordination. We take care of scheduling meetings, managing cancellations, and sending reminders, so your day runs smoothly.`
-        },
-        'document-preparation': {
-            title: 'Document Preparation',
-            description: `From drafting and formatting to proofreading, we deliver professional documents tailored to your business needs. Whether it’s reports, presentations, or contracts, we make sure your files look polished and error-free.`
-        },
-        'social-media-assistance': {
-            title: 'Social Media Assistance',
-            description: `Keep your brand active and engaging online. We provide light management of posts, scheduling, and community engagement, helping you maintain a consistent presence across your social media platforms.`
-        },
-        'customized-admin-tasks': {
-            title: 'Customized Admin Tasks',
-            description: `We understand that every business is unique. Our team is flexible and can be trained to handle a wide range of administrative tasks, from complex research to project coordination, giving you the tailored support you need.`
-        }
-    };
+  // Elements
+  const modalTitle = modal.querySelector('#modal-title');
+  const modalDesc  = modal.querySelector('#modal-description');
+  const modalImg   = modal.querySelector('#modal-image');
+  const closeBtn   = modal.querySelector('.dcp-modal-close-btn');
 
-    // Descriptions para sa Janitorial Services page
-    const janitorialServiceDescriptions = {
-        'restroom-cleaning': {
-            title: 'Restroom Maintenance Services',
-            description: `Your restroom's cleanliness speaks volumes about your entire facility. Our skilled cleaning team ensures your restrooms are spotless and well-maintained, providing a fresh and hygienic experience for your customers and clients.`
-        },
-        'workstation-cleaning': {
-            title: 'Workstation Cleaning Services',
-            description: `A clean workspace boosts productivity and focus. Say goodbye to dusty monitors and crumb-filled keyboards—our team ensures a consistently spotless workstation, so you can concentrate on what truly matters: your work.`
-        },
-        'staff-room-cleaning': {
-            title: 'Staff Room Cleaning Services',
-            description: `A staff room should be a clean and comfortable retreat for employees. We eliminate unsanitized tables, dirty windowsills, and dust buildup, ensuring a fresh and inviting space. With your preferred cleaning solutions, we create an environment your team will appreciate.`
-        },
-        'kitchen-cleaning': {
-            title: 'Kitchen Area Cleaning Services',
-            description: `A clean kitchen is essential for health and safety. Bacteria can linger on food, utensils, and countertops—wiping alone isn’t enough. Our thorough cleaning process, using high-quality disinfectants, ensures all surfaces are sanitized, eliminating harmful germs and keeping your kitchen safe.`
-        },
-        'dusting-disinfection': {
-            title: 'Dusting & Disinfection Services',
-            description: `Say goodbye to dust bunnies, cobwebs, and fine particles. With our specialized tools and top-quality disinfectants, we thoroughly clean and sanitize your space, leaving it fresh, spotless, and safe for you to enjoy.`
-        },
-        'floor-care': {
-            title: 'Floor Cleaning Services – Vacuuming, Sweeping & Mopping',
-            description: `Floors play a crucial role in both the appearance and air quality of your space. Our expertly trained team uses top-tier equipment to ensure spotless, dust-free floors, creating a healthier and more professional environment. Step into cleanliness every day—stress-free.`
-        },
-        'carpet-cleaning': {
-            title: 'Carpet Cleaning',
-            description: `Carpets in commercial spaces do more than just enhance the appearance of a workplace—they play a vital role in maintaining a healthy, professional, and welcoming environment. Let our expert team handle it for you!`
-        },
-        'trash-disposal': {
-            title: 'Trash Disposal Services',
-            description: `Maintaining a clean and clutter-free environment is essential for any business. Our trash disposal service ensures efficient and regular waste removal, keeping your space organized, hygienic, and ready for a productive day.`
-        },
-        'interior-exterior-cleaning': {
-            title: 'Interior & Exterior Cleaning',
-            description: `From the front door to the back office, we provide comprehensive cleaning services to keep your entire facility spotless. Our professional team is equipped to handle both interior spaces, ensuring a hygienic and organized workspace, and exterior areas, maintaining curb appeal and a professional appearance for all visitors.`
-        }
-    };
+  // Determine page type
+  const isJanitorial = document.title.toLowerCase().includes('janitorial');
 
-    let serviceDescriptions;
-
-    // Titingnan kung alin sa dalawang page ang kasalukuyang nakabukas
-    // Base sa title ng page.
-    if (document.title.includes('Janitorial')) {
-        serviceDescriptions = janitorialServiceDescriptions;
-    } else {
-        serviceDescriptions = vaServiceDescriptions;
+  // ----- DATA MAPS -----
+  const VA = {
+    'email-calendar-management': {
+      title: 'Email & Calendar Management',
+      description: 'We manage your inbox priorities and keep your calendar organized so you never miss a beat.',
+      image: null
+    },
+    'customer-support': {
+      title: 'Customer Support',
+      description: 'Friendly, on-brand help through chat/email/phone to keep customers happy and loyal.',
+      image: null
+    },
+    'data-entry': {
+      title: 'Data Entry & Record Keeping',
+      description: 'Accurate, consistent records so your info is always current and searchable.',
+      image: null
+    },
+    'scheduling': {
+      title: 'Scheduling & Appointment Setting',
+      description: 'We handle bookings, reschedules, and reminders—smooth calendars, zero hassle.',
+      image: null
+    },
+    'document-preparation': {
+      title: 'Document Preparation',
+      description: 'Polished reports, decks, SOPs, and forms—drafting, formatting, and proofreading.',
+      image: null
+    },
+    'social-media-assistance': {
+      title: 'Social Media Assistance',
+      description: 'Light scheduling and engagement to keep your brand active and consistent.',
+      image: null
+    },
+    'customized-admin-tasks': {
+      title: 'Customized Admin Tasks',
+      description: 'Research, coordination, and bespoke workflows tailored to your tools and SOPs.',
+      image: null
     }
+  };
 
-    // Modal logic - gumagana na para sa alinmang page
-    serviceItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const serviceId = item.getAttribute('data-service-id');
-            const service = serviceDescriptions[serviceId];
-            if (service) {
-                modalTitle.textContent = service.title;
-                modalDescription.textContent = service.description;
-                modal.style.display = 'block';
-            }
-        });
+  const base = '../images/';
+  const JAN = {
+    'restroom-cleaning': {
+      title:'Restroom Maintenance Services',
+      description:'Spotless, hygienic restrooms maintained on schedule.',
+      image: base + 'restroomcleaning.png'
+    },
+    'workstation-cleaning': {
+      title:'Workstation Cleaning Services',
+      description:'Dust-free desks, sanitized peripherals, tidy stations.',
+      image: base + 'workstationcleaning.png'
+    },
+    'staff-room-cleaning': {
+      title:'Staff Room Cleaning Services',
+      description:'Clean, comfortable break areas your team will appreciate.',
+      image: base + 'windowcleaning.png'
+    },
+    'kitchen-cleaning': {
+      title:'Kitchen Area Cleaning Services',
+      description:'Degreased surfaces, clean sinks, safe food-prep zones.',
+      image: base + 'kitchenarea.png'
+    },
+    'trash-disposal': {
+      title:'Trash Disposal Services',
+      description:'Regular, efficient waste removal for a clutter-free space.',
+      image: base + 'trashdisposal.png'
+    },
+    'dusting-disinfection': {
+      title:'Dusting & Disinfection Services',
+      description:'From particles to touchpoints—fresh, safer environments.',
+      image: base + 'dustingdisinfection.png'
+    },
+    'floor-care': {
+      title:'Floor Cleaning – Vacuuming, Sweeping & Mopping',
+      description:'Clean floors = better air and a more professional feel.',
+      image: base + 'wetfloorcaution.png'
+    },
+    'carpet-cleaning': {
+      title:'Carpet Cleaning',
+      description:'Vacuum + deep extraction for stains and odors.',
+      image: base + 'carpetcleaning.png'
+    },
+    'interior-exterior-cleaning': {
+      title:'Interior & Exterior Cleaning',
+      description:'Comprehensive care: lobbies, entries, façades, more.',
+      image: base + 'interior-exteriorcleaning.png'
+    }
+  };
+
+  const MAP = isJanitorial ? JAN : VA;
+
+  // ----- State & a11y helpers -----
+  let isOpen = false;
+  let prevFocus = null;
+
+  function trapFocus(e){
+    if(e.key !== 'Tab') return;
+    const nodes = modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if(!nodes.length) return;
+    const first = nodes[0], last = nodes[nodes.length - 1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+
+  function openServiceModal(){
+    if (isOpen) return;
+    isOpen = true;
+    prevFocus = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', trapFocus);
+    (closeBtn || modal).focus();
+  }
+
+  function closeServiceModal(){
+    if (!isOpen) return;
+    isOpen = false;
+    document.removeEventListener('keydown', trapFocus);
+    document.body.style.overflow = '';
+    modal.hidden = true;
+    if(prevFocus && prevFocus.focus) prevFocus.focus();
+  }
+
+  function openWithData(data){
+    const title = data?.title || '';
+    const desc  = data?.description || '';
+    const img   = data?.image || '';
+
+    modalTitle.textContent = title;
+    modalDesc.textContent  = desc;
+
+    if (img) {
+      modalImg.removeAttribute('src');
+      modalImg.alt = title || 'Service image';
+      const loader = new Image();
+      loader.onload = () => { modalImg.src = loader.src; openServiceModal(); };
+      loader.onerror = () => openServiceModal();
+      loader.src = img;
+    } else {
+      modalImg.removeAttribute('src');
+      modalImg.alt = '';
+      openServiceModal();
+    }
+  }
+
+  // ----- Attach triggers (supports clicks on inner elements) -----
+  // Use event delegation on the UL to be extra safe
+  document.querySelectorAll('.dcp-services-list, .va-services-list').forEach(list => {
+    list.addEventListener('click', (e) => {
+      const li = e.target.closest('[data-service-id]');
+      if (!li) return;
+      const id = li.getAttribute('data-service-id');
+      const data = MAP[id];
+      if (data) openWithData(data);
     });
 
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
+    // Keyboard support for list items
+    list.querySelectorAll('[data-service-id]').forEach(li => {
+      if (li.tabIndex < 0) li.tabIndex = 0;
+      li.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const id = li.getAttribute('data-service-id');
+          const data = MAP[id];
+          if (data) openWithData(data);
         }
+      });
     });
+  });
 
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && modal.style.display === 'block') {
-            modal.style.display = 'none';
-        }
-    });
+  // ----- Close handlers -----
+  if (closeBtn) closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeServiceModal();
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeServiceModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) closeServiceModal();
+  });
+
+  // Public API (optional)
+  window.DCPModal = { open: openWithData, close: closeServiceModal };
 });

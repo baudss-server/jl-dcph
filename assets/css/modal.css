@@ -1,70 +1,106 @@
-/* ===== MODAL STYLING ===== */
+/* ===== MODAL STYLING (accessibility-safe) ===== */
 .dcp-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 100; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding-top: 50px;
+  position: fixed;
+  inset: 0;
+  z-index: 10000; /* ⬆️ nasa ibabaw */
+  overflow: auto;
+  /* ✅ Default padding for ALL pages (VA atbp) */
+  padding: 300px 16px;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.dcp-modal-content {
-    background: rgba(255, 255, 255, 0.05);
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    width: 80%;
-    max-width: 600px;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    position: relative;
-    animation: fadeIn 0.3s ease-out;
-    transform: translateY(0);
+/* Hide when [hidden] is present (handled by JS) */
+.dcp-modal[hidden] { display: none !important; }
+
+/* Optional: when something is inert, fully disable interactions */
+[inert] { pointer-events: none; user-select: none; }
+[inert] * { pointer-events: none; }
+
+.dcp-modal-content{
+  width: min(680px, 92vw);
+  margin: 4rem auto;
+  padding: 20px;
+  position: relative;
+  border-radius: 15px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,.3);
+  animation: fadeIn .3s ease-out;
 }
 
-.dcp-modal-content h3 {
-    margin-top: 0;
-    font-size: 2rem;
-    font-weight: 600;
+.dcp-modal-content h3{
+  margin: 0 32px 12px 0; /* space for the X button */
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 600;
 }
 
-.dcp-modal-content p {
-    color: #c0c0c0;
-    font-size: 1rem;
-    line-height: 1.6;
+/* Title → Image → Description */
+.modal-image{
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 8px 0 12px;
 }
 
-.dcp-modal-close-btn {
-    color: #fff;
-    font-size: 2rem;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    cursor: pointer;
-    transition: color 0.3s ease;
+/* cleanly hide image element when no src */
+.modal-image:not([src]), .modal-image[src=""] { display: none; }
+
+.dcp-modal-content p{
+  color: #cfd2d9;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
+/* Close button */
+.dcp-modal-close-btn{
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color .2s ease;
+}
 .dcp-modal-close-btn:hover,
-.dcp-modal-close-btn:focus {
-    color: #ffd84d;
-    text-decoration: none;
-    cursor: pointer;
+.dcp-modal-close-btn:focus{ color: #ffd84d; outline: none; }
+
+@media (max-width: 520px){
+  .dcp-modal{ padding: 28px 12px; }
+  .dcp-modal-content{ margin: 2.5rem auto; padding: 18px; }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .dcp-modal-content{ animation: none; }
+}
+
+/* Keyframes */
+@keyframes fadeIn{
+  from{ opacity: 0; transform: translateY(-10px); }
+  to  { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================
+   ✅ JANITORIAL-ONLY OVERRIDES
+   - Gumagana lang kapag <body class="page-janitorial">
+   - Pwede mong i-tune ang taas/baba via --janitorial-modal-pad
+========================= */
+.page-janitorial #service-modal{
+  --janitorial-modal-pad: 100px; /* taas-baba mo dito */
+  padding: var(--janitorial-modal-pad) 16px;
+}
+@media (max-width: 520px){
+  .page-janitorial #service-modal{
+    --janitorial-modal-pad: 120px;
+  }
 }

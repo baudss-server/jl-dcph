@@ -5,7 +5,11 @@
   justify-content: center;
   min-height: 100vh;
   width: 100vw;
-  background: radial-gradient(1200px 500px at 50% 0%, rgba(255, 216, 77, .06), transparent 60%), transparent;
+  /* gold aura + subtle white blend to reduce dark feel */
+  background:
+    radial-gradient(1200px 500px at 50% 0%, rgba(255, 255, 255, .08), transparent 60%),
+    radial-gradient(1200px 500px at 50% 0%, rgba(255, 216, 77, .06), transparent 60%),
+    transparent;
   position: relative;
 }
 .dcp-hero-inner {
@@ -17,6 +21,14 @@
   max-width: 900px;
   margin: 0 auto 28px;
   font-size: 80px;
+}
+
+/* --- Unified CAPTION sizing (applies to Janitorial + VA) --- */
+.dcp-hero-subtitle{
+  font-size: clamp(16px, 1.6vw, 22px);
+  line-height: 1.45;
+  max-width: 720px;
+  margin: 0 auto 20px;
 }
 
 /* === 3D container (unchanged) === */
@@ -66,7 +78,7 @@
   background-repeat: no-repeat;
 
   /* slight blur + scale to hide blur edges */
-  filter: blur(2.2px) brightness(0.98);
+  filter: blur(2.2px) brightness(1);
   transform: scale(1.04);
   z-index: 0;
   transition: inherit;
@@ -227,11 +239,12 @@
     line-height: 1.25;
   }
 
-  .dcp-hero-inner p,
-  .dcp-benefits-inner p,
-  .dcp-about-inner p {
+  /* Keep captions readable but compact on phones */
+  .dcp-hero-subtitle{
     font-size: clamp(13px, 3.7vw, 16px);
     line-height: 1.55;
+    max-width: 720px;
+    margin: 0 auto 18px;
   }
 
   .broom { width: clamp(48px, 14vw, 96px); bottom: -2px; }
@@ -278,4 +291,82 @@
 @media (prefers-reduced-motion: reduce) {
   .broom--exact{ animation: none !important; }
   .dcp-hero-title.text-gradient.dcp-hero-shine{ animation: none !important; }
+}
+
+/* === Main page caption (hero tagline) — unified with janitorial === */
+.hero-tagline{
+  font-size: clamp(16px, 1.6vw, 22px);
+  line-height: 1.45;
+  max-width: 720px;
+  margin: 10px auto 0;
+  letter-spacing: 0.015em;
+}
+@media (max-width: 560px){
+  .hero-tagline{
+    font-size: clamp(13px, 3.7vw, 16px);
+    line-height: 1.55;
+  }
+}
+
+/* =========================================================
+   FINAL OVERRIDES — make all captions look identical across pages
+   (beats generic p rules or older hero styles)
+   ========================================================= */
+
+/* Desktop/tablet unified caption */
+#janitorial-hero .dcp-hero-subtitle,
+#va-hero .dcp-hero-subtitle,
+body.page-home .hero-tagline,
+#home-hero .hero-tagline,
+#main-hero .hero-tagline{
+  font-family: inherit;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  font-size: clamp(16px, 1.6vw, 22px);
+  line-height: 1.45;
+  color: var(--text);
+  max-width: 720px;
+  margin: 0 auto 20px;
+  text-shadow: none;
+}
+
+/* Phones ≤560px unified caption */
+@media (max-width:560px){
+  #janitorial-hero .dcp-hero-subtitle,
+  #va-hero .dcp-hero-subtitle,
+  body.page-home .hero-tagline,
+  #home-hero .hero-tagline,
+  #main-hero .hero-tagline{
+    font-size: clamp(13.5px, 3.9vw, 16px);
+    line-height: 1.55;
+    margin: 0 auto 18px;
+  }
+}
+
+/* Hard reset for captions that might inherit other p styles */
+.dcp-hero-inner p.dcp-hero-subtitle{ all: unset; }
+.dcp-hero-inner p.dcp-hero-subtitle{
+  display:block; font-family: inherit; font-weight:400; letter-spacing:.005em;
+  font-size: clamp(16px, 1.6vw, 22px); line-height:1.45; color:var(--text);
+  max-width:720px; margin:0 auto 20px; text-shadow:none;
+}
+@media (max-width:560px){
+  .dcp-hero-inner p.dcp-hero-subtitle{
+    font-size: clamp(13.5px, 3.9vw, 16px);
+    line-height: 1.55; margin:0 auto 18px;
+  }
+}
+
+/* Main hero tagline reset (older rules safety) */
+.hero-tagline{ all: unset; }
+.hero-tagline{
+  display:block; font-family: inherit; font-weight:400; letter-spacing:.005em;
+  font-size: clamp(16px, 1.6vw, 22px); line-height:1.45; color:var(--text);
+  max-width:720px; margin:10px auto 0; text-shadow:none;
+}
+@media (max-width:560px){
+  .hero-tagline{
+    font-size: clamp(13.5px, 3.9vw, 16px);
+    line-height: 1.55;
+  }
 }

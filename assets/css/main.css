@@ -39,22 +39,12 @@ body{
 
 /* ===== Sections: KEEP 100vw/100vh but stable ===== */
 .page-section{
-  inline-size: var(--svw, 100vw);      /* keep vw semantics */
-  min-block-size: var(--svh, 100vh);   /* keep vh semantics */
+  inline-size: var(--svw, 100vw);
+  min-block-size: var(--svh, 100vh);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
 
   /* guard laban sa inner elements na may box-shadow/translate */
   overflow-x: clip;
-}
-
-/* common wrappers — percent para safe sa loob ng 100vw */
-#va-about .about-container,
-#va-intro .pro-provider-container,
-#va-services-list .services-grid,
-#va-contact .contact-form,
-.footer .footer-columns{
-  width:min(1200px, 92%);
-  margin-inline:auto;
 }
 
 .section-title{
@@ -73,7 +63,7 @@ body{
 }
 .section-title.text-gradient{ position:relative; display:inline-block; padding-bottom:6px; }
 
-/* ===== Glass look ===== */
+/* ===== Glass look (base) ===== */
 .glass{
   background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03));
   border:1px solid var(--border);
@@ -149,14 +139,10 @@ body.menu-open{ overflow-y:hidden; } /* Y lang para iwas webview bug */
 
 /* ===== Utility for any edge-bleed elements ===== */
 .no-bleed{ max-width:100%; overflow-x:hidden }
-/* === Embed & media safety (iwas horizontal scroll) === */
 .dcp-map iframe { width:100%; max-width:100%; display:block; border:0; }
-
-/* Safe default for any iframe/video that might overflow */
 iframe, video { max-width:100%; }
 
 /* ---------- Page Wipe (right) ---------- */
-/* (deprecated first variant kept for compatibility) */
 .page-wipe{
   position: fixed;
   inset: 0;
@@ -174,7 +160,7 @@ iframe, video { max-width:100%; }
   z-index: 2147483646;          /* overlay top */
   transform: translateX(-100%); /* default: nakatago sa kaliwa */
   will-change: transform;
-  contain: layout paint;        /* NEW: prevent layout side-effects */
+  contain: layout paint;        /* prevent layout side-effects */
   pointer-events: none;
 }
 
@@ -206,3 +192,223 @@ iframe, video { max-width:100%; }
 
 /* ---------- Anchor offset for actual section ids ---------- */
 #home, #about, #contact, #testimonials, #faq { scroll-margin-top: var(--va-nav-offset); }
+
+/* =========================================================
+   PAGE-SCOPED ALTERNATING SECTION BACKGROUNDS
+   (No globals; we scope using :has() to the page hero.)
+   ========================================================= */
+
+/* Default dark sections (any page) */
+#home, #testimonials { background: transparent; }
+
+/* ===== VA PAGE ONLY ===== */
+body:has(#va-hero) #about,
+body:has(#va-hero) #how,
+body:has(#va-hero) #benefits,
+body:has(#va-hero) #contact{
+  background:
+    radial-gradient(80% 55% at 50% -10%, rgba(255,255,255,.88), rgba(255,255,255,0) 70%),
+    radial-gradient(120% 80% at 50% 120%, rgba(0,0,0,.06), rgba(0,0,0,0) 60%),
+    #f6f7f9;
+}
+
+/* Titles on white (VA) */
+body:has(#va-hero) #about .section-title.text-gradient,
+body:has(#va-hero) #how .section-title.text-gradient,
+body:has(#va-hero) #benefits .section-title.text-gradient,
+body:has(#va-hero) #contact .section-title.text-gradient{
+  background: linear-gradient(90deg,#1a1a1a 0%, #7a6400 40%, var(--gold-strong) 70%, #1a1a1a 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow: none;
+}
+
+/* Readable copy on white (VA) */
+body:has(#va-hero) #about .about-text h3,
+body:has(#va-hero) #about .about-text p,
+body:has(#va-hero) #how .dcp-step-card h3,
+body:has(#va-hero) #how .dcp-step-card p,
+body:has(#va-hero) #benefits p,
+body:has(#va-hero) #contact .dcp-contact-card label,
+body:has(#va-hero) #contact .dcp-contact-list li{ color:#1a1a1a; }
+
+body:has(#va-hero) #contact .dcp-contact-list a,
+body:has(#va-hero) #about a{ color:#0e0e0e; }
+body:has(#va-hero) #contact .dcp-contact-list a:hover,
+body:has(#va-hero) #about a:hover{ color:var(--gold-strong); }
+
+/* Inputs and glass on white (VA) */
+body:has(#va-hero) #contact .dcp-form input,
+body:has(#va-hero) #contact .dcp-form textarea{
+  background:#fbfbfd; color:#121212; border:1px solid rgba(0,0,0,.14);
+}
+body:has(#va-hero) #contact .dcp-form input::placeholder,
+body:has(#va-hero) #contact .dcp-form textarea::placeholder{ color:#8b8f98; }
+body:has(#va-hero) #contact .dcp-form input:focus,
+body:has(#va-hero) #contact .dcp-form textarea:focus{
+  outline:none; border-color:#e9c959; box-shadow:0 0 0 3px rgba(255,216,77,.22);
+}
+body:has(#va-hero) #about .glass,
+body:has(#va-hero) #how .glass,
+body:has(#va-hero) #benefits .glass,
+body:has(#va-hero) #contact .glass{
+  background: linear-gradient(180deg, rgba(0,0,0,.035), rgba(0,0,0,.02));
+  border-color: rgba(0,0,0,.10); box-shadow: 0 8px 18px rgba(0,0,0,.12);
+}
+body:has(#va-hero) #about .glass:hover,
+body:has(#va-hero) #how .glass:hover,
+body:has(#va-hero) #benefits .glass:hover,
+body:has(#va-hero) #contact .glass:hover{ box-shadow: 0 10px 22px rgba(0,0,0,.16); }
+
+/* Subtle separators (VA) */
+body:has(#va-hero) #about::after,
+body:has(#va-hero) #how::after,
+body:has(#va-hero) #benefits::after,
+body:has(#va-hero) #contact::after{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-1px; width:min(1100px,94vw); height:1px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.08), transparent);
+  pointer-events:none;
+}
+
+/* ===== JANITORIAL PAGE ONLY ===== */
+/* Benefits stays DARK (transparent), Videos + How become WHITE blend */
+body:has(#janitorial-hero) #benefits{ background: transparent; }
+
+body:has(#janitorial-hero) #company-video,
+body:has(#janitorial-hero) #how{
+  background:
+    radial-gradient(80% 55% at 50% -10%, rgba(255,255,255,.88), rgba(255,255,255,0) 70%),
+    radial-gradient(120% 80% at 50% 120%, rgba(0,0,0,.06), rgba(0,0,0,0) 60%),
+    #f6f7f9;
+}
+
+/* Title + readable copy when on white (Janitorial) */
+body:has(#janitorial-hero) #company-video .section-title.text-gradient,
+body:has(#janitorial-hero) #how .section-title.text-gradient{
+  background: linear-gradient(90deg,#1a1a1a 0%, #7a6400 40%, var(--gold-strong) 70%, #1a1a1a 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:none;
+}
+body:has(#janitorial-hero) #company-video .dcp-video-inner,
+body:has(#janitorial-hero) #company-video p,
+body:has(#janitorial-hero) #company-video h3,
+body:has(#janitorial-hero) #how .dcp-step-card h3,
+body:has(#janitorial-hero) #how .dcp-step-card p{
+  color:#1a1a1a;
+}
+
+/* Lighter glass inside white sections (Janitorial) */
+body:has(#janitorial-hero) #company-video .glass,
+body:has(#janitorial-hero) #how .glass{
+  background: linear-gradient(180deg, rgba(0,0,0,.035), rgba(0,0,0,.02));
+  border-color: rgba(0,0,0,.10);
+  box-shadow: 0 8px 18px rgba(0,0,0,.12);
+}
+body:has(#janitorial-hero) #company-video .glass:hover,
+body:has(#janitorial-hero) #how .glass:hover{
+  box-shadow: 0 10px 22px rgba(0,0,0,.16);
+}
+
+/* Optional separators (Janitorial white sections) */
+body:has(#janitorial-hero) #company-video::after,
+body:has(#janitorial-hero) #how::after{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-1px; width:min(1100px,94vw); height:1px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.08), transparent);
+  pointer-events:none;
+}
+
+/* =========================================================
+   🔶 GOLD HIGHLIGHT FOR GLASSMORPHIC CARDS (EXCEPT HERO)
+   - Global rule applies to all pages
+   - Hero section explicitly excluded
+   - VA & Janitorial white sections also get gold ring (scoped)
+   ========================================================= */
+
+/* 1) GLOBAL: add gold accent sa lahat ng .glass cards HINDI sa hero */
+.page-section:not(.dcp-hero-section) .glass{
+  /* keep existing look then add gold ring + gentle glow */
+  border-color: color-mix(in oklab, var(--gold-strong) 55%, #000 45%);
+  box-shadow:
+    var(--shadow),
+    0 0 0 1px rgba(255,216,77,.45) inset,   /* inner gold ring */
+    0 0 24px rgba(255,216,77,.12);          /* soft gold glow */
+}
+.page-section:not(.dcp-hero-section) .glass:hover{
+  box-shadow:
+    var(--shadow),
+    0 0 0 1px rgba(255,216,77,.6) inset,
+    0 0 28px rgba(255,216,77,.18);
+}
+.page-section:not(.dcp-hero-section) .glass:focus-within{
+  outline:none;
+  box-shadow:
+    var(--shadow),
+    0 0 0 2px rgba(255,216,77,.65) inset,
+    0 0 0 3px rgba(255,216,77,.22),
+    0 0 30px rgba(255,216,77,.22);
+}
+
+/* 2) VA PAGE (white sections): retain light backgrounds + add gold accent */
+body:has(#va-hero) #about .glass,
+body:has(#va-hero) #how .glass,
+body:has(#va-hero) #benefits .glass,
+body:has(#va-hero) #contact .glass{
+  border-color: color-mix(in oklab, #000 70%, var(--gold-strong) 30%);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.12),             /* existing light elevation */
+    0 0 0 1px rgba(255,216,77,.40) inset,   /* inner gold ring */
+    0 0 22px rgba(255,216,77,.10);          /* soft glow */
+}
+body:has(#va-hero) #about .glass:hover,
+body:has(#va-hero) #how .glass:hover,
+body:has(#va-hero) #benefits .glass:hover,
+body:has(#va-hero) #contact .glass:hover{
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.16),
+    0 0 0 1px rgba(255,216,77,.55) inset,
+    0 0 26px rgba(255,216,77,.16);
+}
+body:has(#va-hero) #about .glass:focus-within,
+body:has(#va-hero) #how .glass:focus-within,
+body:has(#va-hero) #benefits .glass:focus-within,
+body:has(#va-hero) #contact .glass:focus-within{
+  outline:none;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.16),
+    0 0 0 2px rgba(255,216,77,.65) inset,
+    0 0 0 3px rgba(255,216,77,.22),
+    0 0 28px rgba(255,216,77,.20);
+}
+
+/* 3) JANITORIAL PAGE (white sections only: company-video + how) */
+body:has(#janitorial-hero) #company-video .glass,
+body:has(#janitorial-hero) #how .glass{
+  border-color: color-mix(in oklab, #000 70%, var(--gold-strong) 30%);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.12),
+    0 0 0 1px rgba(255,216,77,.40) inset,
+    0 0 22px rgba(255,216,77,.10);
+}
+body:has(#janitorial-hero) #company-video .glass:hover,
+body:has(#janitorial-hero) #how .glass:hover{
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.16),
+    0 0 0 1px rgba(255,216,77,.55) inset,
+    0 0 26px rgba(255,216,77,.16);
+}
+body:has(#janitorial-hero) #company-video .glass:focus-within,
+body:has(#janitorial-hero) #how .glass:focus-within{
+  outline:none;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.16),
+    0 0 0 2px rgba(255,216,77,.65) inset,
+    0 0 0 3px rgba(255,216,77,.22),
+    0 0 28px rgba(255,216,77,.20);
+}
+
+/* Note:
+   - Hero sections (elements inside .dcp-hero-section) are NOT affected
+     dahil naka-target lang tayo sa .page-section:not(.dcp-hero-section)
+     at sa scoped white sections for VA/Janitorial.
+   - Benefits on Janitorial (dark) at ibang dark sections ay covered
+     ng “GLOBAL” rule sa itaas, so may gold ring sila kahit dark bg. */

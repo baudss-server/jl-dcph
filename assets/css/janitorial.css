@@ -1,19 +1,20 @@
 /* ─────────────────────────────────────────────
    Janitorial-only styles (bright + fast)
-   Place in: assets/css/janitorial.css
+   File: assets/css/janitorial.css
+   Scope: body.page-janitorial …
    ───────────────────────────────────────────── */
 
-:root{
+body.page-janitorial {
   --gold-strong: #ffd84d;
-  --card-bg: rgba(255,255,255,.08);
-  --card-hover: rgba(255,255,255,.12);
-  --border: rgba(255,255,255,.22);
-  --muted: rgba(255,255,255,.75);
-  --text-strong: #ffffff;
+  --card-bg: rgba(255,255,255,.10);
+  --card-hover: rgba(255,255,255,.16);
+  --border: rgba(255,255,255,.30);
+  --muted: #cfd6e6;
+  --text-strong: #f5f7ff;
 }
 
 /* HERO: static janitorial background (NOT VA image) */
-.jan-hero{
+body.page-janitorial .jan-hero{
   position: relative;
   min-height: clamp(320px, 46vw, 520px);
   display: grid;
@@ -23,38 +24,40 @@
     linear-gradient(180deg, rgba(11,11,16,.6), rgba(11,11,16,.6)),
     url("../images/ja-mp.png") center/cover no-repeat;
 }
-.jan-hero__inner{ text-align: center; }
-.jan-hero .dcp-hero-title{ margin-bottom: 10px; color: var(--text-strong); }
-.jan-hero .dcp-hero-subtitle{
+body.page-janitorial .jan-hero__inner{ text-align: center; }
+body.page-janitorial .jan-hero .dcp-hero-title{ margin-bottom: 10px; color: var(--text-strong); }
+body.page-janitorial .jan-hero .dcp-hero-subtitle{
   max-width: 720px; margin: 0 auto; color: var(--text-strong);
 }
 
-/* ── BENEFITS CARD (brighter glass) ───────────────────────── */
-.benefits-card.glass{
+/* ── BENEFITS CARD (brighter glass + fixed contrast) ─────── */
+body.page-janitorial .benefits-card.glass{
   width:min(1100px, 96%);
   margin: 0 auto;
   padding: 22px;
   border-radius: 16px;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.08));
   border: 1px solid var(--border);
   box-shadow: 0 18px 38px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06);
   color: var(--text-strong);
 }
-.benefits-card .lead{
+body.page-janitorial .benefits-card p,
+body.page-janitorial .benefits-card h3{ color: var(--text-strong); }
+body.page-janitorial .benefits-card .lead{
   font-style: italic;
   color: var(--muted);
   margin: 6px 0 10px;
 }
-.benefits-note{
+body.page-janitorial .benefits-note{
   color: var(--text-strong);
   opacity: .95;
   margin-bottom: 10px;
 }
 
 /* bullets */
-.benefits-list{
+body.page-janitorial .benefits-list{
   list-style: none;
   margin: 14px 0 6px;
   padding: 0;
@@ -62,7 +65,7 @@
   gap: 12px;
   grid-template-columns: repeat(2, minmax(260px,1fr));
 }
-.benefits-item{
+body.page-janitorial .benefits-item{
   display: flex;
   align-items: center;
   gap: 12px;
@@ -74,46 +77,106 @@
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
   will-change: transform;
 }
-.benefits-item:hover{
-  background: var(--card-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0,0,0,.28);
-}
-.benefits-item i{
+body.page-janitorial .benefits-item span{ color: var(--text-strong); font-weight: 600; }
+body.page-janitorial .benefits-item i{
   font-size: 1.35rem;
   color: var(--gold-strong);
   filter: drop-shadow(0 1px 4px rgba(255,216,77,.35));
 }
+body.page-janitorial .benefits-item:hover{
+  background: var(--card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.32);
+  border-color: rgba(255,255,255,.40);
+}
+/* keyboard focus */
+body.page-janitorial .benefits-item:focus-within{
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(255,216,77,.55);
+  border-color: rgba(255,255,255,.55);
+}
 
 /* Section title (with icon) */
-#benefits .section-title{
+body.page-janitorial #benefits .section-title{
   display:flex; align-items:center; justify-content:center;
 }
-#benefits .section-title i{
+body.page-janitorial #benefits .section-title i{
   margin-right:10px; color: var(--gold-strong);
 }
 
-/* ── GALLERY CARDS (no layout shift, fast) ───────────────── */
-.dcp-gallery-grid{ display:grid; gap:12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-.dcp-gallery-card{ border-radius:12px; overflow:hidden; background: var(--card-bg); border:1px solid var(--border); }
-.dcp-gallery-card picture, .dcp-gallery-card img{
+/* ── SERVICES LIST (cards you click to open modal) ───────── */
+body.page-janitorial .dcp-services-list{
+  list-style:none;
+  margin: 18px 0 0;
+  padding:0;
+  display:grid;
+  gap:12px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+body.page-janitorial .dcp-services-list li{
+  display:flex; align-items:flex-start; gap:10px;
+  padding:14px 16px;
+  border-radius:14px;
+  background: var(--card-bg);
+  border:1px solid var(--border);
+  cursor:pointer;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+  color: var(--text-strong);
+}
+body.page-janitorial .dcp-services-list li:hover{
+  background: var(--card-hover);
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.40);
+  box-shadow: 0 10px 22px rgba(0,0,0,.30);
+}
+body.page-janitorial .dcp-services-list li:focus-visible{
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(255,216,77,.55);
+}
+body.page-janitorial .dcp-services-list i{
+  color: var(--gold-strong);
+  font-size: 1.25rem;
+  margin-top: 2px;
+}
+body.page-janitorial .dcp-services-list span{
+  color: var(--text-strong);
+}
+
+/* ── GALLERY (disabled thumbnails) ────────────────────────── */
+body.page-janitorial #gallery-grid{ display:none !important; }
+
+/* Optional grid appearance if re-enabled later */
+body.page-janitorial .dcp-gallery-grid{
+  display:grid; gap:12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+body.page-janitorial .dcp-gallery-card{
+  border-radius:12px; overflow:hidden; background: var(--card-bg); border:1px solid var(--border);
+}
+body.page-janitorial .dcp-gallery-card picture,
+body.page-janitorial .dcp-gallery-card img{
   display:block; width:100%; aspect-ratio: 3/2; object-fit: cover;
 }
-.dcp-gallery-card figcaption{
+body.page-janitorial .dcp-gallery-card figcaption{
   padding:10px 12px; color: var(--text-strong); opacity:.95;
 }
-.dcp-gallery-card:hover{ background: var(--card-hover); transform: translateY(-1px); transition: .2s ease; }
+body.page-janitorial .dcp-gallery-card:hover{
+  background: var(--card-hover); transform: translateY(-1px); transition: .2s ease;
+}
 
 /* ── Mobile tweaks ────────────────────────────────────────── */
 @media (max-width: 900px){
-  .benefits-list{ grid-template-columns: 1fr; }
+  body.page-janitorial .benefits-list{ grid-template-columns: 1fr; }
 }
 @media (max-width: 768px){
-  .jan-hero{ min-height: 360px; }
-  .benefits-card.glass{ padding: 18px; }
+  body.page-janitorial .jan-hero{ min-height: 360px; }
+  body.page-janitorial .benefits-card.glass{ padding: 18px; }
 }
 
 /* Reduced motion: smoother on low-end devices */
 @media (prefers-reduced-motion: reduce){
-  *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+  body.page-janitorial *{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
 }

@@ -1,4 +1,4 @@
-/* ===== ABOUT ===== */
+/* ===== ABOUT (Default: dark) ===== */
 .dcp-about-us-section{ background:transparent }
 .dcp-about-inner{ text-align:center }
 .dcp-about-inner .section-title{ display:block }
@@ -34,4 +34,172 @@
   .about-big-card{ flex-direction: column; gap:14px; padding:20px }
   .about-image img{ max-width:260px }
   .about-image{ order:-1 }
+}
+
+/* =========================================================
+   JANITORIAL PAGE: About section with WHITE background
+   ========================================================= */
+body:has(#janitorial-hero) #about{
+  background:
+    radial-gradient(80% 55% at 50% -10%, rgba(255,255,255,.88), rgba(255,255,255,0) 70%),
+    radial-gradient(120% 80% at 50% 120%, rgba(0,0,0,.06), rgba(0,0,0,0) 60%),
+    #f6f7f9;
+  position: relative;
+}
+
+body:has(#janitorial-hero) #about .section-title.text-gradient{
+  background: linear-gradient(90deg,#1a1a1a 0%, #7a6400 40%, var(--gold-strong) 70%, #1a1a1a 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow:none;
+}
+
+body:has(#janitorial-hero) #about .about-text h3,
+body:has(#janitorial-hero) #about .about-text p{
+  color:#1a1a1a;
+}
+
+/* Janitorial About card: toned down + subtle gold highlight */
+body:has(#janitorial-hero) #about .about-big-card{
+  background: linear-gradient(180deg, rgba(0,0,0,.028), rgba(0,0,0,.018));
+  border-color: rgba(0,0,0,.12);
+  box-shadow:
+    0 6px 16px rgba(0,0,0,.12),
+    inset 0 0 0 1px rgba(255,216,77,.34),
+    0 0 16px rgba(255,216,77,.08);
+}
+body:has(#janitorial-hero) #about .about-big-card:hover{
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.16),
+    inset 0 0 0 1px rgba(255,216,77,.48),
+    0 0 20px rgba(255,216,77,.12);
+}
+body:has(#janitorial-hero) #about .about-big-card:focus-within{
+  outline:none;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.16),
+    inset 0 0 0 2px rgba(255,216,77,.55),
+    0 0 0 3px rgba(255,216,77,.20),
+    0 0 22px rgba(255,216,77,.16);
+}
+/* Gold spine softened for white background */
+body:has(#janitorial-hero) #about .about-big-card::before{
+  background: linear-gradient(180deg, rgba(255,216,77,0), rgba(255,216,77,.8), rgba(255,216,77,0));
+  box-shadow: 0 0 10px rgba(255,216,77,.14);
+}
+/* Image frame tuned for light bg */
+body:has(#janitorial-hero) #about .about-image img{
+  border-color: rgba(0,0,0,.12);
+  box-shadow: 0 10px 22px rgba(0,0,0,.16), 0 0 0 rgba(255,216,77,0);
+}
+body:has(#janitorial-hero) #about .about-image img:hover{
+  border-color: rgba(0,0,0,.22);
+  box-shadow: 0 12px 26px rgba(0,0,0,.20), 0 0 14px rgba(255,216,77,.16);
+}
+/* Subtle separator */
+body:has(#janitorial-hero) #about::after{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-1px; width:min(1100px,94vw); height:1px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.08), transparent);
+  pointer-events:none;
+}
+
+/* =========================================================
+   MAIN PAGE (HOME): About section with WHITE background
+   - Works if body has .page-home OR a hero id like #home / #home-hero / #main-hero
+   ========================================================= */
+body.page-home #about,
+body:has(#home-hero) #about,
+body:has(#main-hero) #about,
+body:has(#home) #about{
+  background:
+    radial-gradient(80% 55% at 50% -10%, rgba(255,255,255,.88), rgba(255,255,255,0) 70%),
+    radial-gradient(120% 80% at 50% 120%, rgba(0,0,0,.06), rgba(0,0,0,0) 60%),
+    #f6f7f9;
+  position: relative;
+}
+
+body.page-home #about .section-title.text-gradient,
+body:has(#home-hero) #about .section-title.text-gradient,
+body:has(#main-hero) #about .section-title.text-gradient,
+body:has(#home) #about .section-title.text-gradient{
+  background: linear-gradient(90deg,#1a1a1a 0%, #7a6400 40%, var(--gold-strong) 70%, #1a1a1a 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow:none;
+}
+
+body.page-home #about .about-text h3,
+body.page-home #about .about-text p,
+body:has(#home-hero) #about .about-text h3,
+body:has(#home-hero) #about .about-text p,
+body:has(#main-hero) #about .about-text h3,
+body:has(#main-hero) #about .about-text p,
+body:has(#home) #about .about-text h3,
+body:has(#home) #about .about-text p{
+  color:#1a1a1a;
+}
+
+/* Main About card: toned down + subtle gold highlight (same as janitorial) */
+body.page-home #about .about-big-card,
+body:has(#home-hero) #about .about-big-card,
+body:has(#main-hero) #about .about-big-card,
+body:has(#home) #about .about-big-card{
+  background: linear-gradient(180deg, rgba(0,0,0,.028), rgba(0,0,0,.018));
+  border-color: rgba(0,0,0,.12);
+  box-shadow:
+    0 6px 16px rgba(0,0,0,.12),
+    inset 0 0 0 1px rgba(255,216,77,.34),
+    0 0 16px rgba(255,216,77,.08);
+}
+body.page-home #about .about-big-card:hover,
+body:has(#home-hero) #about .about-big-card:hover,
+body:has(#main-hero) #about .about-big-card:hover,
+body:has(#home) #about .about-big-card:hover{
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.16),
+    inset 0 0 0 1px rgba(255,216,77,.48),
+    0 0 20px rgba(255,216,77,.12);
+}
+body.page-home #about .about-big-card:focus-within,
+body:has(#home-hero) #about .about-big-card:focus-within,
+body:has(#main-hero) #about .about-big-card:focus-within,
+body:has(#home) #about .about-big-card:focus-within{
+  outline:none;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.16),
+    inset 0 0 0 2px rgba(255,216,77,.55),
+    0 0 0 3px rgba(255,216,77,.20),
+    0 0 22px rgba(255,216,77,.16);
+}
+/* Gold spine soften on white */
+body.page-home #about .about-big-card::before,
+body:has(#home-hero) #about .about-big-card::before,
+body:has(#main-hero) #about .about-big-card::before,
+body:has(#home) #about .about-big-card::before{
+  background: linear-gradient(180deg, rgba(255,216,77,0), rgba(255,216,77,.8), rgba(255,216,77,0));
+  box-shadow: 0 0 10px rgba(255,216,77,.14);
+}
+/* Image frame on white */
+body.page-home #about .about-image img,
+body:has(#home-hero) #about .about-image img,
+body:has(#main-hero) #about .about-image img,
+body:has(#home) #about .about-image img{
+  border-color: rgba(0,0,0,.12);
+  box-shadow: 0 10px 22px rgba(0,0,0,.16), 0 0 0 rgba(255,216,77,0);
+}
+body.page-home #about .about-image img:hover,
+body:has(#home-hero) #about .about-image img:hover,
+body:has(#main-hero) #about .about-image img:hover,
+body:has(#home) #about .about-image img:hover{
+  border-color: rgba(0,0,0,.22);
+  box-shadow: 0 12px 26px rgba(0,0,0,.20), 0 0 14px rgba(255,216,77,.16);
+}
+/* Subtle separator */
+body.page-home #about::after,
+body:has(#home-hero) #about::after,
+body:has(#main-hero) #about::after,
+body:has(#home) #about::after{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-1px; width:min(1100px,94vw); height:1px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.08), transparent);
+  pointer-events:none;
 }

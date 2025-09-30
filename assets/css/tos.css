@@ -151,11 +151,6 @@
 .ack{ display: flex; align-items: center; gap: .6rem; user-select: none; }
 .ack input{ inline-size: 18px; block-size: 18px; }
 
-@media (max-width: 480px){
-  .acknowledge{ flex-direction: column; align-items: stretch; }
-  .acknowledge .dcp-btn-primary{ width: 100%; text-align: center; }
-}
-
 /* ===== Footer (reuses site footer; only tiny spacing tweaks here) ===== */
 .footer{
   padding: 36px 0; border-top: 1px solid var(--border);
@@ -172,6 +167,7 @@
 .footer .footer-nav a:hover{
   color: #000; background: var(--gold-strong); padding: .1rem .4rem; border-radius: 8px;
 }
+
 /* === Force center the main title on TOS === */
 .tos-section .section-title{
   display:block !important;          /* override inline-block from main.css */
@@ -182,37 +178,64 @@
 
 /* (optional) maliit na tweak para lumikha ng konting pagitan sa meta line */
 .tos-meta{ text-align:center; margin: 10px 0 18px; }
-/* === Force center the main title on TOS === */
-.tos-section .section-title{
-  display:block !important;          /* override from main.css */
-  margin: 6px auto 8px auto !important;
-  text-align:center !important;
-  width:100%;
-}
 
-/* === Center the whole TOC block and its content === */
+/* === Center the whole TOC block and its content (default desktop) === */
 .toc{
   margin-inline:auto !important;     /* make sure the glass container is centered */
   text-align:center;                 /* center the small "Table of Contents" heading */
 }
 .toc-title{ text-align:center; }
 
-/* Center each grid cell's content */
+/* Center each grid cell's card (cards stay same size/position) */
 .toc ol{
-  justify-items: center;             /* center items within each grid column */
+  justify-items: center;             /* cards centered in grid cells */
   align-items: start;
 }
 
-/* Make each pill centered and consistent width */
+/* Cards (pills) size constraint */
 .toc li{ width:100%; }
 .toc li a{
-  justify-content: center;           /* center the text inside the pill */
+  justify-content: center;           /* default desktop: centered text */
   text-align: center;
   width: 100%;
-  max-width: 560px;                  /* looks clean on desktop; prevents super-wide pills */
+  max-width: 560px;                  /* keep card width consistent */
+}
+
+/* ---------- Desktop/Webview text left (cards unchanged) ---------- */
+@media (min-width: 700px){
+  .toc li a{
+    justify-content: flex-start;     /* left-align text inside the pill */
+    text-align: left;
+  }
 }
 
 /* Responsive tweak: allow full width on small screens */
 @media (max-width: 699px){
   .toc li a{ max-width: 100%; }
+}
+
+/* =========================================================
+   📱 MOBILE VIEW ONLY: Left-align TOC (already left + full width)
+   ========================================================= */
+@media (max-width: 699px) and (hover: none), (max-width: 699px) and (pointer: coarse){
+  .toc{
+    text-align:left;                 /* heading left on mobile */
+    padding: 20px 16px;
+    width: min(720px, 96%);
+  }
+  .toc-title{ text-align:left; display:inline-flex; }
+
+  .toc ol{
+    grid-template-columns: 1fr !important;
+    gap: 12px 16px;
+    justify-items: stretch;          /* pills fill full width */
+    align-items: start;
+  }
+
+  .toc li a{
+    justify-content: flex-start;     /* text align left inside pill */
+    text-align: left;
+    max-width: 100%;
+    width: 100%;
+  }
 }

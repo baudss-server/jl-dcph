@@ -12,19 +12,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- ✅ Use the same Remix Icon version as VA page -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
     <!-- CSS bundles -->
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/header.css" />
     <link rel="stylesheet" href="assets/css/hero-section.css" />
-    <link rel="stylesheet" href="assets/css/how-it-works.css" />
+    <!-- removed from homepage: how-it-works.css -->
     <link rel="stylesheet" href="assets/css/about.css" />
     <link rel="stylesheet" href="assets/css/contact.css" />
     <link rel="stylesheet" href="assets/css/footer.css" />
     <link rel="stylesheet" href="assets/css/testimonials.css" />
-    <!-- ✅ Same FAQ CSS as VA page -->
-    <link rel="stylesheet" href="assets/css/faq.css" />
+    <!-- removed from homepage: faq.css -->
 
     <noscript><style>.page-wipe{display:none!important}</style></noscript>
   </head>
@@ -51,7 +50,7 @@
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
           <a href="#testimonials">Testimonials</a>
-          <a href="#faq">FAQ</a>
+          <!-- removed: FAQ link -->
         </nav>
 
         <button class="dcp-burger" aria-label="Toggle Menu" aria-controls="site-nav" aria-expanded="false">
@@ -62,6 +61,7 @@
 
     <section id="home" class="dcp-hero-section page-section">
       <div class="dcp-hero-inner container">
+
         <div class="hero-cards container">
           <div class="card" aria-label="Janitorial Service">
             <div class="face face1">
@@ -95,28 +95,16 @@
             </div>
           </div>
         </div><!-- /.hero-cards -->
+
+        <!-- ✅ Big gradient tagline like the sample -->
+        <h1 class="hero-tagline">
+          A LEADING, FAMILY-OWNED CLEANING &amp; VIRTUAL ASSISTANCE PROVIDER
+        </h1>
+
       </div>
     </section>
 
-    <section id="how" class="dcp-how-it-works-section page-section">
-      <div class="dcp-hiw-inner container">
-        <h2 class="section-title text-gradient">How It Works</h2>
-        <div class="dcp-steps">
-          <div class="dcp-step-card glass">
-            <h3><i class="ri-edit-2-line"></i> Tell us what you need</h3>
-            <p>Pick the service, schedule, and outcomes. Simple and transparent.</p>
-          </div>
-          <div class="dcp-step-card glass">
-            <h3><i class="ri-shield-check-line"></i> We match a trained team</h3>
-            <p>Vetted staff/VA aligned with your tools and workflows.</p>
-          </div>
-          <div class="dcp-step-card glass">
-            <h3><i class="ri-rocket-2-line"></i> Launch & iterate</h3>
-            <p>Start fast, report clearly, and optimize with your feedback.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- removed: How It Works section from homepage -->
 
     <section id="about" class="dcp-about-us-section page-section">
       <div class="dcp-about-inner container">
@@ -127,18 +115,18 @@
           </div>
           <div class="about-text">
             <h3>DelaCruzPH Corporation</h3>
-            <p>
-              DelaCruzPH Corporation provides dependable <b>Janitorial</b> and
-              <b>Virtual Assistant</b> services. Our approach is simple: trained
-              teams, clear SLAs, and measurable outcomes. We focus on
-              reliability, proactive communication, and weekly reporting so you
-              always know what's done and what's next.
-            </p>
-            <p>
-              Whether on-site or remote, our goal is to remove busywork so you
-              can focus on growth. With playbooks tailored to your workflow and
-              tools, we make delegation smooth and scalable.
-            </p>
+
+            <p><strong>A Leading, Family-Owned Cleaning &amp; Virtual Assistance Provider</strong></p>
+
+            <p>At DelaCruzPH, we take pride in being a prominent and fast-growing service provider. As a family-owned company, we specialize in after-hours cleaning for buildings, offices, and various businesses. We are fully insured, bonded, and covered by Workers’ Compensation Board (WCB) insurance, ensuring safety, reliability, and peace of mind in every service we deliver.</p>
+
+            <p>But we don’t stop there—our services now extend beyond cleaning. DelaCruzPH also offers professional Virtual Assistance services, helping businesses stay organized and productive. From administrative support to scheduling, data entry, and customer service, our virtual team ensures smooth day-to-day operations so you can focus on growing your business.</p>
+
+            <p>Are you looking for a spotless, professional environment and reliable back-office support? Look no further! Our expert team provides comprehensive commercial cleaning and virtual assistance solutions tailored to meet your unique needs. Using the latest techniques, eco-friendly products, and efficient digital tools, we ensure your workspace and operations are not only clean and organized but also safe and productive.</p>
+
+            <p>Whether you require daily, weekly, or one-time cleaning, or ongoing administrative support, our flexible services are designed to fit your schedule. Our highly trained and insured staff guarantee thorough and efficient results every time.</p>
+
+            <p>At DelaCruzPH, we are committed to excellence—and your satisfaction is our top priority.</p>
           </div>
         </div>
       </div>
@@ -217,58 +205,7 @@
       </div>
     </section>
 
-    <!-- ✅ FAQ identical to VA page structure & behavior -->
-    <section id="faq" class="dcp-faq-section page-section">
-      <div class="dcp-faq-inner container">
-        <h2 class="section-title text-gradient">Frequently Asked Questions</h2>
-
-        <div class="dcp-faq-list">
-          <details class="dcp-faq-item">
-            <summary class="faq-summary" tabindex="0" aria-controls="faq-1">
-              <span class="faq-left"><i class="ri-question-line" aria-hidden="true"></i></span>
-              <span class="faq-title">What services do you offer?</span>
-              <span class="faq-right" aria-hidden="true">+</span>
-            </summary>
-            <div id="faq-1" class="faq-content">
-              <p>We specialize in Janitorial Services for commercial and office spaces, and Virtual Assistant Services for business support, content management, and research.</p>
-            </div>
-          </details>
-
-          <details class="dcp-faq-item">
-            <summary class="faq-summary" tabindex="0" aria-controls="faq-2">
-              <span class="faq-left"><i class="ri-shield-check-line" aria-hidden="true"></i></span>
-              <span class="faq-title">How do you ensure quality for janitorial work?</span>
-              <span class="faq-right" aria-hidden="true">+</span>
-            </summary>
-            <div id="faq-2" class="faq-content">
-              <p>Our staff undergoes extensive training, and we maintain strict Service Level Agreements (SLAs). We also provide weekly reports and have a clear communication channel to address any concerns.</p>
-            </div>
-          </details>
-
-          <details class="dcp-faq-item">
-            <summary class="faq-summary" tabindex="0" aria-controls="faq-3">
-              <span class="faq-left"><i class="ri-user-star-line" aria-hidden="true"></i></span>
-              <span class="faq-title">What types of tasks can a Virtual Assistant handle?</span>
-              <span class="faq-right" aria-hidden="true">+</span>
-            </summary>
-            <div id="faq-3" class="faq-content">
-              <p>Our VAs are skilled in a wide range of tasks, including administrative support, social media management, customer service, email handling, and in-depth research.</p>
-            </div>
-          </details>
-
-          <details class="dcp-faq-item">
-            <summary class="faq-summary" tabindex="0" aria-controls="faq-4">
-              <span class="faq-left"><i class="ri-rocket-line" aria-hidden="true"></i></span>
-              <span class="faq-title">How can I get started with your services?</span>
-              <span class="faq-right" aria-hidden="true">+</span>
-            </summary>
-            <div id="faq-4" class="faq-content">
-              <p>It's simple! You can use the contact form on our website to tell us what you need, and we'll get back to you to discuss a plan that works for you. You can also contact us via phone or email.</p>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
+    <!-- removed: entire FAQ section from homepage -->
 
     <section id="contact" class="dcp-contacts-section page-section">
       <div class="dcp-contacts-container container">
@@ -310,7 +247,7 @@
           <div class="logo">
             <img class="brand-logo small" src="assets/images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation" />
           </div>
-          <p>Our team offers meticulous, reliable cleaning for your office or home. We use professional techniques to ensure every corner doesn't just look clean—it shines.</p>
+          <p>Where trusted service meets personal care.</p>
         </div>
 
         <div class="dcp-col links">
@@ -357,7 +294,6 @@
     <script src="assets/js/nav.js" type="module" defer></script>
     <script src="assets/js/main.js" type="module" defer></script>
     <script src="assets/js/testimonial.js" type="module" defer></script>
-    <!-- ✅ Same FAQ JS as VA page -->
-    <script src="assets/js/faq.js" defer></script>
+    <!-- removed from homepage: faq.js -->
   </body>
 </html>
