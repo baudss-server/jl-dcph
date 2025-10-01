@@ -42,9 +42,7 @@ body{
   inline-size: var(--svw, 100vw);
   min-block-size: var(--svh, 100vh);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-
-  /* guard laban sa inner elements na may box-shadow/translate */
-  overflow-x: clip;
+  overflow-x: clip; /* guard laban sa inner elements na may box-shadow/translate */
 }
 
 .section-title{
@@ -156,36 +154,23 @@ iframe, video { max-width:100%; }
 .page-wipe{
   position: fixed;
   inset: 0;
-  background: #000;             /* solid black */
-  z-index: 2147483646;          /* overlay top */
-  transform: translateX(-100%); /* default: nakatago sa kaliwa */
+  background: #000;
+  z-index: 2147483646;
+  transform: translateX(-100%);
   will-change: transform;
-  contain: layout paint;        /* prevent layout side-effects */
+  contain: layout paint;
   pointer-events: none;
 }
 
 /* Exit: cover from RIGHT → LEFT (pa-alis = wipe-left) */
-.page-wipe.wipe-cover-left {
-  animation: dcp-wipe-cover-left 520ms cubic-bezier(.22,.61,.36,1) forwards;
-  pointer-events: auto;
-}
-
+.page-wipe.wipe-cover-left { animation: dcp-wipe-cover-left 520ms cubic-bezier(.22,.61,.36,1) forwards; pointer-events: auto; }
 /* Entry: reveal to the RIGHT (pa-pasok = wipe-right) */
-.page-wipe.wipe-reveal-right {
-  animation: dcp-wipe-reveal-right 640ms cubic-bezier(.22,.61,.36,1) forwards;
-}
-
+.page-wipe.wipe-reveal-right { animation: dcp-wipe-reveal-right 640ms cubic-bezier(.22,.61,.36,1) forwards; }
 /* Optional: safety class kapag gusto mong agad naka-cover sa load */
 .page-wipe.is-covered { transform: translateX(0); }
 
-@keyframes dcp-wipe-cover-left {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(0); }
-}
-@keyframes dcp-wipe-reveal-right {
-  from { transform: translateX(0); }
-  to   { transform: translateX(100%); }
-}
+@keyframes dcp-wipe-cover-left { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes dcp-wipe-reveal-right { from { transform: translateX(0); } to { transform: translateX(100%); } }
 
 /* ---- universal flex/grid child guards ---- */
 :where(.flex > *, .grid > *, [class*="grid"] > *){ min-width:0; min-height:0; }
@@ -204,8 +189,8 @@ iframe, video { max-width:100%; }
 /* ===== VA PAGE ONLY ===== */
 body:has(#va-hero) #about,
 body:has(#va-hero) #how,
-body:has(#va-hero) #benefits,
-body:has(#va-hero) #contact{
+body:has(#va-hero) #benefits{
+  /* NOTE: WALA NA si #contact dito para hindi maging white ang Contact sa VA page */
   background:
     radial-gradient(80% 55% at 50% -10%, rgba(255,255,255,.88), rgba(255,255,255,0) 70%),
     radial-gradient(120% 80% at 50% 120%, rgba(0,0,0,.06), rgba(0,0,0,0) 60%),
@@ -215,8 +200,7 @@ body:has(#va-hero) #contact{
 /* Titles on white (VA) */
 body:has(#va-hero) #about .section-title.text-gradient,
 body:has(#va-hero) #how .section-title.text-gradient,
-body:has(#va-hero) #benefits .section-title.text-gradient,
-body:has(#va-hero) #contact .section-title.text-gradient{
+body:has(#va-hero) #benefits .section-title.text-gradient{
   background: linear-gradient(90deg,#1a1a1a 0%, #7a6400 40%, var(--gold-strong) 70%, #1a1a1a 100%);
   -webkit-background-clip:text; background-clip:text; color:transparent;
   text-shadow: none;
@@ -227,47 +211,44 @@ body:has(#va-hero) #about .about-text h3,
 body:has(#va-hero) #about .about-text p,
 body:has(#va-hero) #how .dcp-step-card h3,
 body:has(#va-hero) #how .dcp-step-card p,
-body:has(#va-hero) #benefits p,
-body:has(#va-hero) #contact .dcp-contact-card label,
-body:has(#va-hero) #contact .dcp-contact-list li{ color:#1a1a1a; }
-
-body:has(#va-hero) #contact .dcp-contact-list a,
-body:has(#va-hero) #about a{ color:#0e0e0e; }
-body:has(#va-hero) #contact .dcp-contact-list a:hover,
-body:has(#va-hero) #about a:hover{ color:var(--gold-strong); }
-
-/* Inputs and glass on white (VA) */
-body:has(#va-hero) #contact .dcp-form input,
-body:has(#va-hero) #contact .dcp-form textarea{
-  background:#fbfbfd; color:#121212; border:1px solid rgba(0,0,0,.14);
+body:has(#va-hero) #benefits p{
+  color:#1a1a1a;
 }
-body:has(#va-hero) #contact .dcp-form input::placeholder,
-body:has(#va-hero) #contact .dcp-form textarea::placeholder{ color:#8b8f98; }
-body:has(#va-hero) #contact .dcp-form input:focus,
-body:has(#va-hero) #contact .dcp-form textarea:focus{
-  outline:none; border-color:#e9c959; box-shadow:0 0 0 3px rgba(255,216,77,.22);
-}
+
+/* Lighter glass inside white sections (VA) */
 body:has(#va-hero) #about .glass,
 body:has(#va-hero) #how .glass,
-body:has(#va-hero) #benefits .glass,
-body:has(#va-hero) #contact .glass{
+body:has(#va-hero) #benefits .glass{
   background: linear-gradient(180deg, rgba(0,0,0,.035), rgba(0,0,0,.02));
   border-color: rgba(0,0,0,.10); box-shadow: 0 8px 18px rgba(0,0,0,.12);
 }
 body:has(#va-hero) #about .glass:hover,
 body:has(#va-hero) #how .glass:hover,
-body:has(#va-hero) #benefits .glass:hover,
-body:has(#va-hero) #contact .glass:hover{ box-shadow: 0 10px 22px rgba(0,0,0,.16); }
+body:has(#va-hero) #benefits .glass:hover{ box-shadow: 0 10px 22px rgba(0,0,0,.16); }
 
 /* Subtle separators (VA) */
 body:has(#va-hero) #about::after,
 body:has(#va-hero) #how::after,
-body:has(#va-hero) #benefits::after,
-body:has(#va-hero) #contact::after{
+body:has(#va-hero) #benefits::after{
   content:""; position:absolute; left:50%; transform:translateX(-50%);
   bottom:-1px; width:min(1100px,94vw); height:1px;
   background: linear-gradient(90deg, transparent, rgba(0,0,0,.08), transparent);
   pointer-events:none;
+}
+
+/* --- ✅ VA PAGE: Testimonials WHITE BG + readable text + title gradient --- */
+body:has(#va-hero) #testimonials{
+  background:#ffffff;
+}
+body:has(#va-hero) #testimonials .section-title.text-gradient{
+  background: linear-gradient(90deg,#1a1a1a 0%, #7a6400 40%, var(--gold-strong) 70%, #1a1a1a 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:none;
+}
+body:has(#va-hero) #testimonials,
+body:has(#va-hero) #testimonials p,
+body:has(#va-hero) #testimonials h3,
+body:has(#va-hero) #testimonials li{
+  color:#1a1a1a;
 }
 
 /* ===== JANITORIAL PAGE ONLY ===== */
@@ -317,21 +298,32 @@ body:has(#janitorial-hero) #how::after{
   pointer-events:none;
 }
 
+/* --- ✅ JANITORIAL PAGE: Testimonials WHITE BG + readable text + title gradient --- */
+body:has(#janitorial-hero) #testimonials{
+  background:#ffffff;
+}
+body:has(#janitorial-hero) #testimonials .section-title.text-gradient{
+  background: linear-gradient(90deg,#1a1a1a 0%, #7a6400 40%, var(--gold-strong) 70%, #1a1a1a 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:none;
+}
+body:has(#janitorial-hero) #testimonials,
+body:has(#janitorial-hero) #testimonials p,
+body:has(#janitorial-hero) #testimonials h3,
+body:has(#janitorial-hero) #testimonials li{
+  color:#1a1a1a;
+}
+
 /* =========================================================
    🔶 GOLD HIGHLIGHT FOR GLASSMORPHIC CARDS (EXCEPT HERO)
-   - Global rule applies to all pages
-   - Hero section explicitly excluded
-   - VA & Janitorial white sections also get gold ring (scoped)
    ========================================================= */
 
 /* 1) GLOBAL: add gold accent sa lahat ng .glass cards HINDI sa hero */
 .page-section:not(.dcp-hero-section) .glass{
-  /* keep existing look then add gold ring + gentle glow */
   border-color: color-mix(in oklab, var(--gold-strong) 55%, #000 45%);
   box-shadow:
     var(--shadow),
-    0 0 0 1px rgba(255,216,77,.45) inset,   /* inner gold ring */
-    0 0 24px rgba(255,216,77,.12);          /* soft gold glow */
+    0 0 0 1px rgba(255,216,77,.45) inset,
+    0 0 24px rgba(255,216,77,.12);
 }
 .page-section:not(.dcp-hero-section) .glass:hover{
   box-shadow:
@@ -348,21 +340,19 @@ body:has(#janitorial-hero) #how::after{
     0 0 30px rgba(255,216,77,.22);
 }
 
-/* 2) VA PAGE (white sections): retain light backgrounds + add gold accent */
+/* 2) VA PAGE (white sections) */
 body:has(#va-hero) #about .glass,
 body:has(#va-hero) #how .glass,
-body:has(#va-hero) #benefits .glass,
-body:has(#va-hero) #contact .glass{
+body:has(#va-hero) #benefits .glass{
   border-color: color-mix(in oklab, #000 70%, var(--gold-strong) 30%);
   box-shadow:
-    0 8px 18px rgba(0,0,0,.12),             /* existing light elevation */
-    0 0 0 1px rgba(255,216,77,.40) inset,   /* inner gold ring */
-    0 0 22px rgba(255,216,77,.10);          /* soft glow */
+    0 8px 18px rgba(0,0,0,.12),
+    0 0 0 1px rgba(255,216,77,.40) inset,
+    0 0 22px rgba(255,216,77,.10);
 }
 body:has(#va-hero) #about .glass:hover,
 body:has(#va-hero) #how .glass:hover,
-body:has(#va-hero) #benefits .glass:hover,
-body:has(#va-hero) #contact .glass:hover{
+body:has(#va-hero) #benefits .glass:hover{
   box-shadow:
     0 10px 22px rgba(0,0,0,.16),
     0 0 0 1px rgba(255,216,77,.55) inset,
@@ -370,8 +360,7 @@ body:has(#va-hero) #contact .glass:hover{
 }
 body:has(#va-hero) #about .glass:focus-within,
 body:has(#va-hero) #how .glass:focus-within,
-body:has(#va-hero) #benefits .glass:focus-within,
-body:has(#va-hero) #contact .glass:focus-within{
+body:has(#va-hero) #benefits .glass:focus-within{
   outline:none;
   box-shadow:
     0 10px 22px rgba(0,0,0,.16),
@@ -406,9 +395,52 @@ body:has(#janitorial-hero) #how .glass:focus-within{
     0 0 28px rgba(255,216,77,.20);
 }
 
-/* Note:
-   - Hero sections (elements inside .dcp-hero-section) are NOT affected
-     dahil naka-target lang tayo sa .page-section:not(.dcp-hero-section)
-     at sa scoped white sections for VA/Janitorial.
-   - Benefits on Janitorial (dark) at ibang dark sections ay covered
-     ng “GLOBAL” rule sa itaas, so may gold ring sila kahit dark bg. */
+/* Notes:
+   - Tinanggal si #contact sa VA white group para dark na ulit ang Contact.
+   - Walang janitorial override para sa #contact dito (handled sa contact.css override sa ibaba).
+*/
+/* =========================================================
+   CONTACT TITLE — UNIFIED CENTER (MAIN, VA, JANITORIAL)
+   Idikit sa pinakababa ng stylesheet mo.
+   Walang kailangan baguhin sa HTML.
+   ========================================================= */
+
+/* 1) I-center ang buong title area ng Contact section */
+#contact,
+#va-contact{
+  /* siguradong nasa gitna ang inline elements gaya ng .section-title.text-gradient */
+  text-align: center;
+}
+
+/* 2) Kung may container na naka-flex na nagpu-push sa kaliwa,
+      pilitin natin i-center ang laman sa Contact section lang */
+#contact .container,
+#va-contact .container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* center horizontally */
+}
+
+/* 3) I-center ang heading mismo kahit anong default margins */
+#contact .section-title,
+#va-contact .section-title{
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;              /* huwag 100% para manatiling inline-block ang gradient style */
+}
+
+/* 4) Dahil may custom rule ka na:
+      .section-title.text-gradient { display:inline-block; }
+      — ito ang tamang kombi: parent ang naka text-align:center,
+        tapos itong margin auto para safe kahit may ibang global styles. */
+
+/* 5) Extra guards laban sa mga page-scoped overrides:
+      (Kapag ang parent section ng Contact sa VA/Janitorial ay may sariling layout rules) */
+body:has(#va-hero) #contact .section-title,
+body:has(#janitorial-hero) #contact .section-title{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 6) Kung ang Contact ng VA page ay may hiwalay na id (#va-contact),
+      covered na sa selectors sa itaas. Kung parehong #contact lang, walang problema. */

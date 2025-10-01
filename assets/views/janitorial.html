@@ -116,10 +116,10 @@
 
         <div id="nav-anchor"></div>
 
+        <!-- Removed About link from navbar -->
         <nav class="dcp-nav" id="siteNav" aria-label="Primary">
           <a href="#janitorial-hero">Home</a>
           <a href="./va.html" class="js-wipe">VA Services</a>
-          <a href="#about">About</a>
           <a href="#contact">Contact</a>
           <a href="#testimonials">Testimonials</a>
           <a href="../../index.html" class="js-wipe">Main Page</a>
@@ -221,24 +221,7 @@
         </div>
       </section>
 
-      <!-- ================= ABOUT ================= -->
-      <section id="about" class="dcp-about-us-section page-section">
-        <div class="dcp-about-inner container">
-          <h2 class="section-title text-gradient">About Us</h2>
-          <div class="about-big-card glass">
-            <div class="about-image">
-              <img src="../images/delacruzph.corporation copy1.png" alt="DelaCruzPH Corporation Logo" />
-            </div>
-            <div class="about-text">
-              <h3>A Leading, Family-Owned Cleaning &amp; Virtual Assistance Provider</h3>
-              <p>At <strong>DelaCruzPH</strong>, we take pride in being a prominent and fast-growing service provider. As a family-owned company, we specialize in after-hours cleaning for buildings, offices, and various businesses. We are fully insured, bonded, and covered by Workers’ Compensation Board (WCB) insurance, ensuring safety, reliability, and peace of mind in every service we deliver.</p>
-              <p>But we don’t stop there—our services now extend beyond cleaning. DelaCruzPH also offers professional Virtual Assistance services, helping businesses stay organized and productive. From administrative support to scheduling, data entry, and customer service, our virtual team ensures smooth day-to-day operations so you can focus on growing your business.</p>
-              <p>Are you looking for a spotless, professional environment and reliable back-office support? Look no further! Our expert team provides comprehensive commercial cleaning and virtual assistance solutions tailored to meet your unique needs. Using the latest techniques, eco-friendly products, and efficient digital tools, we ensure your workspace and operations are not only clean and organized but also safe and productive.</p>
-              <p>Whether you require daily, weekly, or one-time cleaning, or ongoing administrative support, our flexible services are designed to fit your schedule. Our highly trained and insured staff guarantee thorough and efficient results every time. At DelaCruzPH, we are committed to excellence—and your satisfaction is our top priority.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <!-- ================= ABOUT REMOVED ================= -->
 
       <!-- ================= TESTIMONIALS ================= -->
       <section id="testimonials" class="dcp-testimonials-section page-section">
@@ -271,24 +254,23 @@
 
       <!-- FAQ removed -->
       
-      <section id="contact" class="dcp-contacts-section page-section">
-        <div class="dcp-contacts-container container">
+   <section id="contact" class="dcp-contacts-section page-section">
+      <div class="dcp-contacts-inner container">
+        <h2 class="section-title text-gradient">Contact Us</h2> <div class="dcp-contacts-container">
           <div class="dcp-contact-card glass">
-            <h2 class="section-title text-gradient">Contact Us</h2>
             <form class="dcp-form" onsubmit="return false;">
               <label>Name <input type="text" placeholder="Your name" required /></label>
               <label>Email <input type="email" placeholder="you@example.com" required /></label>
               <label>Message <textarea rows="5" placeholder="How can we help?" required></textarea></label>
-              <button type="submit" class="dcp-btn-primary"><i class="ri-send-plane-2-fill" aria-hidden="true"></i> Send Message</button>
+              <button type="submit" class="dcp-btn-primary"><i class="ri-send-plane-2-fill"></i> Send Message</button>
             </form>
           </div>
           <div class="dcp-map-card glass">
-            <h3 class="text-gradient">Contact us</h3>
             <ul class="dcp-contact-list">
-              <li><i class="ri-phone-line" aria-hidden="true"></i> Call Us: <a href="tel:+17787461231">(778) 746-1231</a></li>
-              <li><i class="ri-mail-line" aria-hidden="true"></i> Email: <a href="mailto:info@delacruzph.com">info@delacruzph.com</a></li>
-              <li><i class="ri-printer-line" aria-hidden="true"></i> Fax: (778) 746-1431</li>
-              <li><i class="ri-map-pin-line" aria-hidden="true"></i> Office Address:
+              <li><i class="ri-phone-line"></i> Call Us: <a href="tel:+17787461231">(778) 746-1231</a></li>
+              <li><i class="ri-mail-line"></i> Email: <a href="mailto:info@delacruzph.com">info@delacruzph.com</a></li>
+              <li><i class="ri-printer-line"></i> Fax: <span>(778) 746-1431</span></li>
+              <li><i class="ri-map-pin-line"></i> Office Address:
                 <a href="https://www.google.com/maps/place/1383+W+8th+Ave,+Vancouver,+BC+V6H+3W4" target="_blank" rel="noopener">1383 W 8th Ave, Vancouver, BC V6H 3W4</a>
               </li>
             </ul>
@@ -297,7 +279,8 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
     </main>
 
     <footer class="dcp-footer">
@@ -314,7 +297,7 @@
             <li><a href="../../index.html" class="js-wipe"><i class="ri-home-5-line" aria-hidden="true"></i><span>Home</span></a></li>
             <li><a href="janitorial.html"><i class="ri-brush-3-line" aria-hidden="true"></i><span>Janitorial</span></a></li>
             <li><a href="./va.html" class="js-wipe"><i class="ri-user-voice-line" aria-hidden="true"></i><span>VA Services</span></a></li>
-            <li><a href="#about"><i class="ri-information-line" aria-hidden="true"></i><span>About</span></a></li>
+            <!-- Keeping About link out of the navbar only, as requested -->
             <li><a href="#contact"><i class="ri-contacts-line" aria-hidden="true"></i><span>Contact</span></a></li>
             <li><a href="tos.html" class="js-wipe"><i class="ri-file-text-line" aria-hidden="true"></i><span>Terms of Service</span></a></li>
             <li><a href="privacy.html" class="js-wipe"><i class="ri-shield-line" aria-hidden="true"></i><span>Privacy Policy</span></a></li>

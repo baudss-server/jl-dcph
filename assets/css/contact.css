@@ -1,109 +1,203 @@
 /* ===== CONTACT (HIGH CONTRAST for WHITE SECTION) ===== */
-
-/* Section BG: off-white + very soft vignette (di masakit sa mata) */
-.dcp-contacts-section{
-  background:
-    radial-gradient(80% 55% at 50% -10%, rgba(255,255,255,.92), rgba(255,255,255,0) 70%),
-    radial-gradient(120% 80% at 50% 120%, rgba(0,0,0,.06), rgba(0,0,0,0) 60%),
+/* DEFAULT: White background (retain for non-VA / non-Janitorial pages) */
+.dcp-contacts-section {
+  background: radial-gradient(
+      80% 55% at 50% -10%,
+      rgba(255, 255, 255, 0.92),
+      rgba(255, 255, 255, 0) 70%
+    ),
+    radial-gradient(
+      120% 80% at 50% 120%,
+      rgba(0, 0, 0, 0.06),
+      rgba(0, 0, 0, 0) 60%
+    ),
     #f5f6f8;
-  border-top:1px solid rgba(0,0,0,.06);
-  border-bottom:1px solid rgba(0,0,0,.06);
-  color:#121212; /* default text color */
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  color: #121212; /* default text color */
 }
 
-.dcp-contacts-container{
-  display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;
+/* Center ONLY the section title, NOT the whole container */
+.dcp-contacts-section .section-title { text-align: center; }
+
+/* Keep content left-aligned by default */
+.dcp-contacts-container {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  text-align: initial;
 }
 
-/* ---------- TITLES ---------- */
-/* Force solid dark title on white (overrides .text-gradient) */
+/* ---------- TITLES (default white style) ---------- */
 #contact .section-title,
-#contact .text-gradient{
-  background:none !important;
-  -webkit-background-clip: initial !important;
-  background-clip: initial !important;
-  color:#111 !important;
-  text-shadow: 0 1px 0 rgba(0,0,0,.35);
+#contact .text-gradient {
+  background: linear-gradient(90deg, #fff 15%, var(--gold-strong) 50%, #fff 85%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 0 4px rgba(0,0,0,.18), 0 1px 0 rgba(0,0,0,.15);
 }
 
-/* ---------- GLASS CARDS (whiter + clearer edge) ---------- */
-.dcp-contacts-section .glass{
+/* ---------- GLASS CARDS (default: white section) ---------- */
+.dcp-contacts-section .glass {
   background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.78));
-  border:1px solid #dfe3ea;           /* darker vs white bg */
+  border: 1px solid #dfe3ea;
   box-shadow: 0 10px 22px rgba(0,0,0,.10);
 }
-.dcp-contacts-section .glass:hover{
-  box-shadow: 0 12px 26px rgba(0,0,0,.14);
+.dcp-contacts-section .glass:hover { box-shadow: 0 12px 26px rgba(0,0,0,.14); }
+
+/* ---------- FORM (default: light fields) ---------- */
+.dcp-contact-card { padding: 22px 20px; }
+.dcp-form { display: grid; gap: 12px; }
+.dcp-form label {
+  display: grid; gap: 6px; color: #141414; font-weight: 600; letter-spacing: .2px;
 }
-
-/* ---------- FORM (left) ---------- */
-.dcp-contact-card{ padding:22px 20px; }
-
-.dcp-form{ display:grid; gap:12px }
-.dcp-form label{
-  display:grid; gap:6px;
-  color:#141414;                      /* darker labels */
-  font-weight:600;
-  letter-spacing:.2px;
-}
-
-/* Light fields + crisp borders + strong focus */
 .dcp-form input,
-.dcp-form textarea{
-  background:#ffffff;
-  border:1px solid #cfd3da;           /* clearer than rgba border */
-  color:#121212;
-  border-radius:12px; padding:12px 14px; outline:none;
+.dcp-form textarea {
+  background: #ffffff;
+  border: 1px solid #cfd3da;
+  color: #121212;
+  border-radius: 12px;
+  padding: 12px 14px;
+  outline: none;
   transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
 }
-.dcp-form input::placeholder,
-.dcp-form textarea::placeholder{ color:#8a8f98; }
-.dcp-form input:focus,
-.dcp-form textarea:focus{
-  border-color:#e9c959;
+.dcp-form input::placeholder, .dcp-form textarea::placeholder { color: #8a8f98; }
+.dcp-form input:focus, .dcp-form textarea:focus {
+  border-color: #e9c959;
   box-shadow: 0 0 0 3px rgba(255,216,77,.24);
-  background:#fff;
+  background: #fff;
 }
 
-/* Submit button keeps gold style from global; no change needed */
-
-/* ---------- INFO + MAP (right) ---------- */
-.dcp-map-card{ padding:22px 20px; display:grid; gap:12px; align-content:start }
-
-.dcp-contact-list{
-  list-style:none; padding-left:0; margin:0;
-  display:grid; gap:8px;
-}
-.dcp-contact-list li{
-  color:#1a1a1a;                      /* darker body copy */
-  display:flex; gap:10px; align-items:flex-start
-}
-.dcp-contact-list i{
-  color: var(--gold-strong);
-  margin-top:2px;
-  filter: drop-shadow(0 0 6px rgba(255,216,77,.18));
-}
-.dcp-contact-list a{
-  color:#0e0e0e;
-  text-decoration: none;
-  border-bottom:1px solid transparent;
+/* ---------- INFO + MAP ---------- */
+.dcp-map-card { padding: 22px 20px; display: grid; gap: 12px; align-content: start; }
+.dcp-contact-list { list-style: none; padding-left: 0; margin: 0; display: grid; gap: 8px; }
+.dcp-contact-list li { color: #1a1a1a; display: flex; gap: 10px; align-items: flex-start; }
+.dcp-contact-list i { color: var(--gold-strong); margin-top: 2px; filter: drop-shadow(0 0 6px rgba(255,216,77,.18)); }
+.dcp-contact-list a {
+  color: #0e0e0e; text-decoration: none; border-bottom: 1px solid transparent;
   transition: color .15s ease, border-color .15s ease;
 }
-.dcp-contact-list a:hover{
-  color: var(--gold-strong);
-  border-color: rgba(255,216,77,.55);
-}
+.dcp-contact-list a:hover { color: var(--gold-strong); border-color: rgba(255,216,77,.55); }
 
-/* Map container: stronger edge on white */
-.dcp-map{
-  aspect-ratio:16/12; width:100%;
-  border-radius:14px; overflow:hidden;
-  border:1px solid #dfe3ea;
+.dcp-map {
+  aspect-ratio: 16/12;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #dfe3ea;
   box-shadow: 0 8px 16px rgba(0,0,0,.08);
 }
-.dcp-map iframe{ width:100%; height:100%; border:0 }
+.dcp-map iframe { width: 100%; height: 100%; border: 0; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 980px){
-  .dcp-contacts-container{ grid-template-columns:1fr }
+@media (max-width: 980px) {
+  .dcp-contacts-container { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   OVERRIDES: REMOVE WHITE BG on VA & JANITORIAL PAGES ONLY
+   ========================================================= */
+
+/* 1) Remove white background on VA & Janitorial pages */
+body:has(#va-hero) .dcp-contacts-section,
+body:has(#janitorial-hero) .dcp-contacts-section{
+  background: transparent !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  color: var(--text) !important;
+}
+
+/* 2) Titles: revert to site default gradient on dark (no shadow) */
+body:has(#va-hero) #contact .section-title,
+body:has(#va-hero) #contact .text-gradient,
+body:has(#janitorial-hero) #contact .section-title,
+body:has(#janitorial-hero) #contact .text-gradient{
+  background: linear-gradient(90deg,#fff,var(--gold-strong)) !important;
+  -webkit-background-clip:text !important; background-clip:text !important;
+  color: transparent !important; text-shadow: none !important;
+  text-align: center; /* keep only the heading centered */
+}
+
+/* 3) Cards: use dark glass look (match global) */
+body:has(#va-hero) .dcp-contacts-section .glass,
+body:has(#janitorial-hero) .dcp-contacts-section .glass{
+  background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03)) !important;
+  border:1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+/* 4) Form: use dark fields on dark bg */
+body:has(#va-hero) .dcp-contacts-section .dcp-form label,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-form label{
+  color: var(--text) !important;
+}
+body:has(#va-hero) .dcp-contacts-section .dcp-form input,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-form input,
+body:has(#va-hero) .dcp-contacts-section .dcp-form textarea,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-form textarea{
+  background: rgba(255,255,255,.06) !important;
+  border:1px solid var(--border) !important;
+  color: var(--text) !important;
+}
+body:has(#va-hero) .dcp-contacts-section .dcp-form input::placeholder,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-form input::placeholder,
+body:has(#va-hero) .dcp-contacts-section .dcp-form textarea::placeholder,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-form textarea::placeholder{
+  color: var(--muted) !important;
+}
+body:has(#va-hero) .dcp-contacts-section .dcp-form input:focus,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-form input:focus,
+body:has(#va-hero) .dcp-contacts-section .dcp-form textarea:focus,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-form textarea:focus{
+  outline: none !important;
+  border-color: var(--gold-strong) !important;
+  box-shadow: 0 0 0 3px rgba(255,216,77,.22) !important;
+  background: rgba(255,255,255,.08) !important;
+}
+
+/* 5) Contact list text colors back to light */
+body:has(#va-hero) .dcp-contacts-section .dcp-contact-list li,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-contact-list li{
+  color: var(--text) !important;
+}
+body:has(#va-hero) .dcp-contacts-section .dcp-contact-list a,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-contact-list a{
+  color: var(--text) !important;
+  border-color: transparent !important;
+}
+body:has(#va-hero) .dcp-contacts-section .dcp-contact-list a:hover,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-contact-list a:hover{
+  color: var(--gold-strong) !important;
+  border-color: rgba(255,216,77,.45) !important;
+}
+
+/* 6) Map card edge back to dark style */
+body:has(#va-hero) .dcp-contacts-section .dcp-map,
+body:has(#janitorial-hero) .dcp-contacts-section .dcp-map{
+  border:1px solid var(--border) !important;
+  box-shadow: 0 8px 16px rgba(0,0,0,.35) !important;
+}
+/* =========================================================
+   MAIN PAGE FIX — crisper Contact heading (no blur)
+   (Hindi ito tatama sa VA o Janitorial pages)
+   ========================================================= */
+body:not(:has(#va-hero)):not(:has(#janitorial-hero)) #contact .section-title,
+body:not(:has(#va-hero)):not(:has(#janitorial-hero)) #contact .text-gradient{
+  /* mas contrast na gradient para sa off-white bg */
+  background: linear-gradient(90deg, #1a1a1a 0%, #7a6400 45%, var(--gold-strong) 70%, #1a1a1a 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+
+  /* tanggalin ang blur na cause ng malabong itsura */
+  text-shadow: none !important;
+
+  /* optional: mas kapal para mas linaw (pwede mo alisin kung ayaw mo) */
+  font-weight: 800;
+}
+
+/* Panatilihing left-aligned ang body text sa main page contact */
+body:not(:has(#va-hero)):not(:has(#janitorial-hero)) .dcp-contacts-container{
+  text-align: initial;
 }
